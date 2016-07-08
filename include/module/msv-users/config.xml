@@ -1,0 +1,125 @@
+<?xml version='1.0'?> 
+<document>
+
+<config>
+
+	<param name="activationLevel" value="1"/>
+	<param name="activationUrl" value="*"/>
+	
+	<constant name="TABLE_USERS" value="users"/>
+	
+	<filter action="loadUserSession" url="*"/>
+	
+	<table name="users" index="email" title="email">
+		<field name="id" type="id"/>
+		<field name="published" type="published"/>
+		<field name="deleted" type="deleted"/>
+		<field name="author" type="author"/>
+		<field name="updated" type="updated"/>
+		<field name="lang" type="lang"/>
+		<field name="email" type="str"/>
+		<field name="email_verified" type="bool"/>
+		<field name="password" type="str"/>
+		<field name="name" type="str"/>
+		<field name="phone" type="str"/>
+		<field name="pic" type="pic"/>
+		<field name="country" type="str"/>
+		<field name="city" type="str"/>
+		<field name="timezone" type="str"/>
+		<field name="website" type="str"/>
+		<field name="url" type="str"/>
+		<field name="company" type="str"/>
+		<field name="company_info" type="str"/>
+		<field name="lang_default" type="str"/>
+		<field name="access" type="str" select-from="list:everyone,user,admin,superadmin"/>
+		<field name="iss" type="str"/>
+		<field name="reset_token" type="str"/>
+	</table>
+	
+	<form name="user-login" function="loadUserFormLogin">
+		<field name="email" type="email" required="true"/>
+		<field name="password" type="password" required="true"/>
+	</form>
+	
+	<form name="user-password-reset" function="loadUserFormPasswordReset">
+		<field name="email" type="email" required="true"/>
+	</form>
+	
+	<form name="user-password-update" function="loadUserFormPasswordUpdate">
+		<field name="reset_token" type="str" required="true"/>
+		<field name="password" type="password" required="true"/>
+	</form>
+	
+	
+</config>
+
+<install>
+	<param name="name" value="msv-users"/>
+	<param name="version" value="1.0.2"/>
+	<param name="date" value="10.06.2016"/>
+	<param name="installHook" value="UsersInstall"/>
+	<param name="title" value="MSV - Users"/>
+	<param name="description" value="Users auth functions for MSV."/>
+	
+	<dependency module="msv-core" version="1.0" />
+	<dependency module="msv-api" version="1.0" />
+	
+	<file dir="module" path="msv-users/msv-users.php"/>
+	<file dir="module" path="msv-users/config.xml"/>
+
+	<file dir="template" path="default/user.tpl"/>
+	<file dir="template" path="default/user-login.tpl"/>
+	<file dir="template" path="default/user-signup.tpl"/>
+	<file dir="template" path="default/user-password-reset.tpl"/>
+	<file dir="template" path="default/user-settings.tpl"/>
+	<file dir="template" path="default/user/homepage.tpl"/>
+	<file dir="template" path="default/user/login.tpl"/>
+	<file dir="template" path="default/user/signup.tpl"/>
+	<file dir="template" path="default/user/settings.tpl"/>
+	<file dir="template" path="default/user/user-password-reset.tpl"/>
+	<file dir="template" path="default/widget/menu-user.tpl"/>
+</install>
+
+
+<locales>
+	<locale name="ru">
+		<field name="table.users" value="Пользователи сайта"/>
+		<field name="table.users.id" value="ID"/>
+		<field name="table.users.published" value="Активно"/>
+		<field name="table.users.deleted" value="Удалено"/>
+		<field name="table.users.author" value="Автор"/>
+		<field name="table.users.updated" value="Обновлено"/>
+		<field name="table.users.lang" value="Язык"/>
+		<field name="table.users.email" value="Email"/>
+		<field name="table.users.email_verified" value="Email проверен"/>
+		<field name="table.users.password" value="Пароль"/>
+		<field name="table.users.name" value="ФИО"/>
+		<field name="table.users.phone" value="Телефон"/>
+		<field name="table.users.pic" value="Картинка"/>
+		<field name="table.users.lang_default" value="Язык пользователя"/>
+		<field name="table.users.access" value="Доступ"/>
+		<field name="table.users.iss" value="Источник"/>
+		<field name="table.users.reset_token" value="Токен сброса пароля"/>
+		
+	</locale>
+	<locale name="en">
+		<field name="table.users" value="Users"/>
+		<field name="table.users.id" value="ID"/>
+		<field name="table.users.published" value="Published"/>
+		<field name="table.users.deleted" value="Deleted"/>
+		<field name="table.users.author" value="Author"/>
+		<field name="table.users.updated" value="Updated"/>
+		<field name="table.users.lang" value="Lang"/>
+		<field name="table.users.email" value="Email"/>
+		<field name="table.users.email_verified" value="Email verified"/>
+		<field name="table.users.password" value="Password"/>
+		<field name="table.users.name" value="Name"/>
+		<field name="table.users.phone" value="Phone"/>
+		<field name="table.users.pic" value="Picture"/>
+		<field name="table.users.lang_default" value="User Language"/>
+		<field name="table.users.access" value="Access"/>
+		<field name="table.users.iss" value="Sourse"/>
+		<field name="table.users.reset_token" value="Password Reset token"/>
+	</locale>
+</locales>
+</document>
