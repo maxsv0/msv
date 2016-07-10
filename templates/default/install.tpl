@@ -22,8 +22,14 @@
 
 
 {if $message_error}
-<div style="border:1px solid #f00;padding:15px;">
+<div style="border:1px solid #f00;padding:15px;color:#500;">
 {$message_error}
+</div>
+{/if}
+
+{if $message_success}
+<div style="border:1px solid #0f0;padding:15px;color:#050;">
+{$message_success}
 </div>
 {/if}
 
@@ -152,7 +158,7 @@ Step: {$install_step}
 {if $install_step > 1}
 <p>
 <form method="POST">
-<input type="submit" value="Reset installation">  
+<input type="submit" value="Reset installation" name="install_reset">  
 <input type="hidden" name="install_step" value="1">  
 </form>
 </p>

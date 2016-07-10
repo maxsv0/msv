@@ -29,6 +29,7 @@ $configListNames = array(
 
 if (!empty($_POST["install_reset"])) {
 	$_SESSION["msv_install_step"] = $install_step = 0;
+	$_SESSION["user_id"] = $_SESSION["user_email"] = "";
 	$website->outputRedirect("/");
 }
 
@@ -71,6 +72,8 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 			
 			if (is_writable(ABS."/config.php")) {
 				file_put_contents(ABS."/config.php", $configPHP);
+				
+				$website->messages["success"][] = "".ABS."/config.php updated successfuly";
 			} else {
 				$website->messages["error"][] = "Can't write to ".ABS."/config.php";
 			}
@@ -131,11 +134,24 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 	}
 }
 
-if ($install_step >= 3) {
+if ($install_step === 2) {
+	if (is_writable(ABS."config.php")) {
+		$website->messages["error"][] = "ERROR: <b>".ABS."config.php</b> is not writable";
+	} else {
+		$website->messages["success"][] = "SUCCESS: config.php is writable";
+	}
+}
+if ($install_step === 3) {
 	if (empty($website->config["db"])) {
-		$website->messages["error"][] = "WARNING: Database connection not established.";
+		$website->messages["error"][] = "ERROR: Database connection not established.";
 	} else {
 		$website->messages["success"][] = "SUCCESS: Database connection established.";
+	}
+	
+	if (is_writable(ABS_CUSTOM."smarty/cache")) {
+		$website->messages["error"][] = "ERROR: <b>".ABS_CUSTOM."smarty/cache</b> is not writable";
+	} else {
+		$website->messages["success"][] = "SUCCESS: smarty/cache is writable";
 	}
 }
 
@@ -161,7 +177,7 @@ if ($install_step === 3) {
 	$website->config["modulesList"] = $modulesList;
 	
 	
-	$website->config["admin_login"] = "admin@localhost";
+	$website->config["admin_login"] = "admin@".HOST;
 	$website->config["admin_password"] = Install_generatePassword();
 	
 }
