@@ -121,8 +121,18 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 	
 	
 	if ($_POST["install_step"] === 5) {
+		
+		// finish installation
+		
+		// reset step
 		$_SESSION["msv_install_step"] = $install_step = 0;
+		
+		// copy design "default" to "custom"
+		
+		// disable module Install
 		MSV_disableModule("install");
+		
+		// redirect to homepage
 		$website->outputRedirect("/");
 	}
 	
@@ -176,10 +186,8 @@ if ($install_step === 3) {
 	
 	$website->config["modulesList"] = $modulesList;
 	
-	
 	$website->config["admin_login"] = "admin@".HOST;
 	$website->config["admin_password"] = Install_generatePassword();
-	
 }
 
 if (!empty($install_step)) {

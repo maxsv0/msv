@@ -72,6 +72,10 @@ MSV_assignData("admin_table", $admin_table);
 
 if (!empty($section) && in_array($section, $menu_index)) {
 
+	// get module object
+	$sectionObj = MSV_get("website.$section");
+	
+	// set admin section hendler
 	$handler = $menuItem["handler"];
 
 	if (!empty($handler)) {
@@ -88,7 +92,10 @@ if (!empty($section) && in_array($section, $menu_index)) {
 		MSV_redirect("/admin/?section=$section&table=$admin_table&saved");
 	}
 	if (!empty($_POST["save"])) {
-		MSV_redirect("/admin/?section=$section&table=$admin_table&edit=".$_POST["form_id"]."&saved");
+		MSV_MessageOK(_t("msg.saved_ok"));
+		
+		// TODO: remove this? 
+		//MSV_redirect("/admin/?section=$section&table=$admin_table&edit=".$_POST["form_id"]."&saved");
 	}
 	if (isset($_GET["saved"])) {
 		MSV_MessageOK(_t("msg.saved_ok"));

@@ -50,7 +50,7 @@
 		<field name="updated" type="updated"/>
 		<field name="lang" type="lang"/>
 		<field name="param" type="str"/>
-		<field name="value" type="text"/>
+		<field name="value" type="str"/>
 		<field name="description" type="str"/>
 	</table>
 	<table name="mail_templates" index="id" title="name">
@@ -81,8 +81,8 @@
 
 <install>
 	<param name="name" value="msv-core" />
-	<param name="version" value="1.0.2"/>
-	<param name="date" value="10.06.2016"/>
+	<param name="version" value="1.0.3"/>
+	<param name="date" value="13.07.2016"/>
 	<param name="installHook" value="CoreInstall"/>
 	<param name="title" value="MSV - Core"/>
 	<param name="description" value="Core Functions for MSV."/>
@@ -101,7 +101,19 @@
 	<file dir="template" path="default/main.tpl"/>
 	<file dir="template" path="default/main-sideblock.tpl"/>
 	<file dir="template" path="default/index.tpl"/>
-
+	<file dir="template" path="default/admin.tpl"/>
+	<file dir="template" path="default/admin/list-table.tpl"/>
+	<file dir="template" path="default/admin/form-table.tpl"/>
+	<file dir="template" path="default/admin/field-form.tpl"/>
+	<file dir="template" path="default/admin/fields/field-bool.tpl"/>
+	<file dir="template" path="default/admin/fields/field-default.tpl"/>
+	<file dir="template" path="default/admin/fields/field-doc.tpl"/>
+	<file dir="template" path="default/admin/fields/field-lang.tpl"/>
+	<file dir="template" path="default/admin/fields/field-updated.tpl"/>
+	<file dir="template" path="default/admin/fields/field-select.tpl"/>
+	<file dir="template" path="default/admin/fields/field-date.tpl"/>
+	<file dir="template" path="default/admin/fields/field-picture.tpl"/>
+	<file dir="template" path="default/admin/fields/field-file.tpl"/>
 	<file dir="template" path="default/widget/header.tpl"/>
 	<file dir="template" path="default/widget/footer.tpl"/>
 	<file dir="template" path="default/widget/messages.tpl"/>
@@ -109,9 +121,6 @@
 	<file dir="template" path="default/widget/pagination.tpl"/>
 	<file dir="template" path="default/widget/sideblock.tpl"/>
 	<file dir="template" path="default/widget/menu-top.tpl"/>
-	<file dir="template" path="default/widget/menu-bottom.tpl"/>
-	
-	<file dir="content" path="images/msv-logo.png"/>
 </install>
 
 <locales>
@@ -182,7 +191,7 @@
 		<field name="type.lang" value="строка (20)"/>
 		<field name="type.str" value="строка (255)"/>
 		<field name="type.int" value="целое число"/>
-		<field name="type.bool" value="логический"/>
+		<field name="type.boot" value="логический"/>
 		<field name="type.array" value="список"/>
 		<field name="type.pic" value="изображение"/>
 		<field name="type.file" value="файл"/>
@@ -212,8 +221,8 @@
 		<field name="table.structure.seo_description" value="Описание страницы"/>
 		<field name="table.structure.seo_keywords" value="Ключевые слова"/>
 		
-		<field name="access.everyone" value="Доступен всем"/>
-		<field name="access.user" value="Только пользователи"/>
+		<field name="access.everyone" value="Доступен для всех"/>
+		<field name="access.user" value="Зарег. пользователи"/>
 		<field name="access.admin" value="Администратор"/>
 		<field name="access.superadmin" value="Суперадмин"/>
 		
@@ -355,7 +364,7 @@
 		<field name="table.structure.url" value="URL"/>
 		<field name="table.structure.parent_id" value="Parent ID"/>
 		<field name="table.structure.name" value="Name"/>
-		<field name="table.structure.template" value="Design"/>
+		<field name="table.structure.template" value="Design template"/>
 		<field name="table.structure.page_template" value="Page template"/>
 		<field name="table.structure.page_document_id" value="Document"/>
 		<field name="table.structure.document_text" value="Document"/>

@@ -9,6 +9,7 @@ class MSV_Website {
 	public $instaled 		= false;									// installation status
 	public $protocol 		= "http://";							// default protocol
 	public $host 			= "";									// current hostname
+	public $port 			= 80;									// website port
 	public $masterhost 		= "";									// hostname of default language website
 	
 	public $lang 			= "";									// current language
@@ -142,9 +143,14 @@ class MSV_Website {
 		} else {
 			$this->langSubdomain = false;
 		}
-		
+
 		// set host: current hostname of website
-		$this->host = $_SERVER['HTTP_HOST'];
+		// remove port from host
+		if (strpos($_SERVER['HTTP_HOST'], ":") !== false) {
+			list($this->host, $this->port) = explode(":", $_SERVER['HTTP_HOST']);
+		} else {
+			$this->host = $_SERVER['HTTP_HOST'];
+		}
 		
 		// set lang: current language
 		reset($this->languages);
@@ -169,6 +175,10 @@ class MSV_Website {
 			}
 		}
 		
+		if ($this->port !== 80) {
+			$this->masterhost .= ":".$this->port;
+		}
+			
 		// set lang  		
 		if (!empty($_REQUEST["lang"])) {
 			$lang = $_REQUEST["lang"];
@@ -214,7 +224,8 @@ class MSV_Website {
 				
 			} else {
 				$langHome = $this->protocol.$this->masterhost."/";
-			}
+			}			
+			
 			$this->config["home"][$langID] = $langHome;
 		}
 		$this->config["home_url"] = $this->config["home"][$this->langDefault];
@@ -374,9 +385,15 @@ class MSV_Website {
         		$this->api = array_merge($this->api, $obj->api);
         	}
         	
-        	// include module php file
-        	$result = $obj->runUrl($this->requestUrl);
-
+        	
+        	if (in_array("install", $this->modules)) {
+				//during installation run all php, dont check url
+	        	$result = $obj->runUrl("*");
+        	} else {
+        		// include module php file
+	        	$result = $obj->runUrl($this->requestUrl);
+        	}
+        	
         	if ($result) {
         		$this->modulesActive[] = $module;
         		$this->log("MSV -> $module active");
@@ -685,8 +702,7 @@ class MSV_Website {
 	
 	function outputDebug() {
 		$debugHTML = "";
-		$debugHTML .= "<div class=''>";
-		$debugHTML .= "<b>Debug Log</b>";
+		$debugHTML .= "<div class='debug_log'>";
 		$debugHTML .= "<pre class='pre-scrollable'>";
 		$debugHTML .= $this->logDebug;
 		$debugHTML .= "</pre>";

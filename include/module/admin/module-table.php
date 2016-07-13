@@ -11,7 +11,26 @@ MSV_assignData("admin_table_info", $tableInfo);
 
 if (!empty($_POST["save_exit"]) || !empty($_POST["save"])) {
 	$result = MSV_proccessUpdateTable($table, "form_");
-	if (!$result["ok"]) {
+	if ($result["ok"]) {
+		// make item Url
+		$itemUrl = $sectionObj->baseUrl.$_POST["form_url"];
+		if (FORSE_TRAILING_SLASH) {
+			$itemUrl .= "/";
+		}
+		
+		// save seo
+		$resultQuerySEO = API_getDBItem(TABLE_SEO, "`url` = '".MSV_SQLescape($itemUrl)."'");
+		if ($resultQuerySEO["ok"] && !empty($resultQuerySEO["data"])) {
+			$rowSEO = $resultQuerySEO["data"];
+			$rowSEO["title"] = $_POST["form_seo_title"];
+			$rowSEO["description"] = $_POST["form_seo_description"];
+			$rowSEO["keywords"] = $_POST["form_seo_keywords"];
+			
+			$resultSave = API_updateDBItemRow(TABLE_SEO, $rowSEO);
+		} else {
+			$resultSave = SEO_add($itemUrl, $_POST["form_seo_title"], $_POST["form_seo_description"], $_POST["form_seo_keywords"]);
+		}
+	} else {
 		MSV_redirect("/admin/?section=$section&table=$admin_table&save_error=".$result["msg"]);
 	}
 }
@@ -21,6 +40,21 @@ if (!empty($_POST["save"])) {
 if (!empty($_REQUEST["edit"])) {
 	$resultQueryItem = API_getDBItem($table, "`id` = '".(int)$_REQUEST["edit"]."'");
 	if ($resultQueryItem["ok"]) {
+		
+		// make item Url
+		$itemUrl = $sectionObj->baseUrl.$resultQueryItem["data"]["url"];
+		if (FORSE_TRAILING_SLASH) {
+			$itemUrl .= "/";
+		}
+		
+		// get item SEO
+		$resultQuerySEO = API_getDBItem(TABLE_SEO, "`url` = '".MSV_SQLescape($itemUrl)."'");
+		if ($resultQuerySEO["ok"]) {
+			$resultQueryItem["data"]["seo_title"] = $resultQuerySEO["data"]["title"];
+			$resultQueryItem["data"]["seo_description"] = $resultQuerySEO["data"]["description"];
+			$resultQueryItem["data"]["seo_keywords"] = $resultQuerySEO["data"]["keywords"];
+		}
+		
 		MSV_assignData("admin_edit", $resultQueryItem["data"]);
 	}
 }

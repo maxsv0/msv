@@ -3,6 +3,7 @@
 
 <config>
 	<param name="activationUrl" value="*"/>
+	<param name="baseUrl" value="/blog/"/>
 	<param name="itemsPerPage" value="10"/>
 	<param name="pageUrlParam" value="p"/>
 	<param name="searchUrlParam" value="s"/>
@@ -55,8 +56,8 @@
 
 <install>
 	<param name="name" value="blog" />
-	<param name="version" value="1.0"/>
-	<param name="date" value="01.06.2016"/>
+	<param name="version" value="1.0.1"/>
+	<param name="date" value="13.07.2016"/>
 	<param name="title" value="Blog"/>
 	<param name="description" value="Blog and Publications module."/>
 	

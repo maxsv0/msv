@@ -81,6 +81,13 @@ td {
 #table_config_vars th {
     color: maroon;
 }
+.debug_log pre {
+	overflow: auto;
+	word-wrap: normal;
+	white-space: pre;
+	margin: 0;
+	padding: 5px;
+}
 {/literal}
 </style>
 </head>
@@ -102,13 +109,16 @@ td {
 </div>
 {/if}
 
+<h2>MSV Debug Log</h2>
+{$assigned_vars["debug_code"]}
+
 <h2>assigned template variables</h2>
 
 <table id="table_assigned_vars">
     {foreach $assigned_vars as $vars}
        <tr class="{if $vars@iteration % 2 eq 0}odd{else}even{/if}">   
        <th>${$vars@key|escape:'html'}</th>
-       <td>{$vars|debug_print_var nofilter}</td></tr>
+       <td>{$vars|@debug_print_var}</td></tr>
     {/foreach}
 </table>
 

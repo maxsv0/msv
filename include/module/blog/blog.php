@@ -63,7 +63,7 @@ function BlogLoadArticles($blog) {
     	
     	// add item to page nativation line
     	if (!empty($section)) {
-    		$sectionUrl = "/blog/?category=$section";
+    		$sectionUrl = $blog->baseUrl."?category=$section";
     		
     		$navQuery = API_getDBItem(TABLE_BLOG_ARTICLE_CATEGORIES, " url = '".$section."/".$section."'");
 			if ($navQuery["ok"]) {
@@ -237,7 +237,7 @@ function BlogLoadArticleDetails($blog) {
 
 function BlogInstall($module) {
 
-	MSV_Structure_add("all", "/blog/", "My Blog", "default", "main-blog.tpl", 1, "top", 10, "everyone");
+	MSV_Structure_add("all", $blog->baseUrl, "My Blog", "default", "main-blog.tpl", 1, "top", 10, "everyone");
 	
 }
 
@@ -271,7 +271,7 @@ function Blog_add($url, $post_date = "", $post_title = "", $post_description = "
 	$result = API_itemAdd(TABLE_BLOG_ARTICLES, $item, $lang);
 	
 	if ($result["ok"]) {
-		SEO_add("/blog/".$url."/", $post_title, $post_title, $post_title, $lang);
+		SEO_add($blog->baseUrl.$url."/", $post_title, $post_title, $post_title, $lang);
 	}
 	
 	return $result;

@@ -14,6 +14,7 @@ class MSV_Module {
 	public $pathModule 			= "";
 	public $activationLevel 	= 5;
 	public $activationUrl 		= "";
+	public $baseUrl 			= "/";		// base url for links
 	public $useseo 				= "";		// list of tables for SEO module
 	public $constants			= array();
 	public $tables				= array();
@@ -149,7 +150,7 @@ class MSV_Module {
 	
 	function runInstallHook() {
 		if (empty($this->installHook)) {
-			return false;
+			return true;
 		}
 		$fnname = $this->installHook;
 		
@@ -158,7 +159,9 @@ class MSV_Module {
 		}
 				
 		$evalCode = $fnname."(\$this);";
-		return eval($evalCode);
+		eval($evalCode);
+		
+		return true;
 	}
 	
 	
