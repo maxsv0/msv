@@ -87,13 +87,31 @@ Before getting started, we need to setup config.php file that can be found in th
 
 <h2>Install modules</h2>
 
-<div style="text-align:left;">
+
+<div>
+
+<div style="text-align:left;float:left;width:50%;">
 <p><u>Local modules to activate</u> : </p>
 {foreach from=$modulesList key=moduleName item=moduleInfo} 
 <input type="checkbox" name="modules_local[]" checked value="{$moduleName}">
 {$moduleName}<br>
 {/foreach}
 </div>
+
+
+<div style="text-align:left;float:left;width:50%;">
+<p><u>Remove modules to activate</u> : </p>
+{foreach from=$modulesListRemote item=moduleName} 
+<input type="checkbox" name="modules_remote[]" checked value="{$moduleName}">
+{$moduleName}<br>
+{/foreach}
+</div>
+
+</div>
+
+<br style="clear:both;">
+
+
 
 <h2>Add Administrator</h2>
 

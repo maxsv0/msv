@@ -25,16 +25,28 @@
 {if !in_array($itemFieldID, $admin_list_skip)}
 {assign var="type" value=$admin_table_info.fields.$itemFieldID.type}
 {if $type === "pic"}
-<td><img src="{$itemField}" class="img-responsive" style="max-height:200px;"></td>
+<td>
+{if $itemField}
+	<img src="{$itemField}" class="img-responsive" style="max-height:200px;">
+{/if}
+</td>
 {elseif $type === "updated" || $type === "date"}
 <td><small>{$itemField}</small></td>
+{elseif $type === "bool"}
+<td>
+{if $itemField}
+<span class="text-success">{$t["yes"]}</span>
+{else}
+<span class="text-danger">{$t["no"]}</span>
+{/if}
+</td>
 {else}
 <td>{$itemField|htmlspecialchars|truncate:60:".."}</td>
 {/if}
 {/if}
 {/foreach}
 <td class="text-nowrap">
-	<a href="/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+	<a href="/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;"><span class="glyphicon glyphicon-remove"></span></a>
 	<a href="/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
 	<a href="/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
 </td>

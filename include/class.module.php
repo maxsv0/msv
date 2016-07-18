@@ -82,6 +82,8 @@ class MSV_Module {
 		if ($url === "*" || $url === "/admin/") {
 			// include without check
 			
+			$this->started = true;
+			
 			return include($this->pathModule);
 		} else {
 			

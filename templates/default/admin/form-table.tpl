@@ -34,6 +34,7 @@
  
 <input type="hidden" value="{$admin_section}" name="section">
 <input type="hidden" value="{$admin_table}" name="table">
+<input type="hidden" value="{$dataList.id}" id="itemID">
 
 <div class="form-group">
 <div class="text-right">
@@ -74,7 +75,7 @@
 </div>    
       
     <div id="uploadDiv">
-	<form action="/api/uploadpic/" name="uploadForm" method="post" enctype="multipart/form-data" target="uploadFrame">
+	<form action="/api/uploadpic/" name="uploadForm" id="fUploadForm" method="post" enctype="multipart/form-data" target="uploadFrame">
 	<input name="uploadFile" id="iUploadFile" type="file" class="form-control" style="height: 50px;"/>
 	<input name="table" id="iUploadTable" type="hidden" value="{$admin_table}"/>
 	<input name="field" id="iUploadField" type="hidden" value=""/>
@@ -98,3 +99,41 @@
 </div>
 
 <input id="uploadFilePath" type="hidden" value=""/>
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="libraryModal" tabindex="-1" role="dialog" aria-labelledby="libraryModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Media Library - {$t["module.$admin_section"]}</h4>
+      </div>
+      <div class="modal-body">
+      
+      
+<div>
+<img class="img-responsive cropper" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" id="picPreview">
+</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="closePicLibraryModal();">Save and return</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+      

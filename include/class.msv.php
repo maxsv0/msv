@@ -234,17 +234,21 @@ class MSV_Website {
 		
 		$this->config["languages"] = $this->languages;
 		
+		if (!empty($_SERVER["HTTP_REFERER"])) {
+			$this->config["referer"] = $_SERVER["HTTP_REFERER"];
+		}
+		
 		$this->parseRequest();
 		$this->activateModules();
 		$this->activateCustom();
 		
 		// if module Install is in list => run install
-		// else => run core, api
 		
 		// TODO: run all msv-* module?
-		
+		// run core, api, seo
 		$this->runModule("msv-core");
 		$this->runModule("msv-api");
+		$this->runModule("msv-seo");
 		
 		if (in_array("install", $this->modules)) {
 			$this->log("MSV: setup required");
@@ -287,6 +291,7 @@ class MSV_Website {
 	}
 	
 	function loadPage($requestUrl) {
+		$this->log("MSV: loadPage -> $requestUrl");
 		if (empty($requestUrl)) return false;
 		
 		$page = array();
@@ -328,7 +333,7 @@ class MSV_Website {
 
 				$r = $obj->runFilter($filter);
 				if ($r) {
-					$this->log("MSV: runFilter -> ".$filter["action"]." (level $index)");
+					$this->log("MSV: runFilter -> ".$filter["action"]." successfull (level $index)");
 				} else {
 					//$this->log("MSV: skip runFilter -> ".$filter["action"]." (level $index)");
 				}
@@ -501,6 +506,7 @@ class MSV_Website {
 		$Smarty->compile_dir = $compile_dir;
 		$Smarty->compile_check = true;
 		
+		$Smarty->assign("themeDefaultPath", ABS_TEMPLATE."/default");
 		$Smarty->assign("themePath", ABS_TEMPLATE."/".$this->template);
 		$Smarty->assign("themeUrl", ABS_TEMPLATEs."/".$this->template);
 		
@@ -565,6 +571,7 @@ class MSV_Website {
 		$Smarty->assign("user", $this->user);
 		
 		$Smarty->assign("t", $this->locales);
+		$Smarty->assign("rand", rand());
 
 		$this->smarty = $Smarty;
 		
@@ -626,9 +633,11 @@ class MSV_Website {
 	}
 	function outputPage() {
 		$this->log("MSV: outputPage");
-		
+
 		if (empty($this->page) && $this->instaled) {
 			// set 404 template
+			
+			$this->log("Page not found, loading 404 template");
 			$this->loadPage("/404/");
 			header("HTTP/1.0 404 Not Found");
 			

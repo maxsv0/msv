@@ -87,6 +87,12 @@ function MSV_Load() {
 }
 
 
+function MSV_Output404() {
+	$website = MSV_get("website");
+	$website->output404();
+}
+
+
 function MSV_Output() {
 	$website = MSV_get("website");
 	
@@ -251,7 +257,10 @@ function MSV_LoadPageDocument() {
 	$website = MSV_get("website");
 	
 	if (empty($website->page["page_document_id"])) {
+		MSV_Log("page_document_id empty");
 		return false;
+	} else {
+		MSV_Log("page_document_id -> ".$website->page["page_document_id"]);
 	}
 	
 	$result = API_getDBItem(TABLE_DOCUMENTS, " `id` = '".(int)$website->page["page_document_id"]."'");
@@ -1305,9 +1314,7 @@ function MSV_Structure_add($lang, $url, $name = "", $template = "", $page_templa
 		$structure_id = $result["insert_id"];
 		
 		// add seo
-		if (function_exists("SEO_add")) {
-			SEO_add($url, $name, '', '', $lang);
-		}
+		SEO_add($url, $name, '', '', $lang);
 		
 		// add docuemnt
 		$resultDocument = MSV_Document_add($name, "", "", $lang);
@@ -1381,12 +1388,20 @@ function ajax_Upload_Picture() {
 		
 		$table = $_REQUEST["table"];
 		$field = $_REQUEST["field"];
+		$itemID = $_REQUEST["itemID"];
 		
 		// TODO:
 		// check $table and $field (config ..)
 		
+		// extract file information
 		$file = $_FILES["uploadFile"];
-		$result = MSV_storePic($file["tmp_name"], "jpg", $file["name"], $table, $field);
+		$fileName = $file["name"];
+		if (!empty($itemID)) {
+			$fileName = $itemID."-".$fileName;
+		}
+		
+		// store Picture 
+		$result = MSV_storePic($file["tmp_name"], "jpg", $fileName, $table, $field);
 		if ($result) {
 			echo CONTENT_URL."/".$result;
 		}

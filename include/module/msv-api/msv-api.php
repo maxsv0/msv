@@ -131,9 +131,9 @@ function API_updateDBItemRow($table, $row) {
 	// get table info
 	$infoTable = $tablesList[$table];
 	
-	if (!empty($row["updated"])) {
-		$row["updated"] = date("Y-m-d H:i:s");
-	}
+	// set update date
+	$row["updated"] = date("Y-m-d H:i:s");
+	
 	// build query parts
 	$sqlCodeField = $sqlCodeValue = $sqlCodeUpdate = "";
 	foreach ($row as $field => $value) {

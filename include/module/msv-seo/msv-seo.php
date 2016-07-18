@@ -24,6 +24,10 @@ function SEO_set($title = "", $description = "", $keywords = "") {
 
 
 function SEO_add($pageUrl, $title = "", $description = "", $keywords = "", $lang = LANG) {
+	if (empty($pageUrl)) {
+		return false;
+	}
+	
 	$seo = array(
 		"published" => 1,
 		"url" => $pageUrl,

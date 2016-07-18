@@ -86,7 +86,7 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 			!empty($_POST["modules_local"]) && is_array($_POST["modules_local"])) {
 			foreach ($_POST["modules_local"] as $module) {
 				$obj = $website->{$module};
-				
+
 				if (!$obj->started) {
 					$website->runModule($module);
 				}
@@ -105,6 +105,15 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 				$obj = $website->{$module};
 				$obj->runInstallHook();
 			}
+			
+			
+			if(!empty($_POST["modules_remote"]) && is_array($_POST["modules_remote"])) {
+				foreach ($_POST["modules_local"] as $module) {
+					MSV_installModule($module, false);
+				}
+			}
+			
+			
 		} else {
 			$website->messages["error"][] = "Can't start without modules";
 		}
@@ -185,6 +194,10 @@ if ($install_step === 3) {
 	
 	
 	$website->config["modulesList"] = $modulesList;
+	$website->config["modulesListRemote"] = array(
+		"fancybox",
+		"cropper",
+	);
 	
 	$website->config["admin_login"] = "admin@".HOST;
 	$website->config["admin_password"] = Install_generatePassword();

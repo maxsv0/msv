@@ -3,7 +3,7 @@
 
 <config>
 
-	<param name="activationLevel" value="6"/>
+	<param name="activationLevel" value="9"/>
 	<param name="activationUrl" value="*"/>
 	
 	<constant name="TABLE_SEO" value="seo"/>

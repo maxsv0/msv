@@ -168,12 +168,12 @@ body {
 }
 
 
-#uploadModal .modal-dialog {
+#uploadModal .modal-dialog, #libraryModal .modal-dialog {
    width:auto;
-   max-width:100%;
+   max-width:80%;
 }
 
-#uploadModal .modal-header {
+#uploadModal .modal-header, #libraryModal .modal-header {
    padding: 15px 15px 0 15px;
 }
 
