@@ -108,7 +108,7 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 			
 			
 			if(!empty($_POST["modules_remote"]) && is_array($_POST["modules_remote"])) {
-				foreach ($_POST["modules_local"] as $module) {
+				foreach ($_POST["modules_remote"] as $module) {
 					MSV_installModule($module, false);
 				}
 			}

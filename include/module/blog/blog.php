@@ -236,7 +236,7 @@ function BlogLoadArticleDetails($blog) {
 
 function BlogInstall($module) {
 
-	MSV_Structure_add("all", $module->baseUrl, "My Blog", "default", "main-blog.tpl", 1, "top", 10, "everyone");
+	MSV_Structure_add("all", $blog->baseUrl, "My Blog", "default", "main-blog.tpl", 1, "top", 10, "everyone");
 	
 }
 
@@ -270,7 +270,7 @@ function Blog_add($url, $post_date = "", $post_title = "", $post_description = "
 	$result = API_itemAdd(TABLE_BLOG_ARTICLES, $item, $lang);
 	
 	if ($result["ok"]) {
-		SEO_add("/blog/".$url."/", $post_title, $post_title, $post_title, $lang);
+		SEO_add($blog->baseUrl.$url."/", $post_title, $post_title, $post_title, $lang);
 	}
 	
 	return $result;
