@@ -14,7 +14,57 @@ if (isset($_REQUEST['logout'])) {
 }
 
 
-if (!empty($_REQUEST["email"]) && !empty($_REQUEST["password"])) {
+if (!empty($_REQUEST["doSingUp"])) {
+	if (empty($_REQUEST["email"])) {
+		MSV_MessageError("Не указан Email");
+	}
+	if (empty($_REQUEST["password"])) {
+		MSV_MessageError("Укажите ваш пароль");
+	}
+	if (!empty($_REQUEST["password"]) && empty($_REQUEST["password2"])) {
+		MSV_MessageError("Укажите подтверждение пароля");
+	}
+	if (!MSV_HasMessageError() && $_REQUEST["password"] !== $_REQUEST["password2"]) {
+		MSV_MessageError("Пароль и подтверждение пароля не совпадают");
+	}
+	if (!MSV_HasMessageError()) {
+		$result = API_getDBItem(TABLE_USERS, " `email` = '".MSV_SQLEscape($_REQUEST["email"])."'");
+		if ($result["ok"] && !empty($result["data"])) {
+			MSV_MessageError("Пользователь с таким Email уже зарегистрирован");
+		}
+	}
+	
+	
+	if (!MSV_HasMessageError()) {
+		
+		$result = UserAdd($_REQUEST["email"], 0, $_REQUEST["password"], $_REQUEST["name"], $_REQUEST["phone"], "user", "regform");
+		if ($result["ok"] && !empty($result["insert_id"])) {
+			
+			$_SESSION['user_id'] = $result["insert_id"];
+			$_SESSION['user_email'] = $_REQUEST["email"];
+			header("location: /user/");
+			exit;
+			
+		}
+		
+	}
+	
+	
+	// pass data to template
+	if (!empty($_REQUEST["email"])) {
+		MSV_assignData("email", $_REQUEST["email"]);
+	}
+	if (!empty($_REQUEST["name"])) {
+		MSV_assignData("name", $_REQUEST["name"]);
+	}
+	if (!empty($_REQUEST["phone"])) {
+		MSV_assignData("phone", $_REQUEST["phone"]);
+	}	
+}
+
+
+
+if (!empty($_REQUEST["doLogin"]) && !empty($_REQUEST["email"]) && !empty($_REQUEST["password"])) {
 	
 	$result = API_getDBItem(TABLE_USERS, " `email` = '".MSV_SQLEscape($_REQUEST["email"])."'");
 	if ($result["ok"] && !empty($result["data"])) {
@@ -51,7 +101,7 @@ if (!empty($_REQUEST["email"]) && !empty($_REQUEST["password"])) {
 	MSV_MessageError("Неверно указан пароль");
 }
 
-if (!empty($_REQUEST["user_save"])) {
+if (!empty($_REQUEST["doSave"])) {
 
 	if (!MSV_HasMessageError()) {
 		// set user id
@@ -72,8 +122,11 @@ if (!empty($_REQUEST["user_save"])) {
 		
 	}
 }
-if (isset($_REQUEST["verify_send"])) {
+if (isset($_REQUEST["doVerify"])) {
 	MSV_MessageOK("ok!");
+	
+	// TODO: send email
+	//
 }
 
 	
@@ -85,12 +138,14 @@ if (!empty($_SESSION["user_id"])) {
 		$result = API_getDBItem(TABLE_USERS, " `id` = '".(int)$rowUser["user_id"]."' ");
 
 		if (!$result["ok"]) {
-			API_callError($result["msg"]);
-		} 
-		$rowUser = array_merge($rowUser, $result["data"]);
-		
-		// write changes to website instance
-		$this->website->user = $rowUser;
+			MSV_MessageError($result["msg"]);
+		} else {
+			// add info to user row
+			$rowUser = array_merge($rowUser, $result["data"]);
+			
+			// write changes to website instance
+			$this->website->user = $rowUser;
+		}
 	}
 }
 

@@ -89,6 +89,7 @@
 
 	<dependency module="msv-api" version="1.0" />
 	
+	<file dir="abs" path="robots.txt"/>
 	<file dir="abs" path="index.php"/>
 	<file dir="abs" path="load.php"/>
 	<file dir="include" path="index.php"/>
@@ -97,6 +98,7 @@
 	<file dir="module" path="index.php"/>
 	<file dir="module" path="msv-core/msv-core.php"/>
 	<file dir="module" path="msv-core/config.xml"/>
+
 	<file dir="template" path="default/404.tpl"/>
 	<file dir="template" path="default/main.tpl"/>
 	<file dir="template" path="default/main-sideblock.tpl"/>
@@ -121,6 +123,20 @@
 	<file dir="template" path="default/widget/pagination.tpl"/>
 	<file dir="template" path="default/widget/sideblock.tpl"/>
 	<file dir="template" path="default/widget/menu-top.tpl"/>
+	<file dir="template" path="default/widget/menu-bottom.tpl"/>
+	<file dir="template" path="custom/index.tpl"/>
+	<file dir="template" path="custom/main.tpl "/>
+	<file dir="content" path="images/msv-logo.png"/>
+	<file dir="content" path="css/default.css"/>
+	<file dir="content" path="css/bootstrap.min.css"/>
+	<file dir="content" path="js/jquery.min.js"/>
+	<file dir="content" path="js/bootstrap.min.js"/>
+	<file dir="content" path="js/default.js"/>
+	<file dir="content" path="fonts/glyphicons-halflings-regular.eot"/>
+	<file dir="content" path="fonts/glyphicons-halflings-regular.svg"/>
+	<file dir="content" path="fonts/glyphicons-halflings-regular.ttf"/>
+	<file dir="content" path="fonts/glyphicons-halflings-regular.woff"/>
+	<file dir="content" path="fonts/glyphicons-halflings-regular.woff2"/>
 </install>
 
 <locales>
@@ -364,7 +380,7 @@
 		<field name="table.structure.url" value="URL"/>
 		<field name="table.structure.parent_id" value="Parent ID"/>
 		<field name="table.structure.name" value="Name"/>
-		<field name="table.structure.template" value="Design template"/>
+		<field name="table.structure.template" value="Design"/>
 		<field name="table.structure.page_template" value="Page template"/>
 		<field name="table.structure.page_document_id" value="Document"/>
 		<field name="table.structure.document_text" value="Document"/>

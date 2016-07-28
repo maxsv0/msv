@@ -514,6 +514,9 @@ function API_createTable($table) {
 				$sqlCode .= " `".$field["name"]."` INT NOT NULL DEFAULT 0 ";
 				$tableIndexes[] = $field["name"];
 			break;
+			case "float":
+				$sqlCode .= " `".$field["name"]."` FLOAT NOT NULL DEFAULT 0 ";
+			break;
 			case "author":
 				$sqlCode .= " `".$field["name"]."` VARCHAR(60) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ";
 				$tableIndexes[] = $field["name"];

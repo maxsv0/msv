@@ -18,7 +18,7 @@
 	    <div class="col-sm-8">
 	      <input type="email" class="form-control" id="inputEmail" value="{$user.email}" placeholder="Email" name="user_email" aria-describedby="inputSuccess2Status">
 	      <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
-	      <small class="text-warning">Verification Email sent. <a href="/settings/?verify_send">Resend Email Activation</a></small>
+	      <small class="text-warning">Verification Email sent. <a href="/settings/?doVerify">Resend Email Activation</a></small>
 	    </div>
 	</div>
 {/if}
@@ -86,7 +86,7 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-8">
       <button class="btn btn-danger" type="reset"><span class="glyphicon glyphicon-ban-circle">&nbsp;</span>{$t["btn.reset"]}</button>
-      <button type="submit" name="user_save" value="1" class="btn btn-primary"><span class="glyphicon glyphicon-ok">&nbsp;</span>{$t["btn.save"]}</button>
+      <button type="submit" name="doSave" value="1" class="btn btn-primary"><span class="glyphicon glyphicon-ok">&nbsp;</span>{$t["btn.save"]}</button>
     </div>
   </div>
 </form>

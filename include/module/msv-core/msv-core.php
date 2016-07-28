@@ -905,7 +905,8 @@ function MSV_checkFiles() {
 	$fileList = array();
 	foreach($it as $file) {
 		$file = (string)$file;
-	   if (strpos($file, "/include/custom/")) continue;
+	   if (strpos($file, "/include/custom/") !== false) continue;
+	   if (strpos($file, ".git") !== false) continue;
 	   $fileList[] = $file;
 	}
 	
@@ -1358,8 +1359,8 @@ function MSV_Document_add($name = "", $text = "", $ext_link = "", $lang = LANG) 
 
 function CoreInstall($module) {
 	
-	MSV_Structure_add("all", "/", "Homepage", "default", "index.tpl", 1, "top", 1, "everyone");
-	MSV_Structure_add("all", "/the-first-page/", "The First page", "default", "main.tpl", 1, "top", 2, "everyone");
+	MSV_Structure_add("all", "/", "Homepage", "custom", "index.tpl", 1, "top", 1, "everyone");
+	MSV_Structure_add("all", "/the-first-page/", "The First page", "custom", "main.tpl", 1, "top", 2, "everyone");
 	MSV_Structure_add("all", "/404/", "404 Error", "default", "404.tpl", 0, "", 0, "everyone");
 	MSV_Structure_add("*", "/admin/", "Admin Homepage", "default", "admin.tpl", 0, "", 0, "admin");
 	MSV_Structure_add("*", "/admin/login/", "Admin Homepage Login", "default", "admin-login.tpl", 0, "", 0, "everyone");

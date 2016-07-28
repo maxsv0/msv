@@ -42,11 +42,7 @@ include(ABS_INCLUDE."/class.msv.php");
 
 
 // create MSV Website instance
-// set languages from config
 $website = new MSV_Website();
 
-//$website->includeCSS[] = "/content/css/default.css";
-//$website->includeJS[] = "/content/js/jquery.min.js";
-//$website->includeJS[] = "/content/js/default.js";
-
+// start the instance
 $website->start();
