@@ -127,11 +127,9 @@
 	<file dir="template" path="custom/index.tpl"/>
 	<file dir="template" path="custom/main.tpl "/>
 	<file dir="content" path="images/msv-logo.png"/>
-	<file dir="content" path="css/default.css"/>
 	<file dir="content" path="css/bootstrap.min.css"/>
 	<file dir="content" path="js/jquery.min.js"/>
 	<file dir="content" path="js/bootstrap.min.js"/>
-	<file dir="content" path="js/default.js"/>
 	<file dir="content" path="fonts/glyphicons-halflings-regular.eot"/>
 	<file dir="content" path="fonts/glyphicons-halflings-regular.svg"/>
 	<file dir="content" path="fonts/glyphicons-halflings-regular.ttf"/>

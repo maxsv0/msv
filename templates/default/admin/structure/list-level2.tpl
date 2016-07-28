@@ -21,13 +21,23 @@
 
 <td class="text-nowrap">
 <small>
+{if $item.template}
 {if $item.template === "default"}
-<span class="text-muted">{$item.template}</span>
+	<span class="text-muted">{$item.template}</span>
 {else}
-<span class="text-info">{$item.template}</span>
+	<span class="text-info">{$item.template}</span>
 {/if}
+{else}
+<span class="label label-danger">не указан</span>
+{/if}
+
 /
+
+{if $item.page_template}
 {$item.page_template}
+{else}
+<span class="label label-danger">не указан</span>
+{/if}
 </small>
 </td>
 
