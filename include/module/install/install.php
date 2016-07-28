@@ -73,6 +73,8 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 			if (is_writable(ABS."/config.php")) {
 				file_put_contents(ABS."/config.php", $configPHP);
 				
+				$website->outputRedirect("/");
+				
 				$website->messages["success"][] = "".ABS."/config.php updated successfuly";
 			} else {
 				$website->messages["error"][] = "Can't write to ".ABS."/config.php";
