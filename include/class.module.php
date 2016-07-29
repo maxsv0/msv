@@ -117,7 +117,7 @@ class MSV_Module {
 		if ($filter["url"] === "*") {
 			$patternUrl = "(.*)";
 		} else {
-			$patternUrl = str_replace("*", "([-_a-z0-9A-Z\\.]+)", $filter["url"]);
+			$patternUrl = str_replace("*", "(.+)", $filter["url"]);
 			$patternUrl = str_replace("/", "\\/", $patternUrl);
 		}
 		
@@ -300,8 +300,7 @@ class MSV_Module {
 				);
 				
 				if (!empty($selectfrom)) {
-					list($source, $sourceName) = explode(":", $selectfrom);
-					
+					list($source, $sourceName, $filter, $order) = explode(":", $selectfrom);
 					
 					// TODO: 
 					// type 'select' conflict - api:create table, ???
@@ -311,6 +310,8 @@ class MSV_Module {
 					$fieldAr["select-from"] = array(
 								"source" => $source,
 								"name" => $sourceName,
+								"filter" => $filter,
+								"order" => $order,
 							);
 				}
 				///// ----

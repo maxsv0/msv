@@ -148,8 +148,13 @@ if (!empty($section) && in_array($section, $menu_index)) {
 						// index from config?
 						$index = "id";
 						$title = $cfg["title"];
+						$filter = $field["select-from"]["filter"];
+						$order = $field["select-from"]["order"];
+						if (empty($order)) {
+							$order = "`$title` asc";
+						}
 						
-						$queryData = API_getDBList($field["select-from"]["name"], "", "`$title` asc");
+						$queryData = API_getDBList($field["select-from"]["name"], $filter, $order);
 						if ($queryData["ok"]) {
 							$arData = array();
 							foreach ($queryData["data"] as $item) {
