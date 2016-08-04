@@ -42,6 +42,18 @@ if (!empty($_REQUEST["doSingUp"])) {
 			
 			$_SESSION['user_id'] = $result["insert_id"];
 			$_SESSION['user_email'] = $_REQUEST["email"];
+			
+			$doEmail = MSV_getConfig("email_registration");
+			if ($doEmail) {
+				$userinfo = array();
+				$userinfo["email"] = $_REQUEST["email"];
+				$userinfo["password"] = $_REQUEST["password"];
+				$userinfo["name"] = $_REQUEST["name"];
+				$userinfo["phone"] = $_REQUEST["phone"];
+				
+				MSV_EmailTemplate("user_registration", $_SESSION['user_email'], $userinfo);
+			}
+			
 			header("location: /user/");
 			exit;
 			
@@ -110,6 +122,7 @@ if (!empty($_REQUEST["doSave"])) {
 		// check if email was changed
 		if ($_REQUEST["user_email"] !== $_SESSION['user_email']) {
 			$_REQUEST["user_email_verified"] = 0;
+			$_SESSION['user_email'] = $_REQUEST["user_email"];
 		}
 		
 		// proccess update
@@ -123,10 +136,17 @@ if (!empty($_REQUEST["doSave"])) {
 	}
 }
 if (isset($_REQUEST["doVerify"])) {
-	MSV_MessageOK("ok!");
 	
-	// TODO: send email
-	//
+	$verify_token = substr(md5(time()), 0, 10);
+	$result = API_updateDBItem(TABLE_USERS, "verify_token", "'".MSV_SQLEscape($verify_token)."'", " `id` = '".$_SESSION['user_id']."'");
+	if ($result["ok"]) {
+			
+		$userinfo = MSV_get("website.user");
+		MSV_EmailTemplate("user_registration", $_SESSION["user_email"], $userinfo);
+		
+	} else {
+		MSV_MessageError("Ошибка отправки сообщения");
+	}
 }
 
 	

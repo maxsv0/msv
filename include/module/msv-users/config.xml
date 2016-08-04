@@ -3,7 +3,7 @@
 
 <config>
 
-	<param name="activationLevel" value="1"/>
+	<param name="activationLevel" value="2"/>
 	<param name="activationUrl" value="*"/>
 	
 	<constant name="TABLE_USERS" value="users"/>
@@ -34,6 +34,7 @@
 		<field name="access" type="str" select-from="list:everyone,user,admin,superadmin"/>
 		<field name="iss" type="str"/>
 		<field name="reset_token" type="str"/>
+		<field name="verify_token" type="str"/>
 	</table>
 	
 	<form name="user-login" function="loadUserFormLogin">

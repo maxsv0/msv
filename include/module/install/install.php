@@ -73,8 +73,6 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 			if (is_writable(ABS."/config.php")) {
 				file_put_contents(ABS."/config.php", $configPHP);
 				
-				$website->outputRedirect("/");
-				
 				$website->messages["success"][] = "".ABS."/config.php updated successfuly";
 			} else {
 				$website->messages["error"][] = "Can't write to ".ABS."/config.php";
@@ -122,7 +120,13 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 		
 		if (!empty($_POST["admin_login"]) && !empty($_POST["admin_password"])) {
 			
-			UserAdd($_POST["admin_login"], 1, $_POST["admin_password"], "admin", "", "superadmin", "install");
+			$resultUser = UserAdd($_POST["admin_login"], 1, $_POST["admin_password"], "admin", "", "superadmin", "install");
+			if ($resultUser["ok"] && !empty($resultUser["insert_id"])) {
+				$_SESSION['user_id'] = $resultUser["insert_id"];
+				$_SESSION['user_email'] = $_POST["admin_login"];
+			} else {
+				$website->messages["error"][] = "Error adding administrator account";
+			}
 			
 		} else {
 			$website->messages["error"][] = "Please enter login and password";
@@ -202,7 +206,7 @@ if ($install_step === 3) {
 	);
 	
 	$website->config["admin_login"] = "admin@".HOST;
-	$website->config["admin_password"] = Install_generatePassword();
+	$website->config["admin_password"] = MSV_PasswordGenerate();
 }
 
 if (!empty($install_step)) {
@@ -212,15 +216,3 @@ if (!empty($install_step)) {
 $website->outputDebug();
 $website->outputPage();
 
-
-function Install_generatePassword($length = 12) {
-    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    $count = mb_strlen($chars);
-
-    for ($i = 0, $result = ''; $i < $length; $i++) {
-        $index = rand(0, $count - 1);
-        $result .= mb_substr($chars, $index, 1);
-    }
-
-    return $result;
-}

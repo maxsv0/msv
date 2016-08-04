@@ -66,6 +66,9 @@ function MSV_Start() {
 	if (!empty($message_error)) {
 		MSV_MessageError($message_error);
 	}
+	
+	// link mail function
+	MSV_setConfig("mailer", "MSV_EmailDefault");
 }
 
 
@@ -1272,6 +1275,8 @@ function _t($textID) {
 
 
 
+// ********** User Functions ********
+
 
 function MSV_Structure_add($lang, $url, $name = "", $template = "", $page_template = "", $sitemap = "", $menu = "", $menu_order = 0, $access, $parent_url = "") {
 	
@@ -1357,6 +1362,97 @@ function MSV_Document_add($name = "", $text = "", $ext_link = "", $lang = LANG) 
 }
 
 
+function MSV_EmailDefault($to = "", $subject = "", $body = "") {
+	
+	$emailFrom = MSV_getConfig("email_from");
+	$emailFromName = MSV_getConfig("email_fromname");
+	if (!empty($sendgridFromName)) {
+		$emailFromHeader = $emailFromName." <".$emailFrom.">";
+	} else {
+		$emailFromHeader = $emailFrom;
+	}
+	$headers = "From: ".$emailFromHeader."\r\nContent-type: text/html; charset=\"UTF-8\" \r\n";
+	
+	return mail($to, $subject, $body, $headers);
+}
+
+function MSV_Email($to = "", $subject = "", $body = "") {
+	
+	$mailer = MSV_getConfig("mailer");
+
+	return call_user_func_array($mailer, array($to, $subject, $body));
+}
+
+function MSV_EmailTemplate($template, $mailTo, $data = array(), $message = true, $lang = LANG) {
+	
+	// get template
+	$resultMail = API_getDBItem(TABLE_MAIL_TEMPLATES, " `name` = '".MSV_SQLEscape($template)."'", LANG);
+
+	if ($resultMail["ok"]) {
+		$mailSubject = $resultMail["data"]["subject"];
+		$mailBody = $resultMail["data"]["text"];
+		
+		MSV_setConfig("dataTemplate", $data);
+		
+		// replace pattern:
+		// {email} into $data["email"]
+
+		$mailBody = preg_replace_callback(
+		    '~\{(\w+?)\}~sU',
+		    create_function('$t','
+		   	 $r = MSV_getConfig("dataTemplate");
+		     return $r[$t[1]];
+		    '),
+		    $mailBody);
+
+		$mailSubject = preg_replace_callback(
+		    '~\{(\w+?)\}~sU',
+		    create_function('$t','
+		   	 $r = MSV_getConfig("dataTemplate");
+		     return $r[$t[1]];
+		    '),
+		    $mailSubject);
+		    
+		$r = MSV_Email($mailTo, $mailSubject, $mailBody);
+		
+		if ($r) {
+			if ($message) {
+				MSV_MessageOK("Письмо успешно отправлено на email <b>$mailTo</b>");
+			}
+		} else {
+			if ($message) {
+				MSV_MessageError("Ошибка отправки письма на email <b>$mailTo</b>");
+			}
+		}
+		
+	} else {
+		return false;
+	}
+	
+	return true;
+}
+
+	
+
+function MSV_PasswordGenerate($length = 12) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $count = mb_strlen($chars);
+
+    for ($i = 0, $result = ''; $i < $length; $i++) {
+        $index = rand(0, $count - 1);
+        $result .= mb_substr($chars, $index, 1);
+    }
+
+    return $result;
+}
+
+		
+
+
+
+// ********** Install Script ********
+
+
 function CoreInstall($module) {
 	
 	MSV_Structure_add("all", "/", "Homepage", "custom", "index.tpl", 1, "top", 1, "everyone");
@@ -1375,13 +1471,22 @@ function CoreInstall($module) {
 	MSV_setConfig("email_registration", 0, true, "*");
 	MSV_setConfig("message_ok", "", true, "*");
 	MSV_setConfig("message_error", "This is development version. Readonly mode.", true, "*");
+	//sss
+	MSV_setConfig("email_from", "", true, "*");
+	MSV_setConfig("email_fromname", "", true, "*");
 }
+
+
+
+// ********** AJAX functions ********
 
 
 function ajax_Get_Structure() {
 	
 	$structure = MSV_get("website.structure");
 	var_dump($structure);
+	
+	// TODO..
 }
 
 function ajax_Upload_Picture() {
@@ -1408,3 +1513,4 @@ function ajax_Upload_Picture() {
 		}
 	}
 }
+
