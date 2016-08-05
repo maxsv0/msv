@@ -92,7 +92,7 @@ function MSV_Load() {
 
 function MSV_Output404() {
 	$website = MSV_get("website");
-	$website->output404();
+	$website->outputNotFound();
 }
 
 
@@ -1362,7 +1362,7 @@ function MSV_Document_add($name = "", $text = "", $ext_link = "", $lang = LANG) 
 }
 
 
-function MSV_EmailDefault($to = "", $subject = "", $body = "") {
+function MSV_EmailDefault($to = "", $subject = "", $body = "", $header = "") {
 	
 	$emailFrom = MSV_getConfig("email_from");
 	$emailFromName = MSV_getConfig("email_fromname");
@@ -1372,15 +1372,18 @@ function MSV_EmailDefault($to = "", $subject = "", $body = "") {
 		$emailFromHeader = $emailFrom;
 	}
 	$headers = "From: ".$emailFromHeader."\r\nContent-type: text/html; charset=\"UTF-8\" \r\n";
+	if (!empty($header)) {
+		$headers .= $header;
+	}
 	
 	return mail($to, $subject, $body, $headers);
 }
 
-function MSV_Email($to = "", $subject = "", $body = "") {
+function MSV_Email($to = "", $subject = "", $body = "", $header = "") {
 	
 	$mailer = MSV_getConfig("mailer");
 
-	return call_user_func_array($mailer, array($to, $subject, $body));
+	return call_user_func_array($mailer, array($to, $subject, $body, $header));
 }
 
 function MSV_EmailTemplate($template, $mailTo, $data = array(), $message = true, $lang = LANG) {

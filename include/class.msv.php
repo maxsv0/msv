@@ -603,7 +603,10 @@ class MSV_Website {
 		$str .= "</div>";
 		$this->output($str, 200);
 	}
-	function outputNotFound($output) {
+	function outputNotFound($output = "") {
+		if (empty($output)) {
+			$output = "Page not found.";
+		}
 		$this->output($output, 404);
 	}
 	
@@ -612,7 +615,7 @@ class MSV_Website {
 	}
 	
 	function outputRedirect($url) {
-		// TODO +++: emulate request on redirect (_POST, _FILES..)
+		// TODO +++: emulate request on redirect (_POST, GET, _FILES..)
 		$this->output($url, 301);
 	}
 	function checkAccess($pageAccess, $userAccess = array()) {
