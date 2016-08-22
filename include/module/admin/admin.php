@@ -28,6 +28,7 @@ $menuSubActive = "realtime";
 if (!empty($_REQUEST["section"])) {
 	$section = $_REQUEST["section"];
 }
+
 if (!empty($_REQUEST["table"])) {
 	$admin_table = $_REQUEST["table"];
 }
@@ -48,6 +49,7 @@ if (!empty($section)) {
 		}
 	}
 }
+
 if (!empty($menuItem["table"])) {
 	$admin_table = $menuItem["table"];
 }

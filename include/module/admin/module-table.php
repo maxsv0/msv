@@ -83,7 +83,32 @@ if (isset($_REQUEST["add_new"])) {
 	MSV_assignData("admin_edit", $item);
 }
 
-$resultQuery = API_getDBListPaged($table, "", "`id` asc", 100, "p");
+if (!empty($_REQUEST["sort"])) {
+	// TODO: check if correct key
+	$sort = $_REQUEST["sort"];
+} else {
+	$sort = "id";
+}
+
+if (!empty($_REQUEST["sortd"])) {
+	if ($_REQUEST["sortd"] === "desc") {
+		$sortd = "desc";
+		$sortd_rev = "asc";
+	} else {
+		$sortd = "asc";
+		$sortd_rev = "desc";
+	}
+} else {
+	$sortd = "asc";
+	$sortd_rev = "desc";
+}
+
+MSV_assignData("table_sort", $sort);
+MSV_assignData("table_sortd", $sortd);
+MSV_assignData("table_sortd_rev", $sortd_rev);
+
+
+$resultQuery = API_getDBListPaged($table, "", "`$sort` $sortd", 100, "p");
 if ($resultQuery["ok"]) {
 	MSV_assignData("admin_list", $resultQuery["data"]);
 	

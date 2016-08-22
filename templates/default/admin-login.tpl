@@ -5,7 +5,7 @@
 
 <div class="container">
 
-<form class="form-horizontal" method="POST" action="/admin/">
+<form class="form-horizontal" method="POST" action="/admin/login/">
   <div class="form-group">
     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">

@@ -124,8 +124,6 @@
 	<file dir="template" path="default/widget/sideblock.tpl"/>
 	<file dir="template" path="default/widget/menu-top.tpl"/>
 	<file dir="template" path="default/widget/menu-bottom.tpl"/>
-	<file dir="template" path="custom/index.tpl"/>
-	<file dir="template" path="custom/main.tpl "/>
 	<file dir="content" path="images/msv-logo.png"/>
 	<file dir="content" path="css/bootstrap.min.css"/>
 	<file dir="content" path="js/jquery.min.js"/>

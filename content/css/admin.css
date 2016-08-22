@@ -166,6 +166,9 @@ body {
 	background:#fff;
 	padding:10px 0;
 }
+.table>tbody>tr>th:hover {
+	background:#ebebeb;
+}
 
 
 #uploadModal .modal-dialog, #libraryModal .modal-dialog {
@@ -175,6 +178,10 @@ body {
 
 #uploadModal .modal-header, #libraryModal .modal-header {
    padding: 15px 15px 0 15px;
+}
+
+.tab-content {
+   padding: 15px 0;;
 }
 
 .input-path[readonly] {

@@ -9,7 +9,7 @@
 	    <div class="col-sm-8">
 	      <input type="email" class="form-control" id="inputEmail" value="{$user.email}" placeholder="Email" name="user_email" aria-describedby="inputSuccess2Status">
 	      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-	      <small class="text-success">Email if verified</small>
+	      <small class="text-success">Email is verified</small>
 	    </div>
 	</div>
 {else}

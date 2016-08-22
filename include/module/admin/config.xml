@@ -24,7 +24,7 @@
 	<file dir="module" path="admin/config.xml"/>
 	<file dir="module" path="admin/module-table.php"/>
 	<file dir="module" path="admin/module-robots.php"/>
-	<file dir="module" path="admin/module-docs.php"/>
+	<file dir="module" path="admin/module-media.php"/>
 	<file dir="module" path="admin/module-locales.php"/>
 	<file dir="module" path="admin/module-structure.php"/>
 	<file dir="template" path="default/admin.tpl"/>
@@ -78,6 +78,7 @@
 	<file dir="template" path="default/admin/seo/list.tpl"/>
 	<file dir="template" path="default/admin/mail_template/edit.tpl"/>
 	<file dir="template" path="default/admin/mail_template/list.tpl"/>
+	<file dir="template" path="default/admin/media/file-upload.tpl"/>
 	
 	<file dir="content" path="css/admin.css"/>
 	<file dir="content" path="js/admin.js"/>

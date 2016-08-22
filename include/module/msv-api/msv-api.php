@@ -11,6 +11,8 @@ function apiRequest($module) {
 				eval($evalCode);
 				
 				echo $result;
+			} else {
+				MSV_Error("Function not found: ".$apiInfo["action"]);
 			}
 		}
 	}
@@ -526,6 +528,7 @@ function API_createTable($table) {
 				$tableIndexes[] = $field["name"];
 			break;
 			case "str":
+			case "file":
 			case "pic":
 				$sqlCode .= " `".$field["name"]."` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ";
 			break;

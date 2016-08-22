@@ -8,7 +8,9 @@
 <tr>
 {foreach from=$item key=itemFieldID item=itemField} 
 {if !in_array($itemFieldID, $admin_list_skip)}
-<th>{$t["table.$admin_table.$itemFieldID"]}</th>
+<th>
+	<a href="/admin/?section=blog&table={$admin_table}&sort={$itemFieldID}&sortd={$table_sortd_rev}">{$t["table.$admin_table.$itemFieldID"]}</a>{if $table_sort == $itemFieldID}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+</th>
 {/if}
 {/foreach}
 <th>{$t["actions"]}</th>

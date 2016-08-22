@@ -62,6 +62,15 @@ $submenu["menu"] = array(
 	"file" => "menu.tpl",
 	"title" => _t("admin.menu_title")
 );
+$submenu["documents"] = array(
+	"name" => _t("admin.documents"), 
+	"access" => "admin",
+	"handler" => "module-table.php",
+	"table" => TABLE_DOCUMENTS,
+	"url" => "/admin/?section=documents",
+	"file" => "documents.tpl",
+	"title" => _t("admin.document_title")
+);
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
 
@@ -85,7 +94,7 @@ $menu_ar["users"] = array(
 $menu_ar["media_library"] = array(
 	"name" =>  "Media Library", 
 	"access" => "admin",
-	"handler" => "module-docs.php",
+	"handler" => "module-media.php",
 	"url" => "/admin/?section=media_library",
 	"file" => "media_library.tpl",
 	"title" => "Media Library"
