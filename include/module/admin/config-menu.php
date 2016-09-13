@@ -71,6 +71,15 @@ $submenu["documents"] = array(
 	"file" => "documents.tpl",
 	"title" => _t("admin.document_title")
 );
+$submenu["seo"] = array(
+	"name" => _t("admin.seo"), 
+	"access" => "admin",
+	"handler" => "module-table.php",
+	"table" => TABLE_SEO,
+	"url" => "/admin/?section=seo",
+	"file" => "seo.tpl",
+	"title" => _t("admin.seo_title")
+);
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
 
@@ -175,15 +184,6 @@ $submenu["locales"] = array(
 	"url" => "/admin/?section=locales",
 	"file" => "locales.tpl",
 	"title" => _t("admin.locales_title")
-);
-$submenu["seo"] = array(
-	"name" => _t("admin.seo"), 
-	"access" => "admin",
-	"handler" => "module-table.php",
-	"table" => TABLE_SEO,
-	"url" => "/admin/?section=seo",
-	"file" => "seo.tpl",
-	"title" => _t("admin.seo_title")
 );
 $submenu["robots"] = array(
 	"name" => _t("admin.robots"), 

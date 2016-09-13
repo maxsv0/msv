@@ -5,7 +5,7 @@
 <img class="img-responsive" src="{$value}?{$rand}" id="img-{$item_id}">
 </div>
 {else}
-<div class="alert alert-danger">No stored image</div>
+<div class="alert alert-danger">{_t("msg.no_stored_image")}</div>
 <div class="img-container">
 <img class="img-responsive" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" id="img-{$item_id}">
 </div>
@@ -14,18 +14,18 @@
 
 
 <p>
-File: <span id="value-{$item_id}">{$value}</span>
+{_t("form.file")} <span id="value-{$item_id}">{$value}</span>
 
 {if $value}
-<input type="button" class="btn btn-danger btn-xs" value="Remove Link" onclick="removeLink('{$item_id}');">
+<input type="button" class="btn btn-danger btn-xs" value="{_t("btn.remove_link")}" onclick="removeLink('{$item_id}');">
 {/if}
 </p>
 
 <p>
 {if $item_id !== "pic"}
-<input type="button" class="btn btn-warning" value="Создать" onclick="openPicLibraryModal('{$item_id}');">
+<input type="button" class="btn btn-warning" value="{_t("btn.create")}" onclick="openPicLibraryModal('{$item_id}');">
 {/if}
-<input type="button" class="btn btn-warning" value="Загрузить файл" onclick="openUploadModal('{$item_id}');">
+<input type="button" class="btn btn-warning" value="{_t("btn.upload_file")}" onclick="openUploadModal('{$item_id}');">
 </p>
 
 

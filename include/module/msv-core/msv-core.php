@@ -268,10 +268,24 @@ function MSV_LoadPageDocument() {
 	
 	$result = API_getDBItem(TABLE_DOCUMENTS, " `id` = '".(int)$website->page["page_document_id"]."'");
 
+	$separator = "<hr class=\"next_block\">";
+	$document = $result["data"];
+	$documentText = $document["text"];
+	$documentBlocks = array();
+	if (strpos($documentText,$separator) !== false) {
+		
+		$documentBlocks = explode($separator, $documentText);
+		
+	} else {
+		$documentBlocks[] = $documentText;
+	}
+	$document["text"] = $documentText;
+	
 	if (!$result["ok"]) {
 		MSV_ERROR($result["msg"]);
 	}
-	$website->document = $result["data"];
+	$website->document = $document;
+	$website->document_blocks = $documentBlocks;
 
 	return true;
 }
@@ -926,6 +940,23 @@ function MSV_checkFiles() {
 
 
 
+function MSV_assignTableData($table, $prefix = "") {
+	$tableInfo = MSV_getTableConfig(TABLE_WEBINAR);
+	
+	if (empty($tableInfo)) {
+		return false;
+	}
+	
+	foreach ($tableInfo["fields"] as $k => $item) {
+		if (!array_key_exists($prefix.$item["name"], $_REQUEST)) {
+			MSV_assignData($prefix.$item["name"], $_REQUEST[$prefix.$item["name"]]);
+		}
+	}
+	
+	return true;
+}
+
+
 function MSV_proccessUpdateTable($table, $prefix = "") {
 	$info = MSV_getTableConfig($table);
 	
@@ -1012,14 +1043,13 @@ function MSV_outputAdminMenu() {
 	$website = MSV_get("website");
 	
 	$strOut  = "";
-	$strOut .= "<div style='position:absolute;opacity:0.5;bottom:0;left:0;width:150px;background:rgba(0,0,0,0.8);color:#fff;padding:20px 15px;'>";
-	$strOut .= "<p><a href='/admin/' style='color:#fff;'>Back to Admin</a></p><hr>";
-	$strOut .= "<h3 style='text-align:center;'>Page info</h3>";
+	$strOut .= "<div style='position:fixed;opacity:0.5;bottom:0;left:0;width:150px;background:rgba(0,0,0,0.8);color:#fff;padding:20px 15px;'>";
+	$strOut .= "<p><a href='/admin/' style='color:#fff;'>"._t("btn.back_to_admin")."</a></p><hr>";
 	$strOut .= "<h4>".$website->page["name"]."</h4>";
 	$strOut .= "<h5>url: ".$website->page["url"]."</h5>";
-	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."' style='color:#fff;'>Edit Settings</a></p>";
-	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."#document' style='color:#fff;'>Edit Document</a></p>";
-	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."#seo' style='color:#fff;'>Edit SEO</a></p>";
+	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."' style='color:#fff;'>"._t("btn.edit_settings")."</a></p>";
+	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."#document' style='color:#fff;'>"._t("btn.edit_document")."</a></p>";
+	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."#seo' style='color:#fff;'>"._t("btn.edit_seo")."</a></p>";
 	$strOut .= "</div>";
 
 	return $strOut;
@@ -1458,11 +1488,11 @@ function MSV_PasswordGenerate($length = 12) {
 
 function CoreInstall($module) {
 	
-	MSV_Structure_add("all", "/", "Homepage", "custom", "index.tpl", 1, "top", 1, "everyone");
-	MSV_Structure_add("all", "/the-first-page/", "The First page", "custom", "main.tpl", 1, "top", 2, "everyone");
-	MSV_Structure_add("all", "/404/", "404 Error", "default", "404.tpl", 0, "", 0, "everyone");
-	MSV_Structure_add("*", "/admin/", "Admin Homepage", "default", "admin.tpl", 0, "", 0, "admin");
-	MSV_Structure_add("*", "/admin/login/", "Admin Homepage Login", "default", "admin-login.tpl", 0, "", 0, "everyone");
+	MSV_Structure_add("all", "/", _t("structure.homepage"), "custom", "index.tpl", 1, "top", 1, "everyone");
+	MSV_Structure_add("all", "/the-first-page/", _t("structure.first_page"), "custom", "main.tpl", 1, "top", 2, "everyone");
+	MSV_Structure_add("all", "/404/", _t("structure.404"), "default", "404.tpl", 0, "", 0, "everyone");
+	MSV_Structure_add("*", "/admin/", _t("structure.admin_homepage"), "default", "admin.tpl", 0, "", 0, "admin");
+	MSV_Structure_add("*", "/admin/login/", _t("structure.admin_login"), "default", "admin-login.tpl", 0, "", 0, "everyone");
 	
 	// add site settings
 	MSV_setConfig("include_html_head", "", true, "*");
@@ -1523,190 +1553,152 @@ function ajax_Upload_Picture() {
 
 
 // TODO: + use languages
+
 function ajax_Get_Translit($module) {
-           $res = array();
-           
-           $index = '';
-           
-           if (!empty($_REQUEST['index'])) {
-            $index = $_REQUEST['index'];
-           } else {
-             if (!empty($_REQUEST['ttable'])) {
-                $index = get_table_auto_increment_next_value($website->config["db"], $_REQUEST['ttable']);
-             }
-           }
-           // $_REQUEST['nextpage']
-           
-
-           
-            $trans_fwd = array(
-            	'а'=>'a',
-            	'б'=>'b',
-            	'в'=>'v',
-            	'г'=>'g',
-            	'д'=>'d',
-            	'е'=>'e',
-            	'є'=>'e',
-            	'ё'=>'e',
-            	'ж'=>'zh',
-            	'з'=>'z',
-            	'и'=>'i',
-            	'і'=>'i',
-            	'ї'=>'i',
-            	'й'=>'y',
-            	'к'=>'k',
-            	'л'=>'l',
-            	'м'=>'m',
-            	'н'=>'n',
-            	'о'=>'o',
-            	'п'=>'p',
-            	'р'=>'r',
-            	'с'=>'s',
-            	'т'=>'t',
-            	'у'=>'u',
-            	'ф'=>'f',
-            	'х'=>'h',
-            	'ц'=>'c',
-            	'ч'=>'ch',
-            	'ш'=>'sh',
-            	'щ'=>'sch',
-            	'ъ'=>'',
-            	'ы'=>'i',
-            	'ь'=>'',
-            	'э'=>'e',
-            	'ю'=>'yu',
-            	'я'=>'ya',
-            	' '=>'-',
-            	'-'=>'-',
-            	'0'=>'0',
-            	'1'=>'1',
-            	'2'=>'2',
-            	'3'=>'3',
-            	'4'=>'4',
-            	'5'=>'5',
-            	'6'=>'6',
-            	'7'=>'7',
-            	'8'=>'8',
-            	'9'=>'9',
-            	'_'=>'-',
-            	'('=>'',
-            	')'=>'',
-            	'a'=>'a',
-            	'b'=>'b',
-            	'c'=>'c',
-            	'd'=>'d',
-            	'e'=>'e',
-            	'f'=>'f',
-            	'g'=>'g',
-            	'h'=>'h',
-            	'i'=>'i',
-            	'j'=>'j',
-            	'k'=>'k',
-            	'l'=>'l',
-            	'm'=>'m',
-            	'n'=>'n',
-            	'o'=>'o',
-            	'p'=>'p',
-            	'q'=>'q',
-            	'r'=>'r',
-            	's'=>'s',
-            	't'=>'t',
-            	'u'=>'u',
-            	'v'=>'v',
-            	'w'=>'w',
-            	'x'=>'x',
-            	'y'=>'y',
-            	'z'=>'z'
-            );
-            
-            
-            $trans_bckwd = array(
-            	'a'=>'а',
-            	'b'=>'б',
-            	'c'=>'ц',
-            	'd'=>'д',
-            	'e'=>'е',
-            	'f'=>'ф',
-            	'g'=>'ж',
-            	'h'=>'х',
-            	'i'=>'и',
-            	'j'=>'й',
-            	'k'=>'к',
-            	'l'=>'л',
-            	'm'=>'м',
-            	'n'=>'н',
-            	'o'=>'о',
-            	'p'=>'п',
-            	'q'=>'к',
-            	'r'=>'р',
-            	's'=>'с',
-            	't'=>'т',
-            	'u'=>'у',
-            	'v'=>'в',
-            	'w'=>'в',
-            	'x'=>'кс',
-            	'y'=>'і',
-            	'z'=>'з'
-            );
-            
-
-            
-            if (!empty($_REQUEST['code_str'])) {
-                    $res 	= array('success' 	=> 'ok',
-             	 			'code_str' 		=> translit_encode(str_trunc(((!empty($index)? $index.'-':'').$_REQUEST['code_str']),150)));
-            } else {
-                    $res 	= array('success' 	=> '',
-             	 			'code_str' 		=> '');    
-            }                
+       $res = array();
+       
+       $index = '';
+       
+       if (!empty($_REQUEST['index'])) {
+        $index = $_REQUEST['index'];
+       } else {
+         if (!empty($_REQUEST['ttable'])) {
+            $index = get_table_auto_increment_next_value($_REQUEST['ttable']);
+         }
+       }
+        if (!empty($_REQUEST['code_str'])) {
+                $res 	= array('success' 	=> 'ok',
+         	 			'code_str' 		=> translit_encode(str_trunc(((!empty($index)? $index.'-':'').$_REQUEST['code_str']),150)));
+        } else {
+                $res 	= array('success' 	=> '',
+         	 			'code_str' 		=> '');    
+        }                
     
 
-    
     return json_encode($res);
-    
-    function get_table_auto_increment_next_value($db, $table)
-            {
-              $sql = "SHOW TABLE STATUS FROM `$db` LIKE '$table'";
-            
-              $result = mysql_query($sql);
-              $row    = mysql_fetch_assoc($result);
-              
-              return $row['Auto_increment'];
-            }
-            
-            
-    function translit_encode($string) {
-            	global $trans_fwd;
-            	$result = '';
-            	$string = mb_strtolower($string, 'utf-8');
-            	for ($i = 0; $i < mb_strlen($string, 'utf-8'); $i++) {
-            		//$letter = mb_strtolower($string[$i], mb_detect_encoding($string));
-            		$letter = mb_substr($string, $i, 1, 'utf-8');
-            		if ($trans_fwd[$letter] !== NULL) {
-            			$result .= $trans_fwd[$letter];
-            		} else {
-            			$result .= '';
-            		}
-            	}
-            	return $result;
-            }
-            
-            
-    function str_trunc($str, $max_chars = 30) {
-                $max_chars_tr = (int)round($max_chars*0.8);
-                $sep = array(",", " ", ";", "(", "\\", "/", "-", ".");
-                
-                $s = $str;
-                if (strlen($s) > $max_chars) {
-                    foreach ($sep as $v) {
-                        $a = strpos($s, $v, $max_chars_tr);
-                        if ($a !== false && $a < $max_chars) {
-                            return substr($s, 0, $a);
-                        }
-                    }
-                    return substr($s, 0, $max_chars);
-                } else {
-                    return $s;
-                }
-            }  
-    
 }
+
+
+function get_table_auto_increment_next_value($table) {
+  $sql = "SHOW TABLE STATUS FROM `".DB_NAME."` LIKE '$table'";
+
+  $result = API_SQL($sql);
+  $resultRow = MSV_SQLRow($result["data"]);
+  
+  return $resultRow['Auto_increment'];
+ // return $db;
+}
+        
+        
+function translit_encode($string) {
+	$trans_fwd = array(
+        	'а'=>'a',
+        	'б'=>'b',
+        	'в'=>'v',
+        	'г'=>'g',
+        	'д'=>'d',
+        	'е'=>'e',
+        	'є'=>'e',
+        	'ё'=>'e',
+        	'ж'=>'zh',
+        	'з'=>'z',
+        	'и'=>'i',
+        	'і'=>'i',
+        	'ї'=>'i',
+        	'й'=>'y',
+        	'к'=>'k',
+        	'л'=>'l',
+        	'м'=>'m',
+        	'н'=>'n',
+        	'о'=>'o',
+        	'п'=>'p',
+        	'р'=>'r',
+        	'с'=>'s',
+        	'т'=>'t',
+        	'у'=>'u',
+        	'ф'=>'f',
+        	'х'=>'h',
+        	'ц'=>'c',
+        	'ч'=>'ch',
+        	'ш'=>'sh',
+        	'щ'=>'sch',
+        	'ъ'=>'',
+        	'ы'=>'i',
+        	'ь'=>'',
+        	'э'=>'e',
+        	'ю'=>'yu',
+        	'я'=>'ya',
+        	' '=>'-',
+        	'-'=>'-',
+        	'0'=>'0',
+        	'1'=>'1',
+        	'2'=>'2',
+        	'3'=>'3',
+        	'4'=>'4',
+        	'5'=>'5',
+        	'6'=>'6',
+        	'7'=>'7',
+        	'8'=>'8',
+        	'9'=>'9',
+        	'_'=>'-',
+        	'('=>'',
+        	')'=>'',
+        	'a'=>'a',
+        	'b'=>'b',
+        	'c'=>'c',
+        	'd'=>'d',
+        	'e'=>'e',
+        	'f'=>'f',
+        	'g'=>'g',
+        	'h'=>'h',
+        	'i'=>'i',
+        	'j'=>'j',
+        	'k'=>'k',
+        	'l'=>'l',
+        	'm'=>'m',
+        	'n'=>'n',
+        	'o'=>'o',
+        	'p'=>'p',
+        	'q'=>'q',
+        	'r'=>'r',
+        	's'=>'s',
+        	't'=>'t',
+        	'u'=>'u',
+        	'v'=>'v',
+        	'w'=>'w',
+        	'x'=>'x',
+        	'y'=>'y',
+        	'z'=>'z'
+        );
+	$result = '';
+	$string = mb_strtolower($string, 'utf-8');
+	for ($i = 0; $i < mb_strlen($string, 'utf-8'); $i++) {
+		//$letter = mb_strtolower($string[$i], mb_detect_encoding($string));
+		$letter = mb_substr($string, $i, 1, 'utf-8');
+		if ($trans_fwd[$letter] !== NULL) {
+			$result .= $trans_fwd[$letter];
+		} else {
+			$result .= '';
+		}
+	}
+	return $result;
+}
+        
+        
+function str_trunc($str, $max_chars = 30) {
+    $max_chars_tr = (int)round($max_chars*0.8);
+    $sep = array(",", " ", ";", "(", "\\", "/", "-", ".");
+    
+    $s = $str;
+    if (strlen($s) > $max_chars) {
+        foreach ($sep as $v) {
+            $a = strpos($s, $v, $max_chars_tr);
+            if ($a !== false && $a < $max_chars) {
+                return substr($s, 0, $a);
+            }
+        }
+        return substr($s, 0, $max_chars);
+    } else {
+        return $s;
+    }
+}  

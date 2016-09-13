@@ -35,6 +35,7 @@
 		<field name="iss" type="str"/>
 		<field name="reset_token" type="str"/>
 		<field name="verify_token" type="str"/>
+		<field name="access_token" type="str"/>
 	</table>
 	
 	<form name="user-login" function="loadUserFormLogin">
@@ -84,6 +85,11 @@
 
 <locales>
 	<locale name="ru">
+		<field name="structure.users.account" value="My Account"/>
+		<field name="structure.users.signup" value="Sing Up"/>
+		<field name="structure.users.login" value="Log In"/>
+		<field name="structure.users.password_reset" value="Password Reset"/>
+		<field name="structure.users.settings" value="My settings"/>
 		<field name="table.users" value="Пользователи сайта"/>
 		<field name="table.users.id" value="ID"/>
 		<field name="table.users.published" value="Активно"/>
@@ -101,9 +107,35 @@
 		<field name="table.users.access" value="Доступ"/>
 		<field name="table.users.iss" value="Источник"/>
 		<field name="table.users.reset_token" value="Токен сброса пароля"/>
-		
+		<field name="table.users.verify_token" value="Токен проверки email"/>
+		<field name="table.users.access_token" value="Токен доступа"/>
+		<field name="msg.users.noemail" value="Не указан Email"/>
+		<field name="msg.users.nopassword" value="Укажите ваш пароль"/>
+		<field name="msg.users.nopassword2" value="Укажите подтверждение пароля"/>
+		<field name="msg.users.password_notmatch" value="Пароль и подтверждение пароля не совпадают"/>
+		<field name="msg.users.email_exists" value="Пользователь с таким Email уже зарегистрирован"/>
+		<field name="msg.users.wrong_password" value="Неверно указан пароль"/>
+		<field name="msg.users.saved" value="Пользователь успешно обновлен"/>
+		<field name="msg.users.error_sending" value="Ошибка отправки сообщения"/>
+		<field name="users.goto_account" value="Перейти в аккаунт"/>
+		<field name="users.activate_account" value="Активировать аккаунт"/>
+		<field name="users.form.email" value="Email"/>
+		<field name="users.form.password" value="Пароль"/>
+		<field name="users.form.remember_me" value="Запомнить меня"/>
+		<field name="users.form.link_forget" value="Забыли пароль?"/>
+		<field name="users.form.sign_in" value="Войти в аккаунт"/>
+		<field name="users.form.sign_up" value="Зарегистрироваться"/>
+		<field name="users.form.repeat_password" value="Повтор пароля"/>
+		<field name="users.form.name" value="Ваше имя"/>
+		<field name="users.form.phone" value="Телефон"/>
+		<field name="users.form.title_sign_up" value="Зарегистрироваться"/>
 	</locale>
 	<locale name="en">
+		<field name="structure.users.account" value="My Account"/>
+		<field name="structure.users.signup" value="Sing Up"/>
+		<field name="structure.users.login" value="Log In"/>
+		<field name="structure.users.password_reset" value="Password Reset"/>
+		<field name="structure.users.settings" value="My settings"/>
 		<field name="table.users" value="Users"/>
 		<field name="table.users.id" value="ID"/>
 		<field name="table.users.published" value="Published"/>
@@ -120,7 +152,29 @@
 		<field name="table.users.lang_default" value="User Language"/>
 		<field name="table.users.access" value="Access"/>
 		<field name="table.users.iss" value="Sourse"/>
-		<field name="table.users.reset_token" value="Password Reset token"/>
+		<field name="table.users.reset_token" value="Токен сброса пароля"/>
+		<field name="table.users.verify_token" value="Токен проверки email"/>
+		<field name="table.users.access_token" value="Токен доступа"/>
+		<field name="msg.users.noemail" value="Не указан Email"/>
+		<field name="msg.users.nopassword" value="Укажите ваш пароль"/>
+		<field name="msg.users.nopassword2" value="Укажите подтверждение пароля"/>
+		<field name="msg.users.password_notmatch" value="Пароль и подтверждение пароля не совпадают"/>
+		<field name="msg.users.email_exists" value="Пользователь с таким Email уже зарегистрирован"/>
+		<field name="msg.users.wrong_password" value="Неверно указан пароль"/>
+		<field name="msg.users.saved" value="Успешно сохранено"/>
+		<field name="msg.users.error_sending" value="Ошибка отправки сообщения"/>
+		<field name="users.goto_account" value="Перейти в аккаунт"/>
+		<field name="users.activate_account" value="Активировать аккаунт"/>
+		<field name="users.form.email" value="Email"/>
+		<field name="users.form.password" value="Password"/>
+		<field name="users.form.remember_me" value="Remember me"/>
+		<field name="users.form.link_forget" value="Forget password?"/>
+		<field name="users.form.sign_in" value="Sign in"/>
+		<field name="users.form.sign_up" value="Sign Up"/>
+		<field name="users.form.repeat_password" value="Repeat Password"/>
+		<field name="users.form.name" value="Name"/>
+		<field name="users.form.phone" value="Phone"/>
+		<field name="users.form.title_sign_up" value="Sign Up"/>
 	</locale>
 </locales>
 </document>

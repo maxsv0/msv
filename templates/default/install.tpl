@@ -12,8 +12,6 @@
   </head>
 <body bgcolor="F7F7F7">
 
-
-
 <div style="padding:50px 100px;">
 <h2 style="color:#303030;text-align:center;">MSV</h2>
 <div style="background:#fff;padding:20px 30px 5px 30px;max-width:800px;margin:0 auto;">

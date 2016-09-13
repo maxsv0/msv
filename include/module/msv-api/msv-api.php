@@ -407,7 +407,9 @@ function API_getDBList($table, $filter = "", $orderby = "", $limit = 1000000, $s
 	
 	$tablesList = MSV_get("website.tables");
 	if (!array_key_exists($table, $tablesList)) {
-		return $dataRow;
+		$result["msg"] = "Table not found $table";
+		$result["data"] = array();
+		return $result;
 	}
 	$infoTable = $tablesList[$table];
 	$tableIndex = $infoTable["index"];
@@ -622,7 +624,13 @@ function API_itemAdd($table, $fields, $lang = LANG) {
 	$resultQuery = API_getDBCount($table, $filter, $lang);
 	if ($resultQuery["data"] > 0) {
 		// no need to add, item already exists
-		return false;
+		
+		$result = array(
+			"ok" => false,
+			"data" => array(),
+			"msg" => "Already exists",
+		);
+		return $result;
 	}
 	
 	$tablesList = MSV_get("website.tables");

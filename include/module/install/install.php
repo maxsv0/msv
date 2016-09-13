@@ -20,6 +20,7 @@ $configListNames = array(
 	"DEBUG","DEBUG_LOG","SITE_CLOSED","SHOW_ADMIN_MENU",
 	"PHP_LOCALE","PHP_TIMEZONE","DATABATE_ENCODING",
 	"FORSE_TRAILING_SLASH","SUBDOMAIN_LANGUAGES","REP",
+	"USER_HASH_PASSWORD","USER_IGNORE_PRIVILEGES",
 );
 
 
@@ -125,7 +126,7 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 				$_SESSION['user_id'] = $resultUser["insert_id"];
 				$_SESSION['user_email'] = $_POST["admin_login"];
 			} else {
-				$website->messages["error"][] = "Error adding administrator account";
+				$website->messages["error"][] = "Error adding administrator account: ".$resultUser["msg"];
 			}
 			
 		} else {

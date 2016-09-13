@@ -16,21 +16,21 @@ if (isset($_REQUEST['logout'])) {
 
 if (!empty($_REQUEST["doSingUp"])) {
 	if (empty($_REQUEST["email"])) {
-		MSV_MessageError("Не указан Email");
+		MSV_MessageError(_t("msg.users.noemail"));
 	}
 	if (empty($_REQUEST["password"])) {
-		MSV_MessageError("Укажите ваш пароль");
+		MSV_MessageError(_t("msg.users.nopassword"));
 	}
 	if (!empty($_REQUEST["password"]) && empty($_REQUEST["password2"])) {
-		MSV_MessageError("Укажите подтверждение пароля");
+		MSV_MessageError(_t("msg.users.nopassword2"));
 	}
 	if (!MSV_HasMessageError() && $_REQUEST["password"] !== $_REQUEST["password2"]) {
-		MSV_MessageError("Пароль и подтверждение пароля не совпадают");
+		MSV_MessageError(_t("msg.users.password_notmatch"));
 	}
 	if (!MSV_HasMessageError()) {
 		$result = API_getDBItem(TABLE_USERS, " `email` = '".MSV_SQLEscape($_REQUEST["email"])."'");
 		if ($result["ok"] && !empty($result["data"])) {
-			MSV_MessageError("Пользователь с таким Email уже зарегистрирован");
+			MSV_MessageError(_t("msg.users.email_exists"));
 		}
 	}
 	
@@ -43,18 +43,7 @@ if (!empty($_REQUEST["doSingUp"])) {
 			$_SESSION['user_id'] = $result["insert_id"];
 			$_SESSION['user_email'] = $_REQUEST["email"];
 			
-			$doEmail = MSV_getConfig("email_registration");
-			if ($doEmail) {
-				$userinfo = array();
-				$userinfo["email"] = $_REQUEST["email"];
-				$userinfo["password"] = $_REQUEST["password"];
-				$userinfo["name"] = $_REQUEST["name"];
-				$userinfo["phone"] = $_REQUEST["phone"];
-				
-				MSV_EmailTemplate("user_registration", $_SESSION['user_email'], $userinfo);
-			}
-			
-			header("location: /user/");
+			header("location: /user/?registered");
 			exit;
 			
 		}
@@ -81,11 +70,14 @@ if (!empty($_REQUEST["doLogin"]) && !empty($_REQUEST["email"]) && !empty($_REQUE
 	$result = API_getDBItem(TABLE_USERS, " `email` = '".MSV_SQLEscape($_REQUEST["email"])."'");
 	if ($result["ok"] && !empty($result["data"])) {
 		
-		// php 5.5+. store password hashed
-		// versions under store plain password
-		
+		// USER_HASH_PASSWORD:true - store password hashed
 		$login = false;
-		if (function_exists("password_verify")) {
+		
+		if (USER_IGNORE_PRIVILEGES) {
+			$login = true;
+		}
+		
+		if (USER_HASH_PASSWORD) {
 			if (password_verify($_REQUEST["password"], $result["data"]["password"])) {
 				$login = true;
 			}
@@ -110,7 +102,7 @@ if (!empty($_REQUEST["doLogin"]) && !empty($_REQUEST["email"]) && !empty($_REQUE
 		}
 	} 
 	
-	MSV_MessageError("Неверно указан пароль");
+	MSV_MessageError(_t("msg.users.wrong_password"));
 }
 
 if (!empty($_REQUEST["doSave"])) {
@@ -125,10 +117,14 @@ if (!empty($_REQUEST["doSave"])) {
 			$_SESSION['user_email'] = $_REQUEST["user_email"];
 		}
 		
+		if (!empty($_FILES["user_pic"]) && !empty($_FILES["user_pic"]["name"])) {
+			$_REQUEST["user_pic"] = MSV_storePic($_FILES["user_pic"]["tmp_name"], $_FILES["user_pic"]["type"], "", TABLE_USERS, "pic");
+		}
+		
 		// proccess update
 		$result = MSV_proccessUpdateTable(TABLE_USERS, "user_");
 		if ($result["ok"]) {
-			MSV_MessageOK("Успешно сохранено");
+			MSV_MessageOK(_t("msg.users.saved"));
 		} else {
 			MSV_MessageError($result["msg"]);
 		}
@@ -142,10 +138,31 @@ if (isset($_REQUEST["doVerify"])) {
 	if ($result["ok"]) {
 			
 		$userinfo = MSV_get("website.user");
+		
+		if ($userinfo["email_verified"]) {
+			$verify_link = "http://".HOST."/user/settings/?access_token=$access_token";
+			$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
+<tr><td><div style=\"text-align:center; display: inline-block;\">
+<a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.goto_account")."</a>
+</div></td> </tr>
+</table>
+";
+		} else {
+			$verify_link = "http://".HOST."/user/settings/?verify_token=".$verify_token."&access_token=$access_token";
+			$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
+<tr><td><div style=\"text-align:center; display: inline-block;\">
+<a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.activate_account")."</a>
+</div></td> </tr>
+</table>
+";
+		}
+		$userinfo["verify_code"] = $user_verify;
+		
+		
 		MSV_EmailTemplate("user_registration", $_SESSION["user_email"], $userinfo);
 		
 	} else {
-		MSV_MessageError("Ошибка отправки сообщения");
+		MSV_MessageError(_t("msg.users.error_sending"));
 	}
 }
 
@@ -187,10 +204,20 @@ function loadUserSession($module) {
 
 
 function UserAdd($email, $email_verified = 0, $password = "", $name = "", $phone = "", $access = "user", $iss = "local") {
-	
-	if (!empty($password) && function_exists("password_hash")) {
-		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+	// do not allow empty password
+	if (empty($password)) {
+		$password = MSV_PasswordGenerate();
 	}
+	
+	if (USER_HASH_PASSWORD) {
+		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+	} else {
+		$passwordHash = $password;
+	}
+	
+	$verify_token = substr(md5(microtime().rand()), 0, 10);
+	$access_token = substr(md5(microtime().rand()), 0, 10);
 	
 	$item = array(
 		"published" => 1,
@@ -202,20 +229,56 @@ function UserAdd($email, $email_verified = 0, $password = "", $name = "", $phone
 		"lang_default" => LANG,
 		"access" => $access,
 		"iss" => $iss,
+		"verify_token" => $verify_token,
+		"access_token" => $access_token,
 	);
 	
 	$result = API_itemAdd(TABLE_USERS, $item, "*");
 
+	if ($result["ok"]) {
+		$doEmail = MSV_getConfig("email_registration");
+		if ($doEmail) {
+			
+			$userinfo = array(
+				"email" => $email,
+				"password" => $password,
+				"name" => $name,
+				"phone" => $phone,
+			);
+			
+			if ($email_verified) {
+				$verify_link = "http://".HOST."/user/settings/?access_token=$access_token";
+				$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
+<tr><td><div style=\"text-align:center; display: inline-block;\">
+<a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.goto_account")."</a>
+</div></td> </tr>
+</table>
+";
+			} else {
+				$verify_link = "http://".HOST."/user/settings/?verify_token=".$verify_token."&access_token=$access_token";
+				$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
+<tr><td><div style=\"text-align:center; display: inline-block;\">
+<a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.activate_account")."</a>
+</div></td> </tr>
+</table>
+";
+			}
+			$userinfo["verify_code"] = $user_verify;
+
+			MSV_EmailTemplate("user_registration", $email, $userinfo);
+		}
+	}
+	
 	return $result;
 }
 
 function UsersInstall($module) {
 	
-	MSV_Structure_add("all", "/user/", "My Account", "default", "user.tpl", 1, "user", 1, "user");
-	MSV_Structure_add("all", "/signup/", "Sing Up", "default", "user-signup.tpl", 1, "bottom", 1, "everyone", "/user/");
-	MSV_Structure_add("all", "/login/", "Log In", "default", "user-login.tpl", 1, "bottom", 2, "everyone", "/user/");
-	MSV_Structure_add("all", "/password-reset/", "Password Reset", "default", "user-password-reset.tpl", 1, "", 0, "everyone", "/user/");
-	MSV_Structure_add("all", "/settings/", "My settings", "default", "user-settings.tpl", 1, "user", 2, "everyone", "/user/");
+	MSV_Structure_add("all", "/user/", _t("structure.users.account"), "default", "user.tpl", 1, "user", 1, "user");
+	MSV_Structure_add("all", "/signup/", _t("structure.users.signup"), "default", "user-signup.tpl", 1, "bottom", 1, "everyone", "/user/");
+	MSV_Structure_add("all", "/login/", _t("structure.users.login"), "default", "user-login.tpl", 1, "bottom", 2, "everyone", "/user/");
+	MSV_Structure_add("all", "/password-reset/", _t("structure.users.password_reset"), "default", "user-password-reset.tpl", 1, "", 0, "everyone", "/user/");
+	MSV_Structure_add("all", "/settings/", _t("structure.users.settings"), "default", "user-settings.tpl", 1, "user", 2, "everyone", "/user/");
 	
 	$item = array(
 		"published" => 1,

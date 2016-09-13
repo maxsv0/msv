@@ -178,7 +178,19 @@ class MSV_Website {
 		if ($this->port !== 80) {
 			$this->masterhost .= ":".$this->port;
 		}
-			
+
+		// load lang
+		if (!empty($_REQUEST["setlang"])) {
+			$_SESSION["lang"] = $_REQUEST["setlang"];
+		}
+        if (empty($_REQUEST["lang"]) && empty($_REQUEST["setlang"]) && empty($_SESSION["lang"])) {
+           $_SESSION["lang"] = $_REQUEST["lang"] = $this->languages[0];
+        }
+        
+		if (!empty($_SESSION["lang"])) {
+			$_REQUEST["lang"] = $_SESSION["lang"];
+		}
+		
 		// set lang  		
 		if (!empty($_REQUEST["lang"])) {
 			$lang = $_REQUEST["lang"];
@@ -573,6 +585,8 @@ class MSV_Website {
 		$Smarty->assign("t", $this->locales);
 		$Smarty->assign("rand", rand());
 
+		$Smarty->assign("request_url", $this->requestUrl);
+		
 		$this->smarty = $Smarty;
 		
 		return true;

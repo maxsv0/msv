@@ -145,7 +145,8 @@
 		<field name="btn.delete" value="Удалить"/>
 		<field name="btn.edit" value="Редактировать"/>
 		<field name="btn.duplicate" value="Дублировать"/>
-		<field name="btn.document_create" value="Создать"/>
+		<field name="btn.create" value="Создать"/>
+		<field name="btn.document_create" value="Создать документ"/>
 		<field name="btn.document_edit" value="Редактировать"/>
 		<field name="btn.add_new" value="Добавить элемент"/>
 		<field name="btn.cancel" value="Отмена"/>
@@ -153,6 +154,10 @@
 		<field name="btn.save" value="Сохранить"/>
 		<field name="btn.save_exit" value="Сохранить и выйти"/>
 		<field name="btn.add_child" value="Добавить подраздел"/>
+		<field name="btn.back_to_admin" value="Вернуться в админку"/>
+		<field name="btn.edit_settings" value="Edit Settings"/>
+		<field name="btn.edit_document" value="Edit Document"/>
+		<field name="btn.edit_seo" value="Edit SEO"/>
 		
 		<field name="tab.home" value="Основное"/>
 		<field name="tab.document" value="Документ"/>
@@ -292,6 +297,12 @@
 		<field name="msg.created_ok" value="Создано успешно"/>
 		<field name="msg.saved_ok" value="Успешно сохранено"/>
 		<field name="msg.save_error" value="Ошибка сохранения"/>
+		
+		<field name="structure.homepage" value="Homepage"/>
+		<field name="structure.first_page" value="The First page"/>
+		<field name="structure.404" value="404 Error"/>
+		<field name="structure.admin_homepage" value="Admin Homepage"/>
+		<field name="structure.admin_login" value="Admin Login"/>
 	</locale>
 	<locale name="en">
 		<field name="actions" value="Actions"/>
@@ -302,6 +313,7 @@
 		<field name="btn.delete" value="Delete"/>
 		<field name="btn.edit" value="Edit"/>
 		<field name="btn.duplicate" value="Duplicate"/>
+		<field name="btn.create" value="Create"/>
 		<field name="btn.document_create" value="Create Document"/>
 		<field name="btn.document_edit" value="Edit Document"/>
 		<field name="btn.add_new" value="Add new item"/>
@@ -310,6 +322,10 @@
 		<field name="btn.save" value="Save"/>
 		<field name="btn.save_exit" value="Save and Exit"/>
 		<field name="btn.add_child" value="Add sub-page"/>
+		<field name="btn.back_to_admin" value="Back to Admin"/>
+		<field name="btn.edit_settings" value="Edit Settings"/>
+		<field name="btn.edit_document" value="Edit Document"/>
+		<field name="btn.edit_seo" value="Edit SEO"/>
 		
 		<field name="tab.home" value="General"/>
 		<field name="tab.document" value="Document"/>
@@ -449,6 +465,12 @@
 		<field name="msg.created_ok" value="Created successfuly"/>
 		<field name="msg.saved_ok" value="Saved successfuly"/>
 		<field name="msg.save_error" value="Error during saving"/>
+		
+		<field name="structure.homepage" value="Homepage"/>
+		<field name="structure.first_page" value="The First page"/>
+		<field name="structure.404" value="404 Error"/>
+		<field name="structure.admin_homepage" value="Admin Homepage"/>
+		<field name="structure.admin_login" value="Admin Login"/>
 	</locale>
 </locales>
 </document>

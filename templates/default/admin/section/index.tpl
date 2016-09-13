@@ -1,7 +1,5 @@
 
-
-
-<div class="admin-main-msv">
+<div class="admin-main-msv hide">
     <ul class="admin-main-msv-list">
         <li>
         <span class="glyphicon glyphicon-pencil"></span>

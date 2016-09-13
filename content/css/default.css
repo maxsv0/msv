@@ -75,6 +75,13 @@ mark.admin-btn {
     border: 1px dashed #ccc;
 }
 
-
+.next_block {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 3px solid #ccc;
+    margin: 1em 0;
+    padding: 0; 
+}
 
 
