@@ -9,7 +9,7 @@
 {foreach from=$item key=itemFieldID item=itemField} 
 {if !in_array($itemFieldID, $admin_list_skip)}
 <th>
-	<a href="/admin/?section=blog&table={$admin_table}&sort={$itemFieldID}&sortd={$table_sortd_rev}">{$t["table.$admin_table.$itemFieldID"]}</a>{if $table_sort == $itemFieldID}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort={$itemFieldID}&sortd={$table_sortd_rev}">{$t["table.$admin_table.$itemFieldID"]}</a>{if $table_sort == $itemFieldID}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
 </th>
 {/if}
 {/foreach}
@@ -48,9 +48,9 @@
 {/if}
 {/foreach}
 <td class="text-nowrap">
-	<a href="/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;"><span class="glyphicon glyphicon-remove"></span></a>
-	<a href="/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
-	<a href="/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;"><span class="glyphicon glyphicon-remove"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
 </td>
 
 
@@ -76,5 +76,5 @@
 {/if} 
 
 <div class="col-sm-6">
-<a href="/admin/?section={$admin_section}&table={$admin_table}&add_new" class="btn btn-primary"><span class="glyphicon glyphicon-ok">&nbsp;</span>{$t["btn.add_new"]}</a>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&add_new" class="btn btn-primary"><span class="glyphicon glyphicon-ok">&nbsp;</span>{$t["btn.add_new"]}</a>
 </div>

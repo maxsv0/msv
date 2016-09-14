@@ -25,7 +25,7 @@
       
       
       <ul class="nav navbar-nav navbar-left">
-      <li style="width:180px;"><a class="navbar-brand" href="/admin/">
+      <li style="width:180px;"><a class="navbar-brand" href="{$lang_url}/admin/">
       <img src="/content/images/msv-logo.png">
       </a>
       </li>
@@ -59,7 +59,7 @@
 <ul id="navwebsite" class="nav collapse">
 {foreach from=$languages item=langID}
 {assign var="link" value=$home[$langID]}
-<li><a href="{$link}admin/">{$link}</a></li>
+<li><a href="{$link}">{$link}</a></li>
 {/foreach} 
 </ul>
       </li>
@@ -95,7 +95,7 @@ Hello, <b>{$user.email}</b>
 </a>
 
 <ul id="navuser" class="nav collapse">
-<li><a href="/admin/?section=users&table=users&edit={$user.id}">Edit profile</a></li>
+<li><a href="{$lang_url}/admin/?section=users&table=users&edit={$user.id}">Edit profile</a></li>
 <li><a href="{$user_logout_url}">Logout</a></li>
 </ul>
 
@@ -119,23 +119,22 @@ Hello, <b>{$user.email}</b>
 
 {foreach from=$item.submenu key=submenu_id item=subitem}
 {if $admin_submenu_active == $submenu_id}
-<li class="active"><a href="{$subitem.url}">{$subitem.name}</a></li>
+<li class="active"><a href="{$lang_url}{$subitem.url}">{$subitem.name}</a></li>
 {else}
-<li><a href="{$subitem.url}">{$subitem.name}</a></li>
+<li><a href="{$lang_url}{$subitem.url}">{$subitem.name}</a></li>
 {/if}
 {/foreach}
 </ul>
 {else}
-
-
-{if $admin_menu_active == $menu_id}
-	<li class="active"><a href="{$item.url}">{$item.name} <span class="sr-only">(current)</span></a></li>
-{else}
-	<li><a href="{$item.url}">{$item.name}</a></li>
-{/if}
-
-
-
+	{if $item.url}
+	
+		{if $admin_menu_active == $menu_id}
+			<li class="active"><a href="{$lang_url}{$item.url}">{$item.name} <span class="sr-only">(current)</span></a></li>
+		{else}
+			<li><a href="{$lang_url}{$item.url}">{$item.name}</a></li>
+		{/if}
+	
+	{/if}
 {/if}
 {/foreach}  
     

@@ -14,6 +14,7 @@ class MSV_Website {
 	
 	public $lang 			= "";									// current language
 	public $langDefault 	= "";									// default language
+	public $langUrl 		= "";									// url laguage prefix
 	public $langSubdomain 	= false;								// alllow multi domain for languages, example: en.domain.com, ru.domain.com
 	
 	public $requestUrl		= "";						
@@ -179,18 +180,6 @@ class MSV_Website {
 			$this->masterhost .= ":".$this->port;
 		}
 
-		// load lang
-		if (!empty($_REQUEST["setlang"])) {
-			$_SESSION["lang"] = $_REQUEST["setlang"];
-		}
-        if (empty($_REQUEST["lang"]) && empty($_REQUEST["setlang"]) && empty($_SESSION["lang"])) {
-           $_SESSION["lang"] = $_REQUEST["lang"] = $this->languages[0];
-        }
-        
-		if (!empty($_SESSION["lang"])) {
-			$_REQUEST["lang"] = $_SESSION["lang"];
-		}
-		
 		// set lang  		
 		if (!empty($_REQUEST["lang"])) {
 			$lang = $_REQUEST["lang"];
@@ -200,7 +189,14 @@ class MSV_Website {
 				$this->lang = $_REQUEST["lang"];
 			}
 		}
-
+		
+		// set langUrl
+		if ($this->lang !== $this->langDefault) {
+			$this->langUrl = "/".$this->lang;
+		} else {
+			$this->langUrl = "";
+		}
+		
 		// check MASTERHOST
 		if (defined("MASTERHOST") && strlen(MASTERHOST) > 0) {
 			if ($this->masterhost !== MASTERHOST) {
@@ -242,6 +238,7 @@ class MSV_Website {
 		}
 		$this->config["home_url"] = $this->config["home"][$this->langDefault];
 		define("HOME_URL", $this->config["home_url"]);
+		define("HOME_LINK", substr($this->config["home_url"], 0, -1));
 		
 		
 		$this->config["languages"] = $this->languages;
@@ -586,6 +583,7 @@ class MSV_Website {
 		$Smarty->assign("rand", rand());
 
 		$Smarty->assign("request_url", $this->requestUrl);
+		$Smarty->assign("lang_url", $this->langUrl);
 		
 		$this->smarty = $Smarty;
 		

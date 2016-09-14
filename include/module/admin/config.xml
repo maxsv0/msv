@@ -99,6 +99,9 @@
 		<field name="btn.remove_link" value="Remove Link"/>
 		<field name="btn.upload_file" value="Загрузить файл"/>
 	</locale>
+    <locale name="ua">
+		<field name="msg.module_handler_not_found" value="Не вдалося знайти обробник модуля"/>
+	</locale>
 </locales>
 
 </document>

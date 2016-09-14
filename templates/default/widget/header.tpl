@@ -18,7 +18,7 @@
 {include file="$themePath/widget/menu-user.tpl"}
 </div>
 
-<h2 class="text-center"><a href="{$home.en}">{$masterhost}</a></h2>
+<h2 class="text-center"><a href="{$home.$lang}">{$masterhost}</a></h2>
 {include file="$themePath/widget/menu-top.tpl"}
 </div>
 

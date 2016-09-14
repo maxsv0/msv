@@ -34,6 +34,13 @@
 		<field name="msg.error_input" value="Error input"/>
 		<field name="msg.empty_result" value="Empty result"/>
 	</locale>
+    <locale name="ua">
+		<field name="msg.cant_load_table_data" value="Не вдалося прочитати з таблиці"/>
+		<field name="msg.cant_get_table_data" value="Не вдалося витягти дані з таблиці"/>
+		<field name="msg.cant_get_table_count" value="Не вдалося получити кількість записів в таблиці"/>
+		<field name="msg.error_input" value="Невірне введення"/>
+		<field name="msg.empty_result" value="Порожній результат"/>
+	</locale>
 </locales>
 
 

@@ -297,12 +297,13 @@
 		<field name="msg.created_ok" value="Создано успешно"/>
 		<field name="msg.saved_ok" value="Успешно сохранено"/>
 		<field name="msg.save_error" value="Ошибка сохранения"/>
+		<field name="msg.development_version" value="Это бета версия MSV Website. Режим чтения."/>
 		
-		<field name="structure.homepage" value="Homepage"/>
-		<field name="structure.first_page" value="The First page"/>
-		<field name="structure.404" value="404 Error"/>
-		<field name="structure.admin_homepage" value="Admin Homepage"/>
-		<field name="structure.admin_login" value="Admin Login"/>
+		<field name="structure.homepage" value="Главная"/>
+		<field name="structure.first_page" value="Первая страница"/>
+		<field name="structure.404" value="Ошибка 404"/>
+		<field name="structure.admin_homepage" value="Панель управления"/>
+		<field name="structure.admin_login" value="Вход в Панель управления"/>
 	</locale>
 	<locale name="en">
 		<field name="actions" value="Actions"/>
@@ -465,6 +466,7 @@
 		<field name="msg.created_ok" value="Created successfuly"/>
 		<field name="msg.saved_ok" value="Saved successfuly"/>
 		<field name="msg.save_error" value="Error during saving"/>
+		<field name="msg.development_version" value="This is development version. Readonly mode."/>
 		
 		<field name="structure.homepage" value="Homepage"/>
 		<field name="structure.first_page" value="The First page"/>
@@ -472,5 +474,164 @@
 		<field name="structure.admin_homepage" value="Admin Homepage"/>
 		<field name="structure.admin_login" value="Admin Login"/>
 	</locale>
+    <locale name="ua">
+        <field name="actions" value="Дії"/>
+		<field name="not_found" value="Не знайдено"/>
+		<field name="yes" value="Так"/>
+		<field name="no" value="Ні"/>
+		
+		<field name="btn.delete" value="Видалити"/>
+		<field name="btn.edit" value="Редагувати"/>
+		<field name="btn.duplicate" value="Дублювати"/>
+		<field name="btn.document_create" value="Створити"/>
+		<field name="btn.document_edit" value="Редагувати"/>
+		<field name="btn.add_new" value="Додати елемент"/>
+		<field name="btn.cancel" value="Відмінити"/>
+		<field name="btn.reset" value="Скинути"/>
+		<field name="btn.save" value="Зберігти"/>
+		<field name="btn.save_exit" value="Зберігти і вийти"/>
+		<field name="btn.add_child" value="Добдати подрозділ"/>
+        <field name="btn.generate" value="Генерувати"/>
+		
+		<field name="tab.home" value="Головне"/>
+		<field name="tab.document" value="Документ"/>
+		<field name="tab.seo" value="SEO"/>
+		<field name="tab.files" value="Зображення і файли"/>
+		<field name="tab.access" value="Доступ"/>
+		<field name="tab.history" value="Історія змін"/>
+		
+		<field name="admin.homepage" value="Головна"/>
+		<field name="admin.homepage_title" value="Головна HOST"/>
+		<field name="admin.users" value="Користувачі сайту"/>
+		<field name="admin.users_title" value="Список користувачів сайту"/>
+		<field name="admin.structure" value="Структура сайту"/>
+		<field name="admin.structure_title" value="Структура сайту {HOST}"/>
+		<field name="admin.menu" value="Меню"/>
+		<field name="admin.menu_title" value="Управління меню сайту"/>
+		<field name="admin.documents" value="Документи"/>
+		<field name="admin.documents_title" value="Документи"/>
+		<field name="admin.files_and_doc" value="Файли і документи"/>
+		<field name="admin.files_and_doc_title" value="Менеджер файлів і документів"/>
+		<field name="admin.site_settings" value="Налаштування сайту"/>
+		<field name="admin.site_settings_title" value="Налаштування сайту"/>
+		<field name="admin.locales" value="Мови і тексти"/>
+		<field name="admin.locales_title" value="Мови і тексти"/>
+		<field name="admin.mail_template" value="Шаблони листів"/>
+		<field name="admin.mail_template_title" value="Шаблони листів"/>
+		<field name="admin.stat" value="Статистика переглядів"/>
+		<field name="admin.stat_title" value="Статистика переглядів для {HOST}"/>
+		<field name="admin.seo" value="SEO"/>
+		<field name="admin.seo_title" value="SEO сайту"/>
+		<field name="admin.robots" value="Редагування robots.txt"/>
+		<field name="admin.robots_title" value="Файл robots.txt"/>
+		<field name="admin.module_settings" value="Управління модулями сайту"/>
+		<field name="admin.module_settings_title" value="Управління модулями сайту"/>
+		<field name="admin.design" value="Дизайни"/>
+		<field name="admin.design_title" value="Дизайни"/>
+		<field name="admin.history" value="Істория сесий"/>
+		<field name="admin.history_title" value="Істория сесий користувачів"/>
+		<field name="admin.locale_param" value="Назва змінної"/>
+		<field name="admin.locale_value" value="Значення"/>
+		<field name="admin.robots_example_open" value="Приклад відкритого сайту:"/>
+		<field name="admin.robots_example_closed" value="Приклад закритого сайту:"/>
+		<field name="admin.robots_example_seo" value="Приклад для SEO:"/>
+        <field name="admin.sitemap" value="Мапа сайту"/>
+		
+		<field name="type.id" value="ID, число"/>
+		<field name="type.author" value="строка (60)"/>
+		<field name="type.updated" value="дата"/>
+		<field name="type.lang" value="строка (20)"/>
+		<field name="type.str" value="строка (255)"/>
+		<field name="type.int" value="целое число"/>
+		<field name="type.boot" value="логический"/>
+		<field name="type.array" value="список"/>
+		<field name="type.pic" value="зображення"/>
+		<field name="type.file" value="файл"/>
+		<field name="type.select" value="список"/>
+		
+		<field name="table.structure" value="Структура сайту"/>
+		<field name="table.structure.id" value="ID"/>
+		<field name="table.structure.published" value="Активно"/>
+		<field name="table.structure.deleted" value="Видалене"/>
+		<field name="table.structure.author" value="Автор"/>
+		<field name="table.structure.updated" value="Оновлено"/>
+		<field name="table.structure.lang" value="Мова"/>
+		<field name="table.structure.url" value="URL"/>
+		<field name="table.structure.parent_id" value="Батьківський ID"/>
+		<field name="table.structure.name" value="Назва"/>
+		<field name="table.structure.template" value="Дизайн"/>
+		<field name="table.structure.page_template" value="Шаблон"/>
+		<field name="table.structure.page_document_id" value="Документ"/>
+		<field name="table.structure.document_text" value="Документ"/>
+		<field name="table.structure.sitemap" value="Мапа сайту"/>
+		<field name="table.structure.debug" value="Режим налагодження"/>
+		<field name="table.structure.menu" value="Меню"/>
+		<field name="table.structure.menu_order" value="Номер в меню"/>
+		<field name="table.structure.access" value="Доступ"/>
+		<field name="table.structure.access_users" value="Доступ для користувачів"/>
+		<field name="table.structure.seo_title" value="Title страници"/>
+		<field name="table.structure.seo_description" value="Опис страници"/>
+		<field name="table.structure.seo_keywords" value="Ключові слова"/>
+		
+		<field name="access.everyone" value="Доступен для всіх"/>
+		<field name="access.user" value="Зарег. користувачі"/>
+		<field name="access.admin" value="Адміністратор"/>
+		<field name="access.superadmin" value="Суперадмін"/>
+		
+		<field name="table.settings" value="Налаштування сайту"/>
+		<field name="table.settings.id" value="ID"/>
+		<field name="table.settings.published" value="Активно"/>
+		<field name="table.settings.deleted" value="Видалене"/>
+		<field name="table.settings.author" value="Автор"/>
+		<field name="table.settings.updated" value="Оновлено"/>
+		<field name="table.settings.lang" value="Мова"/>
+		<field name="table.settings.param" value="Назва змінной"/>
+		<field name="table.settings.value" value="Значення"/>
+		<field name="table.settings.description" value="Опис"/>
+		
+		<field name="table.documents" value="Документи"/>
+		<field name="table.documents.id" value="ID"/>
+		<field name="table.documents.published" value="Активно"/>
+		<field name="table.documents.deleted" value="Видалене"/>
+		<field name="table.documents.author" value="Автор"/>
+		<field name="table.documents.updated" value="Обновлено"/>
+		<field name="table.documents.lang" value="Мова"/>
+		<field name="table.documents.name" value="Назва документу"/>
+		<field name="table.documents.text" value="Текст документу HTML"/>
+		<field name="table.documents.external_link" value="Зовнішня ссылка"/>
+		
+		<field name="table.mail_templates" value="Шаблони листів"/>
+		<field name="table.mail_templates.id" value="ID"/>
+		<field name="table.mail_templates.published" value="Активно"/>
+		<field name="table.mail_templates.deleted" value="Видалене"/>
+		<field name="table.mail_templates.author" value="Автор"/>
+		<field name="table.mail_templates.updated" value="Обновлено"/>
+		<field name="table.mail_templates.lang" value="Мова"/>
+		<field name="table.mail_templates.name" value="Назва"/>
+		<field name="table.mail_templates.subject" value="Тема листа"/>
+		<field name="table.mail_templates.text" value="Текст листа HTML"/>
+		
+		<field name="table.menu" value="Меню сайту"/>
+		<field name="table.menu.id" value="ID"/>
+		<field name="table.menu.published" value="Активно"/>
+		<field name="table.menu.deleted" value="Видалене"/>
+		<field name="table.menu.author" value="Автор"/>
+		<field name="table.menu.updated" value="Оновлено"/>
+		<field name="table.menu.lang" value="Мова"/>
+		<field name="table.menu.menu_id" value="ID меню"/>
+		<field name="table.menu.structure_id" value="Структура сайту"/>
+		<field name="table.menu.name" value="Назва"/>
+		<field name="table.menu.url" value="Ссылка"/>
+		<field name="table.menu.order_id" value="Номер"/>
+		
+		<field name="msg.error_remove_active" value="Неможливо видалити активный модуль"/>
+		<field name="msg.removed" value="видалене"/>
+		<field name="msg.repository_not_found" value="не знайден в репозитории"/>
+		<field name="msg.cant_open_zip" value="не удалось відкрити .zip архив"/>
+		<field name="msg.deleted_ok" value="Успішно видалене"/>
+		<field name="msg.created_ok" value="Створено успішно"/>
+		<field name="msg.saved_ok" value="Успешно збережено"/>
+		<field name="msg.save_error" value="Помилка збереження"/>    
+    </locale>
 </locales>
 </document>

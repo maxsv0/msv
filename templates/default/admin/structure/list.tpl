@@ -3,14 +3,34 @@
 {if $listTable}
 <div class="table-responsive">
 <table class="table table-hover table-striped table-module">
-<th></th>
-<th>{$t["table.structure.id"]}</th>
-<th>{$t["table.structure.url"]}</th>
+<th>
+&nbsp;
+</th>
+<th>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=name&sortd={$table_sortd_rev}">{$t["table.structure.name"]}</a>
+{if $table_sort == "name"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+</th>
+<th>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=url&sortd={$table_sortd_rev}">{$t["table.structure.url"]}</a>
+{if $table_sort == "url"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+</th>
 <th class="text-nowrap">{$t["table.structure.template"]} / {$t["table.structure.page_template"]}</th>
-<th>{$t["table.structure.access"]}</th>
-<th>{$t["table.structure.sitemap"]}</th>
-<th>{$t["table.structure.published"]}</th>
-<th>{$t["table.structure.updated"]}</th>
+<th>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=access&sortd={$table_sortd_rev}">{$t["table.structure.access"]}</a>
+{if $table_sort == "access"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+</th>
+<th>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=sitemap&sortd={$table_sortd_rev}">{$t["table.structure.sitemap"]}</a>
+{if $table_sort == "sitemap"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+</th>
+<th>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=published&sortd={$table_sortd_rev}">{$t["table.structure.published"]}</a>
+{if $table_sort == "published"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+</th>
+<th>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=updated&sortd={$table_sortd_rev}">{$t["table.structure.updated"]}</a>
+{if $table_sort == "updated"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
+</th>
 <th>{$t["actions"]}</th>
 
 
@@ -27,7 +47,7 @@
 {/if} 
 
 <div class="col-sm-6">
-<a href="/admin/?section={$admin_section}&add_new" class="btn btn-primary"><span class="glyphicon glyphicon-ok">&nbsp;</span>{$t["btn.add_new"]}</a>
+<a href="{$lang_url}/admin/?section={$admin_section}&add_new" class="btn btn-primary"><span class="glyphicon glyphicon-ok">&nbsp;</span>{$t["btn.add_new"]}</a>
 </div>
 
 

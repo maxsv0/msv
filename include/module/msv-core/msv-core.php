@@ -1040,16 +1040,16 @@ function MSV_redirect($url) {
 
 
 function MSV_outputAdminMenu() {
-	$website = MSV_get("website");
+	$W = MSV_get("website");
 	
 	$strOut  = "";
 	$strOut .= "<div style='position:fixed;opacity:0.5;bottom:0;left:0;width:150px;background:rgba(0,0,0,0.8);color:#fff;padding:20px 15px;'>";
-	$strOut .= "<p><a href='/admin/' style='color:#fff;'>"._t("btn.back_to_admin")."</a></p><hr>";
-	$strOut .= "<h4>".$website->page["name"]."</h4>";
-	$strOut .= "<h5>url: ".$website->page["url"]."</h5>";
-	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."' style='color:#fff;'>"._t("btn.edit_settings")."</a></p>";
-	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."#document' style='color:#fff;'>"._t("btn.edit_document")."</a></p>";
-	$strOut .= "<p><a href='/admin/?section=structure&table=structure&edit=".$website->page["id"]."#seo' style='color:#fff;'>"._t("btn.edit_seo")."</a></p>";
+	$strOut .= "<p><a href='".$W->langUrl."/admin/' style='color:#fff;'>"._t("btn.back_to_admin")."</a></p><hr>";
+	$strOut .= "<h4>".$W->page["name"]."</h4>";
+	$strOut .= "<h5>url: ".$W->page["url"]."</h5>";
+	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."' style='color:#fff;'>"._t("btn.edit_settings")."</a></p>";
+	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."#document' style='color:#fff;'>"._t("btn.edit_document")."</a></p>";
+	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."#seo' style='color:#fff;'>"._t("btn.edit_seo")."</a></p>";
 	$strOut .= "</div>";
 
 	return $strOut;
@@ -1503,7 +1503,7 @@ function CoreInstall($module) {
 	MSV_setConfig("theme_use_jquery", 1, true, "*");
 	MSV_setConfig("email_registration", 0, true, "*");
 	MSV_setConfig("message_ok", "", true, "*");
-	MSV_setConfig("message_error", "This is development version. Readonly mode.", true, "*");
+	MSV_setConfig("message_error", _t("msg.development_version"), true, "*");
 	//sss
 	MSV_setConfig("email_from", "", true, "*");
 	MSV_setConfig("email_fromname", "", true, "*");
@@ -1521,7 +1521,7 @@ function CoreInstall($module) {
 function ajax_Get_Structure() {
 	
 	$structure = MSV_get("website.structure");
-	var_dump($structure);
+	//var_dump($structure);
 	
 	// TODO..
 }

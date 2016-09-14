@@ -102,8 +102,36 @@ if (!empty($_REQUEST["document_create"])) {
 	}
 }
 
+
+
+if (!empty($_REQUEST["sort"])) {
+	// TODO: check if correct key
+	$sort = $_REQUEST["sort"];
+} else {
+	$sort = "parent_id";
+}
+
+if (!empty($_REQUEST["sortd"])) {
+	if ($_REQUEST["sortd"] === "desc") {
+		$sortd = "desc";
+		$sortd_rev = "asc";
+	} else {
+		$sortd = "asc";
+		$sortd_rev = "desc";
+	}
+} else {
+	$sortd = "asc";
+	$sortd_rev = "desc";
+}
+
+MSV_assignData("table_sort", $sort);
+MSV_assignData("table_sortd", $sortd);
+MSV_assignData("table_sortd_rev", $sortd_rev);
+
+
+
 // Load list of items
-$resultQuery = API_getDBListPaged(TABLE_STRUCTURE, "", "`parent_id` desc, `sitemap` desc, `url` asc", 100, "p");
+$resultQuery = API_getDBListPaged(TABLE_STRUCTURE, "", "`$sort` $sortd", 100, "p");
 if ($resultQuery["ok"]) {
 	$adminList = $resultQuery["data"];
 	$listPages = $resultQuery["pages"];

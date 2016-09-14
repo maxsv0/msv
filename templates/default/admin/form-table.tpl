@@ -10,7 +10,7 @@
 {/foreach}
   </ul>
   
-<form action="/admin/" class="form-horizontal" method="POST">
+<form action="{$lang_url}/admin/" class="form-horizontal" method="POST">
 <br>
 <br>
 
