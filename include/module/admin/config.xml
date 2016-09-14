@@ -60,6 +60,8 @@
 	<file dir="template" path="default/admin/section/site_settings.tpl"/>
 	<file dir="template" path="default/admin/section/realtime.tpl"/>
 	<file dir="template" path="default/admin/section/seo.tpl"/>
+	<file dir="template" path="default/admin/section/sitemap.tpl"/>
+	<file dir="template" path="default/admin/section/manual.tpl"/>
 	<file dir="template" path="default/admin/section/index.tpl"/>
 	<file dir="template" path="default/admin/section/custom.tpl"/>
 	<file dir="template" path="default/admin/menu/edit.tpl"/>
