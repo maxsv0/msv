@@ -439,6 +439,8 @@ function API_getDBList($table, $filter = "", $orderby = "", $limit = 1000000, $s
 		$sqlCode .= " limit 0, 5 ";
 	}
 
+	$result["sql"] = $sqlCode;
+	
 	$resultQuery = API_SQL($sqlCode);
 	if (!$resultQuery["ok"]) {
 		$result["ok"] = false;
