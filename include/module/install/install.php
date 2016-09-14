@@ -40,6 +40,9 @@ if (!empty($_POST["install_reset"])) {
 if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 	$_POST["install_step"] = (int)$_POST["install_step"];
 	
+	if ($_POST["install_step"] === 2) {
+		$_SESSION["user_id"] = $_SESSION["user_email"] = "";
+	}
 	if ($_POST["install_step"] === 3) {
 
 		if (empty($_POST["msv_LANGUAGES"]) || !is_array($_POST["msv_LANGUAGES"])) {

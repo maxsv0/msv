@@ -161,21 +161,21 @@ class MSV_Website {
 			// set masterhost
 			$this->masterhost = $this->host;
 		} else {
-			// set masterhost
-			if (strpos($this->host, $this->lang.".") === 0) {
-				$this->masterhost = substr($this->host, strlen($this->lang)+1);
-			} else {
-				$this->masterhost = $this->host;
-			}
-			
 			// if $this->host start with en... ru .. 
 			foreach ($this->languages as $k) {
 				if (strpos($this->host, $k.".") === 0) {
 					$this->lang = $k;
 				}
 			}
+			
+			// set masterhost
+			if (strpos($this->host, $this->lang.".") === 0) {
+				$this->masterhost = substr($this->host, strlen($this->lang)+1);
+			} else {
+				$this->masterhost = $this->host;
+			}
 		}
-		
+
 		if ($this->port !== 80) {
 			$this->masterhost .= ":".$this->port;
 		}
@@ -191,7 +191,7 @@ class MSV_Website {
 		}
 		
 		// set langUrl
-		if ($this->lang !== $this->langDefault) {
+		if (!$this->langSubdomain && $this->lang !== $this->langDefault) {
 			$this->langUrl = "/".$this->lang;
 		} else {
 			$this->langUrl = "";

@@ -27,6 +27,8 @@
 	<file dir="module" path="admin/module-media.php"/>
 	<file dir="module" path="admin/module-locales.php"/>
 	<file dir="module" path="admin/module-structure.php"/>
+	<file dir="module" path="admin/module-manual.php"/>
+	<file dir="module" path="admin/module-sitemap.php"/>
 	<file dir="template" path="default/admin.tpl"/>
 	<file dir="template" path="default/admin-login.tpl"/>
 	<file dir="template" path="default/admin/list-table.tpl"/>

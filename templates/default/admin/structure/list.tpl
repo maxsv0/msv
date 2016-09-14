@@ -15,15 +15,15 @@
 {if $table_sort == "url"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
 </th>
 <th class="text-nowrap">{$t["table.structure.template"]} / {$t["table.structure.page_template"]}</th>
-<th>
+<th class="text-center">
 <a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=access&sortd={$table_sortd_rev}">{$t["table.structure.access"]}</a>
 {if $table_sort == "access"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
 </th>
-<th>
+<th class="text-center">
 <a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=sitemap&sortd={$table_sortd_rev}">{$t["table.structure.sitemap"]}</a>
 {if $table_sort == "sitemap"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
 </th>
-<th>
+<th class="text-center">
 <a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort=published&sortd={$table_sortd_rev}">{$t["table.structure.published"]}</a>
 {if $table_sort == "published"}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
 </th>

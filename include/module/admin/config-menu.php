@@ -28,7 +28,14 @@ $submenu["social"] = array(
 	"file" => "social.tpl",
 	"title" => "Social Wall",
 );
-
+$submenu["manual"] = array(
+	"name" => _t("admin.manual"), 
+	"access" => "admin",
+	"handler" => "module-manual.php",
+	"url" => "/admin/?section=manual",
+	"file" => "manual.tpl",
+	"title" => _t("admin.manual_title")
+);
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
 $menu_ar["index"] = array(
@@ -192,6 +199,14 @@ $submenu["robots"] = array(
 	"url" => "/admin/?section=robots",
 	"file" => "robots.tpl",
 	"title" => _t("admin.robots_title")
+);
+$submenu["sitemap"] = array(
+	"name" => _t("admin.sitemap"), 
+	"access" => "superadmin",
+	"handler" => "module-sitemap.php",
+	"url" => "/admin/?section=sitemap",
+	"file" => "sitemap.tpl",
+	"title" => _t("admin.sitemap_title")
 );
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
