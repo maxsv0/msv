@@ -95,13 +95,19 @@
 		<field name="form.file" value="File:"/>
 		<field name="btn.remove_link" value="Remove Link"/>
 		<field name="btn.upload_file" value="Загрузить файл"/>
+		<field name="title.upload_files" value="Загрузить файлы"/>
+		<field name="form.server_path" value="Путь на севвере"/>
+		<field name="form.select_file" value="Выберете файлы"/>
 	</locale>
 	<locale name="en">
 		<field name="msg.module_handler_not_found" value="Module handler not found"/>
 		<field name="msg.no_stored_image" value="No stored image"/>
 		<field name="form.file" value="File:"/>
 		<field name="btn.remove_link" value="Remove Link"/>
-		<field name="btn.upload_file" value="Загрузить файл"/>
+		<field name="btn.upload_file" value="Upload file"/>
+		<field name="title.upload_files" value="Upload files"/>
+		<field name="form.server_path" value="Server path"/>
+		<field name="form.select_file" value="Select file"/>
 	</locale>
     <locale name="ua">
 		<field name="msg.module_handler_not_found" value="Не вдалося знайти обробник модуля"/>

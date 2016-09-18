@@ -67,7 +67,7 @@ function admin_build_media_list($home_path = "/images") {
 	$media_url = substr(CONTENT_URL, 1).$media_url;
 	$media_url_asb = HOME_URL.$media_url;
 
-	if ($handle = opendir($media_dir)) {
+	if (file_exists($media_dir) && $handle = opendir($media_dir)) {
 	    while (false !== ($entry = readdir($handle))) {
 	    	if (strpos($entry, ".") === 0) {
 	    		continue;

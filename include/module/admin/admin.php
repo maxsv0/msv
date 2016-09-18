@@ -200,6 +200,27 @@ if (!empty($section) && in_array($section, $menu_index)) {
 		MSV_assignData("admin_edit_tabs", $tabs);
 		MSV_assignData("admin_edit", $table_edit);
 	}
+	
+	if (isset($_GET["export"])) {
+		header('Content-Encoding: UTF-8');
+		header('Content-type: text/csv; charset=UTF-8');
+		header('Content-Disposition: attachment; filename='.$table.'-'.time().'.csv');
+	
+		$out = fopen('php://output', 'w');
+		foreach ($adminList as $row) {
+			$rowShort = array();
+			
+			foreach ($row as $k => $v) {
+				if (!in_array($k, $adminListSkipFields)) {
+					$rowShort[] = $v;
+				}
+			}
+			fputcsv($out, $rowShort);
+		}
+		
+		fclose($out);
+		die;
+	}
 }
 
 

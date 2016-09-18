@@ -134,6 +134,7 @@ if (!empty($_REQUEST["doSave"])) {
 if (isset($_REQUEST["doVerify"])) {
 	
 	$verify_token = substr(md5(time()), 0, 10);
+	$access_token = substr(md5(time()), 0, 10);
 	$result = API_updateDBItem(TABLE_USERS, "verify_token", "'".MSV_SQLEscape($verify_token)."'", " `id` = '".$_SESSION['user_id']."'");
 	if ($result["ok"]) {
 			

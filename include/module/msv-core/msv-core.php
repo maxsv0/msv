@@ -1048,7 +1048,7 @@ function MSV_outputAdminMenu() {
 	$strOut .= "<h4>".$W->page["name"]."</h4>";
 	$strOut .= "<h5>url: ".$W->page["url"]."</h5>";
 	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."' style='color:#fff;'>"._t("btn.edit_settings")."</a></p>";
-	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."#document' style='color:#fff;'>"._t("btn.edit_document")."</a></p>";
+	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=documents&table=documents&edit=".$W->page["page_document_id"]."#document' style='color:#fff;'>"._t("btn.edit_document")."</a></p>";
 	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."#seo' style='color:#fff;'>"._t("btn.edit_seo")."</a></p>";
 	$strOut .= "</div>";
 

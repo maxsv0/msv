@@ -70,11 +70,15 @@
 {else}
 
 <div class="col-sm-6 col-md-offset-2">
-<div class="alert alert-info">{$t["not_found"]}</div>
+<div class="alert alert-info">{_t("not_found")}</div>
 </div>
 
 {/if} 
 
 <div class="col-sm-6">
 <a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&add_new" class="btn btn-primary"><span class="glyphicon glyphicon-ok">&nbsp;</span>{$t["btn.add_new"]}</a>
+</div>
+
+<div class="col-sm-6 text-right">
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&export" class="btn btn-default"><span class="glyphicon glyphicon-download">&nbsp;</span>{_t("btn.export_table")}</a>
 </div>

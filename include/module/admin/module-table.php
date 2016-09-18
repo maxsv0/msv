@@ -175,4 +175,3 @@ if ($resultQuery["ok"]) {
 	MSV_assignData("admin_list_skip", $adminListSkipFields);
 	MSV_assignData("admin_list", $adminList);
 }
-
