@@ -143,6 +143,8 @@ function MSV_IncludeCSSFile($filePath, $url = "") {
 	}
 	
 	$website->includeCSS[] = $filePath;
+	
+	return true;
 }
 
 function MSV_IncludeJSFile($filePath, $url = "") {
@@ -157,6 +159,8 @@ function MSV_IncludeJSFile($filePath, $url = "") {
 	}
 	
 	$website->includeJS[] = $filePath;
+	
+	return true;
 }
 
 function MSV_IncludeJS($jsCode) {
@@ -208,6 +212,8 @@ function MSV_Include($filePath, $url = "") {
 		default:
 			break;
 	}
+	
+	return true;
 }
 
 
@@ -372,25 +378,26 @@ function MSV_setConfig($param, $value, $updateDB = false, $lang = LANG) {
 	
 	// TODO : CHECK ... 
 	
+	$website->config[$param] = $value;
+	
 	if (array_key_exists($param, $website->config)) {
 		
 		if ($updateDB) {
-			$result = API_updateDBItem(TABLE_SETTINGS, "value", "'".MSV_SQLEscape($value)."'", " `param` = '".$param."'");
+			return API_updateDBItem(TABLE_SETTINGS, "value", "'".MSV_SQLEscape($value)."'", " `param` = '".$param."'");
 		}
+		
 	} else {
 		
 		if ($updateDB) {
 			$item = array(
 				"published" => 1,
-				"url" => $url,
 				"value" => $value,
 				"param" => $param,
 			);
 			
-			$result = API_itemAdd(TABLE_SETTINGS, $item, $lang);
+			return API_itemAdd(TABLE_SETTINGS, $item, $lang);
 		}
 	}
-	$website->config[$param] = $value;
 	
 	return true;
 }
@@ -400,9 +407,11 @@ function MSV_getConfig($param) {
 	
 	// TODO : CHECK ... 
 	if (array_key_exists($param, $website->config)) {
+		
 		return $website->config[$param];
-		$result["data"] = $value;
+		
 	} else {
+		
 		return false;
 	}
 }
@@ -437,8 +446,8 @@ function MSV_enableModule($module) {
 	if (!is_dir($pathModuleDisabled)) return false;
 	
 	$pathModulePHP = $pathModuleDisabled."/".$module.".php";
-	if (!file_exists($pathModuleDisabled)) return false;
-	if (!is_readable($pathModuleDisabled)) return false;
+	if (!file_exists($pathModulePHP)) return false;
+	if (!is_readable($pathModulePHP)) return false;
 	
 	rename($pathModuleDisabled, $pathModuleEnabled);
 	
@@ -464,8 +473,8 @@ function MSV_disableModule($module) {
 	if (!is_dir($pathModuleEnabled)) return false;
 	
 	$pathModulePHP = $pathModuleEnabled."/".$module.".php";
-	if (!file_exists($pathModuleEnabled)) return false;
-	if (!is_readable($pathModuleEnabled)) return false;
+	if (!file_exists($pathModulePHP)) return false;
+	if (!is_readable($pathModulePHP)) return false;
 	
 	rename($pathModuleEnabled, $pathModuleDisabled);
 	
@@ -479,7 +488,6 @@ function MSV_disableModule($module) {
 function MSV_removeModule($module) {
 	// TODO: DO
 	return false;
-	
 	
 	MSV_Log("***** removeModule $module");
 	// remove only disabled.
@@ -503,7 +511,7 @@ function MSV_removeModule($module) {
 		
 		if (!empty($tableList)) {
 			foreach ($tableList as $tableName => $tableInfo) {
-				$result = API_removeTable($tableName);
+				API_removeTable($tableName);
 			}
 		}
 	}	
@@ -525,8 +533,6 @@ function MSV_removeModule($module) {
 function MSV_listModules() {
 	MSV_Log("Website -> listModules");
 	
-	$website = MSV_get("website");
-
 	$cont = file_get_contents(REP);
 	
 	if (!$cont) {
@@ -546,6 +552,7 @@ function MSV_listModules() {
 		MSV_ERROR($result["msg"]);
 	}
 	
+	return false;
 }
 
 function cmp_modules_list($a, $b) {
@@ -559,6 +566,11 @@ function MSV_installModule($module, $redirect = true) {
 	
 	// TODO add info, check
 	$list = MSV_listModules();
+	if (empty($list)) {
+		MSV_MessageError("installModule -> $module "._t("msg.no_repository"));
+		return false;
+	}
+	
 	$moduleInfo = $list[$module];
 	if (empty($moduleInfo)) {
 		MSV_MessageError("installModule -> $module "._t("msg.repository_not_found"));
@@ -579,13 +591,10 @@ function MSV_installModule($module, $redirect = true) {
 	$tempDir = $tempDir."dir";
 	mkdir($tempDir);
 	
-//	var_dump($tmpFilename);
-//	var_dump($tempDir);
 //	$zipArchive = new PclZip($tmpFilename);
 //	if (!$zipArchive->extract(PCLZIP_OPT_PATH, $tempDir) == 0) {
 //		MSV_Error("installModule -> "._t("msg.cant_open_zip"));
 //	}
-
 
 	// try to extract using ZipArchive lib
 	// in case of fail, use shell_exec
@@ -598,7 +607,7 @@ function MSV_installModule($module, $redirect = true) {
 		$zipArchive->extractTo($tempDir);
 		$zipArchive->close();
 	} else {
-		$result = shell_exec("unzip $tmpFilename -d $tempDir");
+		shell_exec("unzip $tmpFilename -d $tempDir");
 	}
 
 	// TODO:
@@ -611,8 +620,6 @@ function MSV_installModule($module, $redirect = true) {
 		$fileList = $moduleObj->files;
 	} else {
 		// module first install
-		
-		
 		
 		$fileList = $moduleInfo["files"];
 	}
@@ -669,7 +676,6 @@ function MSV_installModule($module, $redirect = true) {
 
 function MSV_reinstallModule($module, $redirect = true) {
 	MSV_Log("***** reinstallModule");
-	$website = MSV_get("website");
 	
 	// TODO: check, reinstall ckeck??
 	MSV_installModule($module, $redirect);
@@ -941,13 +947,13 @@ function MSV_checkFiles() {
 
 
 function MSV_assignTableData($table, $prefix = "") {
-	$tableInfo = MSV_getTableConfig(TABLE_WEBINAR);
+	$tableInfo = MSV_getTableConfig($table);
 	
 	if (empty($tableInfo)) {
 		return false;
 	}
 	
-	foreach ($tableInfo["fields"] as $k => $item) {
+	foreach ($tableInfo["fields"] as $item) {
 		if (!array_key_exists($prefix.$item["name"], $_REQUEST)) {
 			MSV_assignData($prefix.$item["name"], $_REQUEST[$prefix.$item["name"]]);
 		}
@@ -1048,7 +1054,11 @@ function MSV_outputAdminMenu() {
 	$strOut .= "<h4>".$W->page["name"]."</h4>";
 	$strOut .= "<h5>url: ".$W->page["url"]."</h5>";
 	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."' style='color:#fff;'>"._t("btn.edit_settings")."</a></p>";
-	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=documents&table=documents&edit=".$W->page["page_document_id"]."#document' style='color:#fff;'>"._t("btn.edit_document")."</a></p>";
+	if ($W->page["page_document_id"]) {
+		$strOut .= "<p><a href='".$W->langUrl."/admin/?section=documents&table=documents&edit=".$W->page["page_document_id"]."#document' style='color:#fff;'>"._t("btn.document_edit")."</a></p>";
+	} else {		
+		$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&document_create=".$W->page["id"]."' style='color:#fff;'>"._t("btn.document_create")."</a></p>";
+	}
 	$strOut .= "<p><a href='".$W->langUrl."/admin/?section=structure&table=structure&edit=".$W->page["id"]."#seo' style='color:#fff;'>"._t("btn.edit_seo")."</a></p>";
 	$strOut .= "</div>";
 
@@ -1369,7 +1379,7 @@ function MSV_Structure_add($lang, $url, $name = "", $template = "", $page_templa
 				"structure_id" => $structure_id,
 				"order_id" => $menu_order,
 			);
-			$resultMenu = API_itemAdd(TABLE_MENU, $item, $lang);
+			API_itemAdd(TABLE_MENU, $item, $lang);
 		}
 	}
 	
@@ -1396,7 +1406,7 @@ function MSV_EmailDefault($to = "", $subject = "", $body = "", $header = "") {
 	
 	$emailFrom = MSV_getConfig("email_from");
 	$emailFromName = MSV_getConfig("email_fromname");
-	if (!empty($sendgridFromName)) {
+	if (!empty($emailFromName)) {
 		$emailFromHeader = $emailFromName." <".$emailFrom.">";
 	} else {
 		$emailFromHeader = $emailFrom;
@@ -1419,7 +1429,7 @@ function MSV_Email($to = "", $subject = "", $body = "", $header = "") {
 function MSV_EmailTemplate($template, $mailTo, $data = array(), $message = true, $lang = LANG) {
 	
 	// get template
-	$resultMail = API_getDBItem(TABLE_MAIL_TEMPLATES, " `name` = '".MSV_SQLEscape($template)."'", LANG);
+	$resultMail = API_getDBItem(TABLE_MAIL_TEMPLATES, " `name` = '".MSV_SQLEscape($template)."'", $lang);
 
 	if ($resultMail["ok"]) {
 		$mailSubject = $resultMail["data"]["subject"];
@@ -1450,11 +1460,11 @@ function MSV_EmailTemplate($template, $mailTo, $data = array(), $message = true,
 		
 		if ($r) {
 			if ($message) {
-				MSV_MessageOK("Письмо успешно отправлено на email <b>$mailTo</b>");
+				MSV_MessageOK(_t("msg.email_sent_to")."<b>$mailTo</b>");
 			}
 		} else {
 			if ($message) {
-				MSV_MessageError("Ошибка отправки письма на email <b>$mailTo</b>");
+				MSV_MessageError(_t("msg.email_sending_error"));
 			}
 		}
 		
@@ -1466,7 +1476,6 @@ function MSV_EmailTemplate($template, $mailTo, $data = array(), $message = true,
 }
 
 	
-
 function MSV_PasswordGenerate($length = 12) {
     $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $count = mb_strlen($chars);

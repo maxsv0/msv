@@ -91,6 +91,15 @@ body {
 .main {
   padding: 20px;
 }
+
+.btnCover {
+    position: absolute;
+    right: 0;
+    margin-right: 65px;
+    margin-top: -10px;
+    background: #fff;
+}
+
 @media (min-width: 768px) {
   .main {
     padding-right: 40px;

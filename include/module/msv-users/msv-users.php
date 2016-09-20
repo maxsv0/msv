@@ -141,7 +141,7 @@ if (isset($_REQUEST["doVerify"])) {
 		$userinfo = MSV_get("website.user");
 		
 		if ($userinfo["email_verified"]) {
-			$verify_link = "http://".HOST."/user/settings/?access_token=$access_token";
+			$verify_link = HOME_URL."user/settings/?access_token=$access_token";
 			$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
 <tr><td><div style=\"text-align:center; display: inline-block;\">
 <a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.goto_account")."</a>
@@ -149,7 +149,7 @@ if (isset($_REQUEST["doVerify"])) {
 </table>
 ";
 		} else {
-			$verify_link = "http://".HOST."/user/settings/?verify_token=".$verify_token."&access_token=$access_token";
+			$verify_link = HOME_URL."user/settings/?verify_token=".$verify_token."&access_token=$access_token";
 			$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
 <tr><td><div style=\"text-align:center; display: inline-block;\">
 <a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.activate_account")."</a>
@@ -248,7 +248,7 @@ function UserAdd($email, $email_verified = 0, $password = "", $name = "", $phone
 			);
 			
 			if ($email_verified) {
-				$verify_link = "http://".HOST."/user/settings/?access_token=$access_token";
+				$verify_link = HOME_URL."user/settings/?access_token=$access_token";
 				$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
 <tr><td><div style=\"text-align:center; display: inline-block;\">
 <a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.goto_account")."</a>
@@ -256,7 +256,7 @@ function UserAdd($email, $email_verified = 0, $password = "", $name = "", $phone
 </table>
 ";
 			} else {
-				$verify_link = "http://".HOST."/user/settings/?verify_token=".$verify_token."&access_token=$access_token";
+				$verify_link = HOME_URL."user/settings/?verify_token=".$verify_token."&access_token=$access_token";
 				$user_verify = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"5\" bgcolor=\"#3092da\" style=\"background-color:#3092da; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px; font-size:10.5pt; line-height:140%;  font-family: Arial, sans-serif;\">
 <tr><td><div style=\"text-align:center; display: inline-block;\">
 <a href=\"".$verify_link."\" style=\"text-decoration:none;color:#ffffff;\">"._t("users.activate_account")."</a>
@@ -288,5 +288,5 @@ function UsersInstall($module) {
 		"menu_id" => "user",
 		"order_id" => 100,
 	);
-	$resultMenu = API_itemAdd(TABLE_MENU, $item, "all");
+	API_itemAdd(TABLE_MENU, $item, "all");
 }

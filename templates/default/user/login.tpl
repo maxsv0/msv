@@ -1,6 +1,6 @@
 <form class="form-horizontal" method="POST" action="/">
   <div class="form-group">
-    <label for="inputEmail" class="col-sm-2 control-label">{$t["users.form.email"]}1</label>
+    <label for="inputEmail" class="col-sm-2 control-label">{_t("users.form.email")}</label>
     <div class="col-sm-10">
       <input type="email" class="form-control" id="inputEmail" placeholder="{_t("users.form.email")}" name="email">
     </div>

@@ -15,11 +15,7 @@ xsi:schemaLocation="http://www.google.com/schemas/sitemap/0.84 http://www.google
 		$query = API_getDBList(TABLE_SEO, "`sitemap` > 0", "`url` desc", 10000, 0,  $langID);
 		if ($query["ok"] && $query["data"]) {
 			foreach ($query["data"] as $item) {
-				if ($langID === $website->langDefault) {
-					$link = HOME_LINK.$item["url"];
-				} else {
-					$link = HOME_URL.$langID.$item["url"];
-				}
+				$link = $website->config["home"][$langID].substr($item["url"], 1);
 				
 				$sitemapXML .= "
 <url>

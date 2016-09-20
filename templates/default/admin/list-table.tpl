@@ -6,6 +6,7 @@
 
 {if $smarty.foreach.loop.first}
 <tr>
+<th>{$t["actions"]}</th>
 {foreach from=$item key=itemFieldID item=itemField} 
 {if !in_array($itemFieldID, $admin_list_skip)}
 <th>
@@ -13,7 +14,6 @@
 </th>
 {/if}
 {/foreach}
-<th>{$t["actions"]}</th>
 </tr>
 {/if}
 
@@ -22,7 +22,11 @@
 {else}
 <tr class="danger">
 {/if}
-
+<td class="text-nowrap">
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;"><span class="glyphicon glyphicon-remove"></span></a>
+</td>
 {foreach from=$item key=itemFieldID item=itemField}
 {if !in_array($itemFieldID, $admin_list_skip)}
 {assign var="type" value=$admin_table_info.fields.$itemFieldID.type}
@@ -47,11 +51,7 @@
 {/if}
 {/if}
 {/foreach}
-<td class="text-nowrap">
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;"><span class="glyphicon glyphicon-remove"></span></a>
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-</td>
+
 
 
 
@@ -80,5 +80,5 @@
 </div>
 
 <div class="col-sm-6 text-right">
-<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&export" class="btn btn-default"><span class="glyphicon glyphicon-download">&nbsp;</span>{_t("btn.export_table")}</a>
+<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&export" class="btn btn-info"><span class="glyphicon glyphicon-download">&nbsp;</span>{_t("btn.export_table")}</a>
 </div>

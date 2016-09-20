@@ -65,7 +65,7 @@
       </li>
         
       <li>
-      <a href="{$home_url}">Goto {$host}</a>
+      <a href="{$home_url}">{_t("btn.goto")} {$host}</a>
       </li>
         
       </ul>
@@ -89,8 +89,8 @@
 <div class="col-sm-3 col-md-2 sidebar collapse in">
 
 {if $user.id}
-<p data-toggle="collapse" data-target="#navuser">
-Hello, <b>{$user.email}</b> 
+<p class="text-right" data-toggle="collapse" data-target="#navuser">
+<b>{$user.email}</b> 
 <span class="caret"></span>
 </a>
 

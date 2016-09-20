@@ -236,7 +236,7 @@ class MSV_Website {
 			
 			$this->config["home"][$langID] = $langHome;
 		}
-		$this->config["home_url"] = $this->config["home"][$this->langDefault];
+		$this->config["home_url"] = $this->config["home"][$this->lang];
 		define("HOME_URL", $this->config["home_url"]);
 		define("HOME_LINK", substr($this->config["home_url"], 0, -1));
 		
@@ -248,8 +248,8 @@ class MSV_Website {
 		}
 		
 		$this->parseRequest();
-		$this->activateModules();
 		$this->activateCustom();
+		$this->activateModules();
 		
 		// if module Install is in list => run install
 		
@@ -319,6 +319,8 @@ class MSV_Website {
 
 		$this->template = $page["template"];
 		$this->pageTemplate = $page["page_template"];
+		
+		return true;
 	}
 	
 	function runFilters() {
@@ -332,6 +334,8 @@ class MSV_Website {
 			
 			$this->runFiltersLevel($i);
 		}
+		
+		return true;
 	}
 	function runFiltersLevel($index) {
 		// TODO: check $index
@@ -630,7 +634,7 @@ class MSV_Website {
 		// TODO +++: emulate request on redirect (_POST, GET, _FILES..)
 		$this->output($url, 301);
 	}
-	function checkAccess($pageAccess, $userAccess = array()) {
+	function checkAccess($pageAccess, $userAccess = '') {
 		if (!$this->instaled) {
 			return true;
 		}
@@ -702,12 +706,11 @@ class MSV_Website {
 			}
 		}
 		
-		
 		// init smarty
 		$r = $this->initSmarty();
 		
 		if (empty($this->smarty)) {
-			// TODO: ERROR
+			$this->outputError("Template Engine not found");
 		}
 		// output current page, use Smarty object
 		$this->smarty->display($this->pageTemplatePath);
@@ -812,6 +815,7 @@ class MSV_Website {
 			}
 		}
 		
+		return true;
 	}
 	
 	function log($logText = "", $type = "warning") {

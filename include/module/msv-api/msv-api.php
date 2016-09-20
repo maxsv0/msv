@@ -2,8 +2,6 @@
 function apiRequest($module) {
 	$apiRequest = $module->website->requestUrlMatch[1];
 	
-	$fn = $module->website->api[$apiRequest];
-	
 	foreach ($module->website->api as $apiInfo) {
 		if ($apiInfo["name"] === $apiRequest) {
 			if (function_exists($apiInfo["action"])) {
@@ -127,7 +125,10 @@ function API_updateDBItemRow($table, $row) {
 	// get list of tables and check $table
 	$tablesList = MSV_get("website.tables");
 	if (!array_key_exists($table, $tablesList)) {
-		return $dataRow;
+		$result["ok"] = false;
+		$result["msg"] = _t("msg.table_not_found").": $table";
+		
+		return $result;
 	}
 	
 	// get table info
@@ -318,7 +319,12 @@ function API_getDBItem($table, $filter = "", $lang = LANG) {
 	// TODO: check if $table in conf.
 	
 	$sqlCode = "select * from `$table` where ";
-	$sqlCode .= " `published` > 0 and ";
+
+	$user = MSV_get("website.user");
+	if (!($user["access"] === "superadmin" || $user["access"] === "admin")) {
+		$sqlCode .= " `published` > 0 and ";
+	}
+	
 	$sqlCode .= " `deleted` = 0 and  ";
 	$sqlCode .= " (`lang` = '".$lang."' or `lang` = '*') ";
 	
@@ -370,7 +376,12 @@ function API_getDBCount($table, $filter, $lang = LANG) {
 	);
 	
 	$sqlCode = "select count(*) total from `$table` where";
-	$sqlCode .= " `published` > 0 and ";
+
+	$user = MSV_get("website.user");
+	if (!($user["access"] === "superadmin" || $user["access"] === "admin")) {
+		$sqlCode .= " `published` > 0 and ";
+	}
+	
 	$sqlCode .= " `deleted` = 0  and ";
 	$sqlCode .= " (`lang` = '".$lang."' or `lang` = '*')  ";
 	if (!empty($filter)) {
@@ -418,7 +429,12 @@ function API_getDBList($table, $filter = "", $orderby = "", $limit = 1000000, $s
 	// TODO: check if $table in conf.
 	
 	$sqlCode = "select * from `$table` where";
-	$sqlCode .= " `published` > 0 and ";
+	
+	$user = MSV_get("website.user");
+	if (!($user["access"] === "superadmin" || $user["access"] === "admin")) {
+		$sqlCode .= " `published` > 0 and ";
+	}
+	
 	$sqlCode .= " `deleted` = 0  and ";
 	$sqlCode .= " (`lang` = '".$lang."' or `lang` = '*')  ";
 

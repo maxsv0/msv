@@ -19,16 +19,16 @@
 {foreach from=$admin_media_list key=mediaID item=mediaInfo} 
 <div role="tabpanel" class="tab-pane {if $admin_media_active == $mediaID}active{/if}" id="{$mediaID}">
 <p>
-Server path: <b>{$mediaInfo.url}</b>
+{_t("form.server_path")}: <b>{$mediaInfo.url}</b>
 </p>
 
 <table class='table table-hover'>
 <tr>
-<th class='col-sm-4'>Name</th>
-<th class='col-sm-2'>Type</th>
-<th class='col-sm-3'>Preview</th>
-<th class='col-sm-2'>Access</th>
-<th class='col-sm-1'>Actions</th>
+<th class='col-sm-4'>{_t("admin.filename")}</th>
+<th class='col-sm-2'>{_t("admin.filetype")}</th>
+<th class='col-sm-3'>{_t("admin.filepreview")}</th>
+<th class='col-sm-2'>{_t("admin.fileaccess")}</th>
+<th class='col-sm-1'>{_t("actions")}</th>
 </tr>
 
 {foreach from=$mediaInfo.list_files key=filePath item=fileInfo} 
@@ -50,7 +50,7 @@ Server path: <b>{$mediaInfo.url}</b>
 {elseif ($fileInfo.type == "image/png" || $fileInfo.type == "image/gif" || $fileInfo.type == "image/jpeg")}
 	<img src="{$fileInfo.urlabs}" class="img-responsive" border="1">
 {else}
-	<a href="{$fileInfo.urlabs}" class="btn btn-primary">open file</a>
+	<a href="{$fileInfo.urlabs}" class="btn btn-primary" target="_blank">open file <span class='glyphicon glyphicon-new-window'></span></a>
 
 {/if}
 </td>

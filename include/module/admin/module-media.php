@@ -33,12 +33,6 @@ foreach ($media_list as $k => $v) {
 
 MSV_assignData("admin_media_list", $media_list);
 
-$media_library = "
-<div id='media_table'>
-$media_table
-</div>";
-
-
 
 $service_folder_id = MSV_getConfig("service_folder_id");
 if (!empty($service_folder_id)) {

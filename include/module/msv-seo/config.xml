@@ -18,9 +18,9 @@
 		<field name="updated" type="updated"/>
 		<field name="lang" type="lang"/>
 		<field name="url" type="str"/>
-		<field name="title" type="str"/>
-		<field name="description" type="str"/>
-		<field name="keywords" type="str"/>
+		<field name="title" type="text"/>
+		<field name="description" type="text"/>
+		<field name="keywords" type="text"/>
 		<field name="sitemap" type="bool"/>
 	</table>
 </config>

@@ -37,7 +37,7 @@
 </div>
 </div>
 {if $admin_sitemap}
-<pre class="panel panel-success text-success" style="font-size: 14px;">
+<pre class="panel panel-success text-success" style="font-size: 14px;max-height: 500px;">
 {$admin_sitemap|htmlspecialchars}
 </pre>
 {else}

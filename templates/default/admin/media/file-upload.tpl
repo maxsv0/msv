@@ -1,5 +1,5 @@
 <fieldset class="legend">
-    <legend class="legend">{_t("title.upload_files")} to <b>{$upload_path}</b></legend>
+    <legend class="legend">{_t("title.upload_files")} <b>{$upload_path}</b></legend>
     
    
     

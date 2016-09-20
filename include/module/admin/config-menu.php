@@ -7,26 +7,25 @@ $menu_index = array();
 
 $submenu = array();
 $submenu["realtime"] = array(
-	"name" => "Real-Time Overview", 
+	"name" => _t("admin.realtime"), 
 	"access" => "admin",
 	"url" => "/admin/?section=realtime",
 	"file" => "index.tpl",
-	"title" => "Real-Time Overview", 
+	"title" => _t("admin.realtime"), 
 );
 $submenu["analytics"] = array(
-	"name" => "Analytics", 
-	"table" => $name, 
+	"name" => _t("admin.analytics"), 
 	"access" => "admin",
 	"url" => "/admin/?section=analytics",
 	"file" => "analytics.tpl",
-	"title" => "Analytics"
+	"title" => _t("admin.analytics")
 );
 $submenu["social"] = array(
-	"name" => "Social Wall", 
+	"name" => _t("admin.social"), 
 	"access" => "admin",
 	"url" => "/admin/?section=social",
 	"file" => "social.tpl",
-	"title" => "Social Wall",
+	"title" => _t("admin.social"),
 );
 $submenu["manual"] = array(
 	"name" => _t("admin.manual"), 
@@ -34,7 +33,7 @@ $submenu["manual"] = array(
 	"handler" => "module-manual.php",
 	"url" => "/admin/?section=manual",
 	"file" => "manual.tpl",
-	"title" => _t("admin.manual_title")
+	"title" => _t("admin.manual")
 );
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
@@ -52,7 +51,7 @@ $menu_ar["index"] = array(
 
 $submenu = array();
 $submenu["structure"] = array(
-	"name" => "Website Structure", 
+	"name" => _t("admin.structure_manage"), 
 	"access" => "admin",
 	"handler" => "module-structure.php",
 	"table" => TABLE_STRUCTURE,
@@ -76,7 +75,7 @@ $submenu["documents"] = array(
 	"table" => TABLE_DOCUMENTS,
 	"url" => "/admin/?section=documents",
 	"file" => "documents.tpl",
-	"title" => _t("admin.document_title")
+	"title" => _t("admin.documents_title")
 );
 $submenu["seo"] = array(
 	"name" => _t("admin.seo"), 
@@ -108,12 +107,12 @@ $menu_ar["users"] = array(
 );
 
 $menu_ar["media_library"] = array(
-	"name" =>  "Media Library", 
+	"name" =>  _t("admin.media_library"), 
 	"access" => "admin",
 	"handler" => "module-media.php",
 	"url" => "/admin/?section=media_library",
 	"file" => "media_library.tpl",
-	"title" => "Media Library"
+	"title" =>  _t("admin.media_library")
 );
 
 
@@ -133,7 +132,7 @@ foreach ($this->website->modules as $module) {
 				"handler" => "module-table.php",
 				"url" => "/admin/?section=".$module->name."&table=".$name,
 				"file" => "custom.tpl",
-				"title" => $module->description.": ".$name
+				"title" => _t("table.".$name)." - ".$name
 			);
 		}
 		$menu_ar[$module->name] = array(
@@ -165,7 +164,7 @@ $menu_ar["mail_template"] = array(
 
 
 $menu_ar["module_settings"] = array(
-	"name" => "Modules Manager", 
+	"name" => _t("admin.module_settings"), 
 	"access" => "superadmin",
 	"url" => "/admin/?section=module_settings",
 	"file" => "module_settings.tpl",
@@ -211,9 +210,9 @@ $submenu["sitemap"] = array(
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
 $menu_ar["dev_tools"] = array(
-	"name" => "Development Tools", 
+	"name" => _t("admin.dev_tools"), 
 	"access" => "admin",
-	"title" => "Development Tools",
+	"title" => _t("admin.dev_tools"),
 	"submenu" => $submenu
 );
 

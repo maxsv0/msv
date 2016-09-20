@@ -60,12 +60,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">File Upload</h4>
+        <h4 class="modal-title" id="myModalLabel">{$t["title.upload_files"]}</h4>
         
         <div class="row text-muted">
         <p class="col-sm-4">1. Select file</p>
-        <p class="col-sm-4">2. Click "Upload File"</p>
-        <p class="col-sm-4">3. Click "Save changes"</p>
+        <p class="col-sm-4">2. Click "{$t["btn.upload_file"]}"</p>
+        <p class="col-sm-4">3. Click "{$t["btn.save"]}"</p>
         </div>
       </div>
       <div class="modal-body">
@@ -79,7 +79,7 @@
 	<input name="uploadFile" id="iUploadFile" type="file" class="form-control" style="height: 50px;"/>
 	<input name="table" id="iUploadTable" type="hidden" value="{$admin_table}"/>
 	<input name="field" id="iUploadField" type="hidden" value=""/>
-	<input type="submit" name="submitBtn" value="Upload File" class="btn btn-warning btn-block"/>
+	<input type="submit" name="submitBtn" value="{$t["btn.upload_file"]}" class="btn btn-warning btn-block"/>
 	</form>
 	<iframe id="uploadFrame" name="uploadFrame" src="about:blank" style="width:0;height:0;border:0px solid #fff;" onload="uploadFrameLoad(this)"></iframe>
 	</div>
@@ -91,8 +91,8 @@
       
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="closeUploadModal();">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{$t["btn.close"]}</button>
+        <button type="button" class="btn btn-primary" onclick="closeUploadModal();">{$t["btn.save"]}</button>
       </div>
     </div>
   </div>
@@ -115,7 +115,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Media Library - {$t["module.$admin_section"]}</h4>
+        <h4 class="modal-title" id="myModalLabel">{$t["admin.media_library"]} - {$t["module.$admin_section"]}</h4>
       </div>
       <div class="modal-body">
       
@@ -127,8 +127,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="closePicLibraryModal();">Save and return</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{$t["btn.close"]}</button>
+        <button type="button" class="btn btn-primary" onclick="closePicLibraryModal();">{$t["btn.save_exit"]}</button>
       </div>
     </div>
   </div>

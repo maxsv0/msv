@@ -175,7 +175,7 @@ if (!empty($section) && in_array($section, $menu_index)) {
 					}
 				}
 				
-				if ($field["type"] === "doc") {
+				if ($field["type"] === "doc" || $field["type"] === "text") {
 					$tabs["document"]["fields"][] = $field;
 				} elseif ($field["type"] === "pic"
 				 || $field["type"] === "file") {

@@ -1,5 +1,9 @@
 <?php
 $tableInfo = MSV_getTableConfig(TABLE_STRUCTURE);
+$tableInfo["fields"]["document_name"] = array(
+	"name" => "document_name",
+	"type" => "text",
+);
 $tableInfo["fields"]["document_text"] = array(
 	"name" => "document_text",
 	"type" => "doc",
@@ -11,6 +15,7 @@ if (!empty($_POST["save_exit"]) || !empty($_POST["save"])) {
 	
 	// save document
 	API_updateDBItem(TABLE_DOCUMENTS, "text", "'".MSV_SQLEscape($_POST["form_document_text"])."'", " `id` = '".(int)$_POST["form_page_document_id"]."'");
+	API_updateDBItem(TABLE_DOCUMENTS, "name", "'".MSV_SQLEscape($_POST["form_document_name"])."'", " `id` = '".(int)$_POST["form_page_document_id"]."'");
 	
 	// save seo
 	$resultQuerySEO = API_getDBItem(TABLE_SEO, "`url` = '".MSV_SQLescape($_POST["form_url"])."'");
@@ -28,31 +33,11 @@ if (!empty($_POST["save_exit"]) || !empty($_POST["save"])) {
 		MSV_redirect("/admin/?section=$section&edit=".$_POST["form_id"]."&save_error=".urlencode($resultSave["msg"]));
 	}
 }
+
 if (!empty($_POST["save"])) {
 	$_REQUEST["edit"] = $_POST["form_id"];
 }
-if (!empty($_REQUEST["edit"])) {
-	$resultQueryItem = API_getDBItem(TABLE_STRUCTURE, "`id` = '".(int)$_REQUEST["edit"]."'");
-	if ($resultQueryItem["ok"]) {
-		$editStructure = $resultQueryItem["data"];
-		
-		if (!empty($editStructure["page_document_id"])) {
-			$resultQueryDocument = API_getDBItem(TABLE_DOCUMENTS, "`id` = '".(int)$editStructure["page_document_id"]."'");
-			if ($resultQueryDocument["ok"]) {
-				$editStructure["document_text"] = $resultQueryDocument["data"]["text"];
-			}
-		}
-		
-		$resultQuerySEO = API_getDBItem(TABLE_SEO, "`url` = '".MSV_SQLescape($editStructure["url"])."'");
-		if ($resultQuerySEO["ok"]) {
-			$editStructure["seo_title"] = $resultQuerySEO["data"]["title"];
-			$editStructure["seo_description"] = $resultQuerySEO["data"]["description"];
-			$editStructure["seo_keywords"] = $resultQuerySEO["data"]["keywords"];
-		}
-		
-		MSV_assignData("admin_edit_structure", $editStructure);
-	}
-}
+
 if (!empty($_REQUEST["duplicate"])) {
 	$resultQueryItem = API_getDBItem(TABLE_STRUCTURE, "`id` = '".(int)$_REQUEST["duplicate"]."'");
 	if ($resultQueryItem["ok"]) {
@@ -65,6 +50,7 @@ if (!empty($_REQUEST["duplicate"])) {
 		// it will not be saved
 	}
 }
+
 if (!empty($_REQUEST["add_child"])) {
 	$resultQueryItem = API_getDBItem(TABLE_STRUCTURE, "`id` = '".(int)$_REQUEST["add_child"]."'");
 	if ($resultQueryItem["ok"]) {
@@ -75,10 +61,12 @@ if (!empty($_REQUEST["add_child"])) {
 		MSV_assignData("admin_edit_structure", $resultQueryItem["data"]);
 	}
 }
+
 if (!empty($_REQUEST["delete"])) {
 	$resultQueryDelete = API_deleteDBItem(TABLE_STRUCTURE, "`id` = '".(int)$_REQUEST["delete"]."'");
 	MSV_MessageOK(_t("msg.deleted_ok"));
 }
+
 if (isset($_REQUEST["add_new"])) {
 	$item = array("id" => "", "published" => 1, "deleted" => 0);
 	if (!empty($_REQUEST["edit_key"])) {
@@ -86,6 +74,7 @@ if (isset($_REQUEST["add_new"])) {
 	}
 	MSV_assignData("admin_edit_structure", $item);
 }
+
 if (!empty($_REQUEST["document_create"])) {
 	$resultQueryItem = API_getDBItem(TABLE_STRUCTURE, "`id` = '".(int)$_REQUEST["document_create"]."'");
 	if ($resultQueryItem["ok"]) {
@@ -100,8 +89,32 @@ if (!empty($_REQUEST["document_create"])) {
 		}
 		MSV_MessageOK(_t("msg.created_ok"));
 	}
+	$_REQUEST["edit"] = $_REQUEST["document_create"];
 }
 
+if (!empty($_REQUEST["edit"])) {
+	$resultQueryItem = API_getDBItem(TABLE_STRUCTURE, "`id` = '".(int)$_REQUEST["edit"]."'");
+	if ($resultQueryItem["ok"]) {
+		$editStructure = $resultQueryItem["data"];
+		
+		if (!empty($editStructure["page_document_id"])) {
+			$resultQueryDocument = API_getDBItem(TABLE_DOCUMENTS, "`id` = '".(int)$editStructure["page_document_id"]."'");
+			if ($resultQueryDocument["ok"]) {
+				$editStructure["document_text"] = $resultQueryDocument["data"]["text"];
+				$editStructure["document_name"] = $resultQueryDocument["data"]["name"];
+			}
+		}
+		
+		$resultQuerySEO = API_getDBItem(TABLE_SEO, "`url` = '".MSV_SQLescape($editStructure["url"])."'");
+		if ($resultQuerySEO["ok"]) {
+			$editStructure["seo_title"] = $resultQuerySEO["data"]["title"];
+			$editStructure["seo_description"] = $resultQuerySEO["data"]["description"];
+			$editStructure["seo_keywords"] = $resultQuerySEO["data"]["keywords"];
+		}
+		
+		MSV_assignData("admin_edit_structure", $editStructure);
+	}
+}
 
 
 if (!empty($_REQUEST["sort"])) {
@@ -131,7 +144,7 @@ MSV_assignData("table_sortd_rev", $sortd_rev);
 
 
 // Load list of items
-$resultQuery = API_getDBListPaged(TABLE_STRUCTURE, "", "`$sort` $sortd", 100, "p");
+$resultQuery = API_getDBListPaged(TABLE_STRUCTURE, "", "`$sort` $sortd", 10, "p");
 if ($resultQuery["ok"]) {
 	$adminList = $resultQuery["data"];
 	$listPages = $resultQuery["pages"];

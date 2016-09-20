@@ -163,6 +163,7 @@ if ($resultQuery["ok"]) {
 			foreach ($adminList as $listItemID => $listItem) {
 				
 				if (!empty($listItem[$field["name"]])) {
+					$listItem[$field["name"]."_data"] = $listItem[$field["name"]];
 					$listItem[$field["name"]] = $field["data"][$listItem[$field["name"]]];
 				}
 				

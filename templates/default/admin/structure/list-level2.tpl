@@ -1,11 +1,17 @@
 {foreach from=$listTable name=loop key=item_id item=item}
 {if $item.parent_id == $show_parent_id}
-{if $item.debug}
-<tr class="danger">
-{else}
+{if $item.published}
 <tr>
+{else}
+<tr class="danger">
 {/if}
 
+<td class="text-nowrap">
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&add_child={$item.id}" title="{$t['btn.add_child']}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;" title="{$t['btn.delete']}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+</td>
 <td>└</td>
 
 <td class="text-nowrap" style="padding-left:20px;">
@@ -42,6 +48,7 @@
 </td>
 
 <td class="text-nowrap text-center">
+<small>
 {if $item.access === "everyone"}
 	<span class="text-success">{$item.access_data}</span>
 {elseif $item.access === "user"}
@@ -53,6 +60,7 @@
 {else}
 	{$item.access_data}
 {/if}
+</small>
 </td>
 <td class="text-nowrap text-center">
 {if $item.sitemap}
@@ -71,12 +79,6 @@
 
 <td><small>{$item.updated}</small></td>
 
-<td class="text-nowrap">
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;" title="{$t['btn.delete']}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&add_child={$item.id}" title="{$t['btn.add_child']}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></a>
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-</td>
 </tr>
 
 {/if}
