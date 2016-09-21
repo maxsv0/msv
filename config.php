@@ -2,7 +2,7 @@
 define("ABS", __DIR__);
 define("LANGUAGES", "en,ru");
 define("DB_HOST", "127.0.0.1");
-define("DB_LOGIN", "root");
+define("DB_LOGIN", "msv");
 define("DB_PASSWORD", "");
 define("DB_NAME", "msv");
 define("DB_REQUIRED", false);

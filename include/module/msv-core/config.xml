@@ -125,14 +125,7 @@
 	<file dir="template" path="default/widget/menu-top.tpl"/>
 	<file dir="template" path="default/widget/menu-bottom.tpl"/>
 	<file dir="content" path="images/msv-logo.png"/>
-	<file dir="content" path="css/bootstrap.min.css"/>
 	<file dir="content" path="js/jquery.min.js"/>
-	<file dir="content" path="js/bootstrap.min.js"/>
-	<file dir="content" path="fonts/glyphicons-halflings-regular.eot"/>
-	<file dir="content" path="fonts/glyphicons-halflings-regular.svg"/>
-	<file dir="content" path="fonts/glyphicons-halflings-regular.ttf"/>
-	<file dir="content" path="fonts/glyphicons-halflings-regular.woff"/>
-	<file dir="content" path="fonts/glyphicons-halflings-regular.woff2"/>
 </install>
 
 <locales>
