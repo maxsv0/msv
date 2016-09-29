@@ -1020,6 +1020,9 @@ function MSV_proccessUpdateTable($table, $prefix = "") {
 			case "updated":
 				$itemNew[$item["name"]] = date("Y-m-d H:i:s");
 			break;
+			case "array":
+				$itemNew[$item["name"]] = serialize($value);
+			break;
 			case "date":
 				$dt = strtotime($value);
 				$itemNew[$item["name"]] = date("Y-m-d H:i:s", $dt);

@@ -36,6 +36,14 @@
 		<field name="msg.empty_result" value="Empty result"/>
 		<field name="msg.table_not_found" value="Table not found"/>
 	</locale>
+	<locale name="de">
+		<field name="msg.cant_load_table_data" value="Can't load from table"/>
+		<field name="msg.cant_get_table_data" value="Can't get data from table"/>
+		<field name="msg.cant_get_table_count" value="Can't get table count"/>
+		<field name="msg.error_input" value="Error input"/>
+		<field name="msg.empty_result" value="Empty result"/>
+		<field name="msg.table_not_found" value="Table not found"/>
+	</locale>
     <locale name="ua">
 		<field name="msg.cant_load_table_data" value="Не вдалося прочитати з таблиці"/>
 		<field name="msg.cant_get_table_data" value="Не вдалося витягти дані з таблиці"/>

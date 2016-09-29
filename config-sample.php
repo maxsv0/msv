@@ -1,6 +1,6 @@
 <?php 
 define("ABS", __DIR__);
-define("LANGUAGES", "en,ru");
+define("LANGUAGES", "en,ru,de");
 define("DB_HOST", "127.0.0.1");
 define("DB_LOGIN", "msv");
 define("DB_PASSWORD", "");

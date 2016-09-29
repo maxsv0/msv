@@ -150,6 +150,41 @@
 		<field name="table.article_categories.article_id" value="Article"/>
 		<field name="table.article_categories.title" value="Title"/>
 	</locale>
+	<locale name="de">
+		<field name="module.blog" value="Blog"/>
+		<field name="table.articles" value="Blog Publications"/>
+		<field name="table.articles.id" value="ID"/>
+		<field name="table.articles.published" value="Published"/>
+		<field name="table.articles.deleted" value="Deleted"/>
+		<field name="table.articles.author" value="Author"/>
+		<field name="table.articles.updated" value="Updated"/>
+		<field name="table.articles.lang" value="Lang"/>
+		<field name="table.articles.sticked" value="Sticked"/>
+		<field name="table.articles.url" value="URL"/>
+		<field name="table.articles.date" value="Date"/>
+		<field name="table.articles.title" value="Title"/>
+		<field name="table.articles.description" value="Short text"/>
+		<field name="table.articles.text" value="Article text"/>
+		<field name="table.articles.pic" value="Picture Big"/>
+		<field name="table.articles.pic_preview" value="Picture"/>
+		<field name="table.articles.album_id" value="Album"/>
+		<field name="table.articles.views" value="Views"/>
+		<field name="table.articles.shares" value="Shares"/>
+		<field name="table.articles.comments" value="Comments"/>
+		<field name="table.articles.seo_title" value="Page Title"/>
+		<field name="table.articles.seo_description" value="Description"/>
+		<field name="table.articles.seo_keywords" value="Keywords"/>
+		<field name="table.article_categories" value="Article Categories"/>
+		<field name="table.article_categories.id" value="ID"/>
+		<field name="table.article_categories.published" value="Published"/>
+		<field name="table.article_categories.deleted" value="Deleted"/>
+		<field name="table.article_categories.author" value="Author"/>
+		<field name="table.article_categories.updated" value="Updated"/>
+		<field name="table.article_categories.lang" value="Lang"/>
+		<field name="table.article_categories.url" value="URL"/>
+		<field name="table.article_categories.article_id" value="Article"/>
+		<field name="table.article_categories.title" value="Title"/>
+	</locale>
 </locales>
 
 		

@@ -144,7 +144,7 @@ MSV_assignData("table_sortd_rev", $sortd_rev);
 
 
 // Load list of items
-$resultQuery = API_getDBListPaged(TABLE_STRUCTURE, "", "`$sort` $sortd", 10, "p");
+$resultQuery = API_getDBListPaged(TABLE_STRUCTURE, "", "`$sort` $sortd", 1000, "p");
 if ($resultQuery["ok"]) {
 	$adminList = $resultQuery["data"];
 	$listPages = $resultQuery["pages"];

@@ -152,6 +152,42 @@
 		<field name="table.gallery_photos.pic" value="Picture Big"/>
 		<field name="table.gallery_photos.pic_preview" value="Picture"/>
 	</locale>
+	<locale name="de">
+		<field name="module.gallery" value="Photo Gallery"/>
+		<field name="table.gallery_album" value="Albums"/>
+		<field name="table.gallery_album.id" value="ID"/>
+		<field name="table.gallery_album.published" value="Published"/>
+		<field name="table.gallery_album.deleted" value="Deleted"/>
+		<field name="table.gallery_album.author" value="Author"/>
+		<field name="table.gallery_album.updated" value="Updated"/>
+		<field name="table.gallery_album.lang" value="Lang"/>
+		<field name="table.gallery_album.url" value="URL"/>
+		<field name="table.gallery_album.date" value="Date"/>
+		<field name="table.gallery_album.title" value="Title"/>
+		<field name="table.gallery_album.description" value="Short text"/>
+		<field name="table.gallery_album.pic" value="Picture Big"/>
+		<field name="table.gallery_album.pic_preview" value="Picture"/>
+		<field name="table.gallery_album.views" value="Views"/>
+		<field name="table.gallery_album.shares" value="Shares"/>
+		<field name="table.gallery_album.comments" value="Comments"/>
+		<field name="table.gallery_album.seo_title" value="Page Title"/>
+		<field name="table.gallery_album.seo_description" value="Description"/>
+		<field name="table.gallery_album.seo_keywords" value="Keywords"/>
+		<field name="table.gallery_photos" value="Photos"/>
+		<field name="table.gallery_photos.id" value="ID"/>
+		<field name="table.gallery_photos.published" value="Published"/>
+		<field name="table.gallery_photos.deleted" value="Deleted"/>
+		<field name="table.gallery_photos.author" value="Author"/>
+		<field name="table.gallery_photos.updated" value="Updated"/>
+		<field name="table.gallery_photos.lang" value="Lang"/>
+		<field name="table.gallery_photos.album_id" value="Album"/>
+		<field name="table.gallery_photos.order_id" value="Order ID"/>
+		<field name="table.gallery_photos.date" value="Date"/>
+		<field name="table.gallery_photos.title" value="Title"/>
+		<field name="table.gallery_photos.description" value="Short text"/>
+		<field name="table.gallery_photos.pic" value="Picture Big"/>
+		<field name="table.gallery_photos.pic_preview" value="Picture"/>
+	</locale>
 </locales>
 
 		
