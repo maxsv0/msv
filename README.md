@@ -5,18 +5,19 @@ http://msv.host/
 Open Source PHP Web Framework with build-in CMS (Content Management System) for website of any complexity.
 
 
+# Coping
+
+git clone https://github.com/maxsv0/msv.git msv
+cd msv
+
+
 # Installation
 
-git clone https://github.com/maxsv0/msv.git /var/www/dev
+chmod +x install.sh
+./install.sh /var/www/html
 
-cp -ar /var/www/dev/. /var/www/html
 
-find /var/www -type d -exec chmod 775 {} \;  
+# Automated Server Installation
 
-find /var/www -type f -exec chmod 664 {} \;
-
-chmod 777 /var/www/html/include/custom/smarty/cache
-
-# Automated Installation
-
-bash <(curl -s http://msv.host/content/install.sh)
+chmod +x install-server.sh
+./install-server.sh
