@@ -15,12 +15,11 @@ echo "mysql-server mysql-server/root_password password $MASTER_PASS" | sudo debc
 echo "mysql-server mysql-server/root_password_again password $MASTER_PASS" | sudo debconf-set-selections
 
 apt-get -y install mysql-server
-E: Unable to locate package php-mbstring
+
 apt-get -y install php5
 apt-get -y install libapache2-mod-php5
-apt-get -y install php-mysql
-apt-get -y install php-xml
-apt-get -y install php-mbstring
+apt-get -y install php5-mysql
+apt-get -y install php5-xml
 apt-get -y install php5-curl 
 apt-get -y install php-gettext
 
