@@ -2,7 +2,6 @@
 echo "Installing MSV Server"
 
 apt-get -y update 
-apt-get -y upgrade 
 apt-get -y install debconf-utils
 apt-get -y install unzip 
 apt-get -y install apache2 
@@ -24,8 +23,6 @@ apt-get -y install php-mbstring
 apt-get -y install php5-curl 
 apt-get -y install php-gettext
 
-apt-get -y install git
-apt-get -y install phpmyadmin  
 apt-get -y install proftpd  
 
 rm /var/www/html/index.html 
