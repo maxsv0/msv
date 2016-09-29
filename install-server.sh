@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "Installing MSV Server"
 
+add-apt-repository universe
 apt-get -y update 
 apt-get -y install debconf-utils
 apt-get -y install unzip 
@@ -14,7 +15,7 @@ echo "mysql-server mysql-server/root_password password $MASTER_PASS" | sudo debc
 echo "mysql-server mysql-server/root_password_again password $MASTER_PASS" | sudo debconf-set-selections
 
 apt-get -y install mysql-server
-
+E: Unable to locate package php-mbstring
 apt-get -y install php5
 apt-get -y install libapache2-mod-php5
 apt-get -y install php-mysql
