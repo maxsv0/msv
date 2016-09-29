@@ -27,7 +27,8 @@ apt-get -y install libapache2-mod-php5
 apt-get -y install php5-mysql
 apt-get -y install php5-xml
 apt-get -y install php5-curl 
-apt-get -y install php-gettext
+apt-get -y install php5-gd
+apt-get -y install gettext
 
 echo "proftpd-basic shared/proftpd/inetd_or_standalone select standalone" | sudo debconf-set-selections
 apt-get -y install proftpd-basic  
@@ -39,20 +40,22 @@ a2enmod headers
 a2enmod expires 
 a2enmod mcrypt 
 
-printf "<Directory /var/www/>\n
-        Options Indexes FollowSymLinks\n
-        AllowOverride All\n
+printf "<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
 </Directory>\n">>/etc/apache2/apache2.conf 
 
+SERVER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 
-printf "<Global>\n
-    RootLogin	off\n
-    RequireValidShell off\n
-</Global>\n
-<Limit LOGIN>\n
-    DenyUser !devftp\n
-</Limit>\n
-DefaultRoot  ~\n">>/etc/proftpd/proftpd.conf 
+printf "<Global>
+    RootLogin	off
+    RequireValidShell off
+</Global>
+<Limit LOGIN>
+    DenyUser !devftp
+</Limit>
+DefaultRoot  ~
+MasqueradeAddress $SERVER_IP\n">>/etc/proftpd/proftpd.conf 
 
 
 wget https://dl-ssl.google.com/dl/linux/direct/mod-pagespeed-stable_current_amd64.deb 
@@ -71,4 +74,7 @@ echo devftp:$MASTER_PASS | chpasswd
 chown -R devftp:www-data /var/www/html
 
 
-echo "Master password is: $MASTER_PASS"
+echo "Install Successfull"
+echo "------------------------------------"
+echo "Password: $MASTER_PASS"
+echo "IP: $SERVER_IP"
