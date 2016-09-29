@@ -377,16 +377,15 @@ function MSV_setConfig($param, $value, $updateDB = false, $lang = LANG) {
 	$website = MSV_get("website");
 	
 	// TODO : CHECK ... 
-	
-	$website->config[$param] = $value;
-	
 	if (array_key_exists($param, $website->config)) {
+		$website->config[$param] = $value;
 		
 		if ($updateDB) {
 			return API_updateDBItem(TABLE_SETTINGS, "value", "'".MSV_SQLEscape($value)."'", " `param` = '".$param."'");
 		}
 		
 	} else {
+		$website->config[$param] = $value;
 		
 		if ($updateDB) {
 			$item = array(
