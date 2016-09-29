@@ -18,9 +18,8 @@ apt-get -y install mysql-server mysql-client
 
 mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "CREATE USER 'msv'@'localhost' IDENTIFIED BY '$MASTER_PASS';"
 mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "GRANT USAGE ON *.* TO 'msv'@'localhost' IDENTIFIED BY '$MASTER_PASS' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
-mysql -h 127.0.0.1 -uroot -pIavaechaisho -e "GRANT USAGE ON *.* TO 'msv'@'localhost' IDENTIFIED BY '123' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
-mysql -h 127.0.0.1 -uroot -pIavaechaisho -e "CREATE DATABASE IF NOT EXISTS 'msv';"
-mysql -h 127.0.0.1 -uroot -pIavaechaisho -e "GRANT ALL PRIVILEGES ON msv.* TO 'msv'@'localhost';"
+mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "CREATE DATABASE IF NOT EXISTS 'msv';"
+mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "GRANT ALL PRIVILEGES ON msv.* TO 'msv'@'localhost';"
 
 
 apt-get -y install php5
