@@ -82,6 +82,7 @@ if (!empty($_REQUEST["install_step"]) && empty($website->messages["error"])) {
 			
 			if (is_writable(ABS."/config.php")) {
 				file_put_contents(ABS."/config.php", $configPHP);
+				sleep(1); // TODO: WHY??
 				
 				$website->messages["success"][] = "".ABS."/config.php updated successfuly";
 			} else {
