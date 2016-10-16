@@ -65,6 +65,10 @@ any
 
 	{include "$themePath/admin/fields/field-picture.tpl"}
 	
+{elseif $item_type === "multiselect"}
+
+	{include "$themePath/admin/fields/field-multiselect.tpl"}
+	
 {else}
 
 	{include "$themePath/admin/fields/field-default.tpl"}

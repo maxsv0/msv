@@ -33,7 +33,7 @@
 {if $type === "pic"}
 <td>
 {if $itemField}
-	<img src="{$itemField}" class="img-responsive" style="max-height:200px;">
+	<img src="{$itemField}" class="img-responsive" style="max-height:100px;">
 {/if}
 </td>
 {elseif $type === "updated" || $type === "date"}
@@ -62,7 +62,7 @@
 
 
 {if $admin_list_pages}
-{include file="$themePath/widget/pagination.tpl" pagination=$admin_list_pages urlsuffix="&section=$admin_section&table=$admin_table"}
+{include file="$themePath/widget/pagination.tpl" pagination=$admin_list_pages urlsuffix="&section=$admin_section&table=$admin_table&sort=$table_sort&sortd=$table_sortd"}
 {/if}
 
 

@@ -116,6 +116,7 @@
 	<file dir="template" path="default/admin/fields/field-date.tpl"/>
 	<file dir="template" path="default/admin/fields/field-picture.tpl"/>
 	<file dir="template" path="default/admin/fields/field-file.tpl"/>
+	<file dir="template" path="default/admin/fields/field-multiselect.tpl"/>
 	<file dir="template" path="default/widget/header.tpl"/>
 	<file dir="template" path="default/widget/footer.tpl"/>
 	<file dir="template" path="default/widget/messages.tpl"/>

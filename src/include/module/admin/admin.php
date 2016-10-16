@@ -188,6 +188,7 @@ if (!empty($section) && in_array($section, $menu_index)) {
 				 || $field["type"] === "updated"
 				 || $field["type"] === "str"
 				 || $field["type"] === "array"
+				 || $field["type"] === "multiselect"
 				 || $field["type"] === "author"
 				 || $field["type"] === "select"
 				 || $field["type"] === "lang") {

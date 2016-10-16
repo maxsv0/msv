@@ -710,6 +710,7 @@ function MSV_DataFormat($table, $dataRow) {
 				
 			break;
 			case "array":
+			case "multiselect":
 				$dataRow[$field["name"]] = unserialize($value);
 			break;
 			case "date":
@@ -1020,6 +1021,7 @@ function MSV_proccessUpdateTable($table, $prefix = "") {
 				$itemNew[$item["name"]] = date("Y-m-d H:i:s");
 			break;
 			case "array":
+			case "multiselect":
 				$itemNew[$item["name"]] = serialize($value);
 			break;
 			case "date":

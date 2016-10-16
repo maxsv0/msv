@@ -162,7 +162,15 @@ if ($resultQuery["ok"]) {
 			$adminListFiltered = array();
 			foreach ($adminList as $listItemID => $listItem) {
 				
-				if (!empty($listItem[$field["name"]])) {
+				if (is_array($listItem[$field["name"]])) {
+					
+					$str = "";
+					foreach ($listItem[$field["name"]] as $value) {
+						$str .=  $field["data"][$value].",";
+					}
+					$listItem[$field["name"]] = substr($str, 0, -1);
+					
+				} elseif (!empty($listItem[$field["name"]])) {
 					$listItem[$field["name"]."_data"] = $listItem[$field["name"]];
 					$listItem[$field["name"]] = $field["data"][$listItem[$field["name"]]];
 				}

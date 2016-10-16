@@ -25,10 +25,10 @@ $configListNames = array(
 
 
 /// TODO:
-// + dublicate template and set theme name // each lang
+// + dublicate template and set theme name // each lang??
 //
 
-if (!empty($_POST["install_reset"])) {
+if (!empty($_REQUEST["install_reset"])) {
 	$_SESSION["msv_install_step"] = $install_step = 0;
 	$_SESSION["user_id"] = $_SESSION["user_email"] = "";
 	unset($_SESSION["user_id"]);
@@ -36,16 +36,15 @@ if (!empty($_POST["install_reset"])) {
 	$website->outputRedirect("/");
 }
 
-
-if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
-	$_POST["install_step"] = (int)$_POST["install_step"];
+if (!empty($_REQUEST["install_step"]) && empty($website->messages["error"])) {
+	$_REQUEST["install_step"] = (int)$_REQUEST["install_step"];
 	
-	if ($_POST["install_step"] === 2) {
+	if ($_REQUEST["install_step"] === 2) {
 		$_SESSION["user_id"] = $_SESSION["user_email"] = "";
 	}
-	if ($_POST["install_step"] === 3) {
+	if ($_REQUEST["install_step"] === 3) {
 
-		if (empty($_POST["msv_LANGUAGES"]) || !is_array($_POST["msv_LANGUAGES"])) {
+		if (empty($_REQUEST["msv_LANGUAGES"]) || !is_array($_REQUEST["msv_LANGUAGES"])) {
 			$website->messages["error"][] = "Please select languages";
 		} else {
 
@@ -53,9 +52,14 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 			$configPHP = "<?php \n";
 			
 			foreach ($configListNames as $name) {
-				$value = $_POST["msv_".$name];
-				
 				$valueCurrent = constant($name);
+				
+				if (array_key_exists("msv_".$name, $_REQUEST)) {
+					$value = $_REQUEST["msv_".$name];
+				} else {
+					$value = $valueCurrent;
+				}
+				
 				if ($name === "LANGUAGES") {
 					$configPHP .= "define(\"".$name."\", \"".implode(",", $value)."\");\n";
 				} elseif (is_bool($valueCurrent)) {
@@ -86,11 +90,11 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 		}
 	}
 	
-	if ($_POST["install_step"] === 4) {
+	if ($_REQUEST["install_step"] === 4) {
 		
 		if (empty($website->messages["error"]) && 
-			!empty($_POST["modules_local"]) && is_array($_POST["modules_local"])) {
-			foreach ($_POST["modules_local"] as $module) {
+			!empty($_REQUEST["modules_local"]) && is_array($_REQUEST["modules_local"])) {
+			foreach ($_REQUEST["modules_local"] as $module) {
 				$obj = $website->{$module};
 
 				if (!$obj->started) {
@@ -107,14 +111,14 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 					}
 				}
 			}
-			foreach ($_POST["modules_local"] as $module) {
+			foreach ($_REQUEST["modules_local"] as $module) {
 				$obj = $website->{$module};
 				$obj->runInstallHook();
 			}
 			
 			
-			if(!empty($_POST["modules_remote"]) && is_array($_POST["modules_remote"])) {
-				foreach ($_POST["modules_remote"] as $module) {
+			if(!empty($_REQUEST["modules_remote"]) && is_array($_REQUEST["modules_remote"])) {
+				foreach ($_REQUEST["modules_remote"] as $module) {
 					MSV_installModule($module, false);
 				}
 			}
@@ -124,12 +128,12 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 			$website->messages["error"][] = "Can't start without modules";
 		}
 		
-		if (!empty($_POST["admin_login"]) && !empty($_POST["admin_password"])) {
+		if (!empty($_REQUEST["admin_login"]) && !empty($_REQUEST["admin_password"])) {
 			
-			$resultUser = UserAdd($_POST["admin_login"], 1, $_POST["admin_password"], "admin", "", "superadmin", "install");
+			$resultUser = UserAdd($_REQUEST["admin_login"], 1, $_REQUEST["admin_password"], "admin", "", "superadmin", "install");
 			if ($resultUser["ok"] && !empty($resultUser["insert_id"])) {
 				$_SESSION['user_id'] = $resultUser["insert_id"];
-				$_SESSION['user_email'] = $_POST["admin_login"];
+				$_SESSION['user_email'] = $_REQUEST["admin_login"];
 			} else {
 				$website->messages["error"][] = "Error adding administrator account: ".$resultUser["msg"];
 			}
@@ -137,11 +141,10 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 		} else {
 			$website->messages["error"][] = "Please enter login and password";
 		}
-		
 	}
 	
 	
-	if ($_POST["install_step"] === 5) {
+	if ($_REQUEST["install_step"] === 5) {
 		
 		// finish installation
 		
@@ -159,9 +162,18 @@ if (!empty($_POST["install_step"]) && empty($website->messages["error"])) {
 	
 	// if no errors, go to next step
 	if (empty($website->messages["error"]) && !empty($install_step)) {
-		$install_step = $_POST["install_step"];
+		$install_step = $_REQUEST["install_step"];
 		$_SESSION["msv_install_step"] = $install_step;
-		$website->outputRedirect("/");
+		
+		
+		if (!empty($_REQUEST["install_auto"])) {
+			$queryString = str_replace("install_step=".$install_step, "install_step=".($install_step+1), $_SERVER["QUERY_STRING"]);
+			
+			$website->outputRedirect("/?".$queryString);
+		} else {
+			$website->outputRedirect("/");
+		}
+		
 	}
 }
 

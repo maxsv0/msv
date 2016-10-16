@@ -9,15 +9,17 @@ apt-get -y install apache2
 apt-get -y install pwgen
 
 MASTER_PASS=$(pwgen -c -1 12)
-echo "Master password is: $MASTER_PASS"
+MSV_PASS=$(pwgen -c -1 12)
+echo "Root password: $MASTER_PASS"
+echo "MSV password is: $MSV_PASS"
 
 echo "mysql-server mysql-server/root_password password $MASTER_PASS" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password $MASTER_PASS" | sudo debconf-set-selections
 
 apt-get -y install mysql-server mysql-client
 
-mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "CREATE USER 'msv'@'localhost' IDENTIFIED BY '$MASTER_PASS';"
-mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "GRANT USAGE ON *.* TO 'msv'@'localhost' IDENTIFIED BY '$MASTER_PASS' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
+mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "CREATE USER 'msv'@'localhost' IDENTIFIED BY '$MSV_PASS';"
+mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "GRANT USAGE ON *.* TO 'msv'@'localhost' IDENTIFIED BY '$MSV_PASS' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;"
 mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "CREATE DATABASE IF NOT EXISTS msv;"
 mysql -h 127.0.0.1 -uroot -p$MASTER_PASS -e "GRANT ALL PRIVILEGES ON msv.* TO 'msv'@'localhost';"
 
@@ -55,6 +57,7 @@ printf "<Global>
     DenyUser !devftp
 </Limit>
 DefaultRoot  ~
+PassivePorts 60000 65000
 MasqueradeAddress $SERVER_IP\n">>/etc/proftpd/proftpd.conf 
 
 
@@ -67,7 +70,7 @@ service proftpd restart
 
 adduser --disabled-password --gecos "" devftp -shell /bin/false -home /var/www 
 
-echo devftp:$MASTER_PASS | chpasswd
+echo devftp:$MSV_PASS | chpasswd
 
 ./install.sh /var/www/html
 
@@ -76,5 +79,6 @@ chown -R devftp:www-data /var/www/html
 
 echo "Install Successfull"
 echo "------------------------------------"
-echo "Password: $MASTER_PASS"
+echo "Root Password: $MASTER_PASS"
+echo "MSV Password: $MSV_PASS"
 echo "IP: $SERVER_IP"

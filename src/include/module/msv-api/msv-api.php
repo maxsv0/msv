@@ -554,6 +554,7 @@ function API_createTable($table) {
 			break;
 			case "text":
 			case "array":
+			case "multiselect":
 				$sqlCode .= " `".$field["name"]."` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL ";
 			break;
 			case "doc":
@@ -701,6 +702,7 @@ function API_itemAdd($table, $fields, $lang = LANG) {
 			case "updated":
 				$valueEscaped = " now() ";
 			break;
+			case "multiselect":
 			case "array":
 				$valueEscaped = " '".MSV_SQLEscape(serialize($value))."' ";
 			break;
