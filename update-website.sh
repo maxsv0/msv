@@ -2,6 +2,9 @@
 
 echo "UPDATE WEBSITE"
 
+git pull
+
+echo "Copy files"
 
 cp -R src/include/* /var/www/html/include/
 
