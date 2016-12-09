@@ -8,7 +8,7 @@
 <tr>
 <th>{$t["actions"]}</th>
 {foreach from=$item key=itemFieldID item=itemField} 
-{if !in_array($itemFieldID, $admin_list_skip)}
+{if !in_array($itemFieldID, $admin_list_skip) && !empty($admin_table_info.fields.$itemFieldID.type)}
 <th>
 	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&sort={$itemFieldID}&sortd={$table_sortd_rev}">{$t["table.$admin_table.$itemFieldID"]}</a>{if $table_sort == $itemFieldID}{if $table_sortd == "asc"}&darr;{else}&uarr;{/if}{/if}
 </th>
@@ -28,7 +28,7 @@
 	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger" onclick="if (!confirm('Вы уверены что хотите удалить?')) return false;"><span class="glyphicon glyphicon-remove"></span></a>
 </td>
 {foreach from=$item key=itemFieldID item=itemField}
-{if !in_array($itemFieldID, $admin_list_skip)}
+{if !in_array($itemFieldID, $admin_list_skip) && !empty($admin_table_info.fields.$itemFieldID.type)}
 {assign var="type" value=$admin_table_info.fields.$itemFieldID.type}
 {if $type === "pic"}
 <td>

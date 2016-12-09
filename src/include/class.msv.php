@@ -288,8 +288,9 @@ class MSV_Website {
 		
 		$this->loadPage($this->requestUrl);
 		
-		// redirect if FORSE_TRAILING_SLASH if page is found
-		if (!empty($this->page) && defined("FORSE_TRAILING_SLASH") && FORSE_TRAILING_SLASH) {
+		// redirect if FORSE_TRAILING_SLASH 
+		// if page is NOT found
+		if (empty($this->page) && defined("FORSE_TRAILING_SLASH") && FORSE_TRAILING_SLASH) {
 			if (!$this->config["hasTrailingSlash"]) {
 				$this->outputRedirect($this->requestUrl."/");
 			}

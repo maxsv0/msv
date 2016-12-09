@@ -208,6 +208,17 @@ if (!empty($section) && in_array($section, $menu_index)) {
 		header('Content-Disposition: attachment; filename='.$table.'-'.time().'.csv');
 	
 		$out = fopen('php://output', 'w');
+		
+		$table_info = MSV_getConfig("admin_table_info");
+		$rowShort = array();
+		foreach ($table_info["fields"] as $field) {
+			if (!in_array($field["name"], $adminListSkipFields)) {
+				$rowShort[] = _t("table.".$table_info["name"].".".$field["name"]);
+			}
+		}
+		fputcsv($out, $rowShort);
+		
+		
 		foreach ($adminList as $row) {
 			$rowShort = array();
 			

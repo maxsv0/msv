@@ -25,7 +25,7 @@ function SEO_set($title = "", $description = "", $keywords = "") {
 }
 
 
-function SEO_add($pageUrl, $title = "", $description = "", $keywords = "", $lang = LANG) {
+function SEO_add($pageUrl, $title = "", $description = "", $keywords = "", $sitemap = 0, $lang = LANG) {
 	if (empty($pageUrl)) {
 		return false;
 	}
@@ -36,6 +36,7 @@ function SEO_add($pageUrl, $title = "", $description = "", $keywords = "", $lang
 		"title" => $title,
 		"description" => $description,
 		"keywords" => $keywords,
+		"sitemap" => $sitemap,
 	);
 	
 	return API_itemAdd(TABLE_SEO, $seo, $lang);
