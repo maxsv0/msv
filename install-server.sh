@@ -41,6 +41,7 @@ a2enmod rewrite
 a2enmod headers 
 a2enmod expires 
 a2enmod mcrypt 
+a2enmod deflate 
 
 printf "<Directory /var/www/>
         Options Indexes FollowSymLinks

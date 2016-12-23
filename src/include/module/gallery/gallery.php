@@ -201,11 +201,11 @@ function Gallery_Photo_add($album_id, $photo_date = "", $photo_title = "", $phot
 	}
 	$picPath = "";
 	if (!empty($pic)) {
-		$picPath = MSV_storePic($pic, TABLE_GALLERY_PHOTOS, "pic");
+		$picPath = MSV_storePic($pic, TABLE_GALLERY_PHOTOS, "pic_".time());
 	}
 	$picPathPreview = "";
 	if (!empty($pic)) {
-		$picPathPreview = MSV_storePic($pic_preview, TABLE_GALLERY_PHOTOS, "pic_preview");
+		$picPathPreview = MSV_storePic($pic_preview, TABLE_GALLERY_PHOTOS, "pic_preview_".time());
 	}
 
 	$item = array(

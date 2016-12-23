@@ -23,9 +23,11 @@ php_value upload_max_filesize 300M
 RedirectMatch 403 ^/include/(.*)$
 RedirectMatch 403 ^/templates/(.*)$
 
+<IfModule mod_headers.c>
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|woff)$">
 	Header set Cache-Control "max-age=290304000, public"
 </FilesMatch>
+</IfModule>
 
 <IfModule mod_expires.c>
 	ExpiresActive On
