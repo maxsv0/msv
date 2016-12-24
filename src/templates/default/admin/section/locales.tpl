@@ -39,7 +39,7 @@
 <td>{$localeID}</td>
 <td>{$localeText}</td>
 <td class="text-nowrap">
-	<a href="{$lang_url}/admin/?section={$admin_section}&edit={$localeID}" title="{$t['btn.edit']}" class="disabled btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&edit={$localeID}" title="{$t['btn.edit']}" class="disabled btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
 </td>
 </tr>
 {/foreach}

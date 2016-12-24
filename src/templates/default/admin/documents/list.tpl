@@ -28,9 +28,9 @@
 <tr class="danger">
 {/if}
 <td class="text-nowrap">
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}#document" title="{$t['btn.edit']}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a>
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning"><span class="glyphicon glyphicon-duplicate"></span></a>
-	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&edit={$item.id}#document" title="{$t['btn.edit']}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&duplicate={$item.id}" title="{$t['btn.duplicate']}" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-duplicate"></span></a>
+	<a href="{$lang_url}/admin/?section={$admin_section}&table={$admin_table}&delete={$item.id}" title="{$t['btn.delete']}" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></a>
 </td>
 <td>{$item.id}</td>
 
