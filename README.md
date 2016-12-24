@@ -6,7 +6,7 @@ Open Source PHP Framework with build-in Content Management System (CMS) for webs
 Enterprise resource planning (ERP) is in alpha test.
 
 
-# Coping
+# Copying
 
 ```
 git clone https://github.com/maxsv0/msv.git msv
@@ -30,17 +30,18 @@ docker run -e MYSQL_ROOT_PASSWORD=test -d -p 3306:3306 mysql
 
 
 
-# Install to /var/www/html
+# Install to local folder
+
 ```
 chmod +x install.sh 
 ./install.sh /var/www/html
 ```
-
+Website will be installed to **/var/www/html**
 
 # Automated Server Installation
 ```
 chmod +x install-server.sh 
 ./install-server.sh
 ```
-
+LAMP server installation
 
