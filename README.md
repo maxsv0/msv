@@ -8,21 +8,19 @@ Open Source PHP Web Framework with build-in CMS (Content Management System) for 
 # Coping
 
 git clone https://github.com/maxsv0/msv.git msv 
-
 cd msv
 
-
-# Installation
-
-chmod +x install.sh && ./install.sh /var/www/html
-
-
-# Run with Docker
+# Run in Docker container
 
 docker build  -t msv-app .   
 docker run -d -p 80:80 msv-app
 
 Note: MySQL is not included in Docker image.
+
+# Install to /var/www/html
+
+chmod +x install.sh 
+./install.sh /var/www/html
 
 # Automated Server Installation
 
