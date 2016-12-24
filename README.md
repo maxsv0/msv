@@ -9,6 +9,7 @@ Enterprise resource planning (ERP) is in alpha test.
 # Coping
 
 git clone https://github.com/maxsv0/msv.git msv 
+
 cd msv
 
 # Run in Docker container
