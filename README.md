@@ -22,6 +22,7 @@ Note: MySQL is not included in Docker image.
 # Install to /var/www/html
 
 chmod +x install.sh 
+
 ./install.sh /var/www/html
 
 # Automated Server Installation
