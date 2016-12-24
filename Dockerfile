@@ -24,8 +24,8 @@ RUN buildDeps=" \
 	set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --enable-gd-native-ttf --with-jpeg-dir=/usr/lib/x86_64-linux-gnu --with-png-dir=/usr/lib/x86_64-linux-gnu --with-freetype-dir=/usr/lib/x86_64-linux-gnu \
-	&& docker-php-ext-configure ldap --with-libdir=/usr/lib/x86_64-linux-gnu \
-	&& docker-php-ext-install gd ldap mbstring mcrypt mysqli zip \
+	&& docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
+	&& docker-php-ext-install gd ldap exif mbstring mcrypt mysqli zip \
 	&& apt-get purge -y --auto-remove $buildDeps
 
 
