@@ -21,6 +21,6 @@ define("PHP_TIMEZONE", "Europe/London");
 define("DATABATE_ENCODING", "utf8");
 define("FORSE_TRAILING_SLASH", true);
 define("SUBDOMAIN_LANGUAGES", true);
-define("REP", "http://msv.host/rep/main/");
+define("REP", "http://rep.msvhost.com/rep/main/");
 define("USER_HASH_PASSWORD", true);
 define("USER_IGNORE_PRIVILEGES", false);
