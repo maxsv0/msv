@@ -108,7 +108,7 @@
 		<field name="admin.filepreview" value="Просмотр"/>
 		<field name="admin.fileaccess" value="Доступ"/>
 		<field name="admin.homepage" value="Главная"/>
-		<field name="admin.homepage_title" value="Главная HOST"/>
+		<field name="admin.homepage_title" value="Главная {HOST}"/>
 		<field name="admin.users" value="Пользователи сайта"/>
 		<field name="admin.users_title" value="Список пользователей сайта"/>
 		<field name="admin.structure" value="Структура сайта"/>
