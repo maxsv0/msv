@@ -8,23 +8,39 @@ Enterprise resource planning (ERP) is in alpha test.
 
 # Coping
 
-git clone https://github.com/maxsv0/msv.git msv 
-
+```
+git clone https://github.com/maxsv0/msv.git msv
 cd msv
+```
+
 
 # Run in Docker container
 
+```
 docker build  -t msv-app .   
 docker run -d -p 80:80 msv-app
+```
 
 Note: MySQL is not included in Docker image.
 
+MySQL can be started with command:
+```
+docker run -e MYSQL_ROOT_PASSWORD=test -d -p 3306:3306 mysql
+```
+
+
+
 # Install to /var/www/html
-
+```
 chmod +x install.sh 
-
 ./install.sh /var/www/html
+```
+
 
 # Automated Server Installation
+```
+chmod +x install-server.sh 
+./install-server.sh
+```
 
-chmod +x install-server.sh && ./install-server.sh
+
