@@ -782,7 +782,7 @@ function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "")
 	$hash = uniqid();
 	
 	if (!empty($name)) {
-		$fileName = $name;
+		$fileName = $hash."-".$name;
 	} elseif (!empty($field)) {
 		$fileName = $hash."-".$field.".".$type;
 	} else {
@@ -855,11 +855,31 @@ function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "")
 					$imgNew = imagecreatetruecolor($widthNew, $heightNew);
 					imagecopyresampled($imgNew, $img, 0, 0, 0, 0, $widthNew, $heightNew, $width, $height);
 					$img = $imgNew;
+					
+					
+					switch ($type) {
+						case "png":
+							imagepng($img, $filePath);
+						break;
+						case "gif":
+							imagegif($img, $filePath);
+						break;
+						case "jpg":
+							imagejpeg($img, $filePath, 90);
+						break;
+						default:
+							imagejpeg($img, $filePath, 90);
+							break;
+					}
+					
+					return $fileUrl;
+				} else {
+					
+					// do not resize
+					// do not change original file
+					
 				}
 				
-				
-				imagejpeg($img, $filePath, 90);
-				return $fileUrl;
 			}
 		}
 		
@@ -1540,26 +1560,42 @@ function ajax_Get_Structure() {
 }
 
 function ajax_Upload_Picture() {
+	
+	$allowedTypes = array(
+		IMAGETYPE_PNG => "png", 
+		IMAGETYPE_JPEG => "jpg", 
+		IMAGETYPE_GIF => "gif"
+	);
+	
 	if (!empty($_FILES["uploadFile"])) {
 		
-		$table = $_REQUEST["table"];
-		$field = $_REQUEST["field"];
-		$itemID = $_REQUEST["itemID"];
-		
-		// TODO:
-		// check $table and $field (config ..)
-		
-		// extract file information
-		$file = $_FILES["uploadFile"];
-		$fileName = $file["name"];
-		if (!empty($itemID)) {
-			$fileName = $itemID."-".$fileName;
-		}
-		
-		// store Picture 
-		$result = MSV_storePic($file["tmp_name"], "jpg", $fileName, $table, $field);
-		if ($result) {
-			echo CONTENT_URL."/".$result;
+		$detectedType = exif_imagetype($_FILES["uploadFile"]['tmp_name']);
+		if (array_key_exists($detectedType, $allowedTypes)) {
+			
+			$fileType = $allowedTypes[$detectedType];
+			
+			$table = $_REQUEST["table"];
+			$field = $_REQUEST["field"];
+			$itemID = $_REQUEST["itemID"];
+			
+			// TODO:
+			// check $table and $field (config ..)
+			
+			// extract file information
+			$file = $_FILES["uploadFile"];
+			$fileName = $file["name"];
+			if (!empty($itemID)) {
+				$fileName = $itemID."-".$fileName;
+			}
+			
+			// store Picture 
+			$result = MSV_storePic($file["tmp_name"], $fileType, $fileName, $table, $field);
+			if ($result) {
+				echo CONTENT_URL."/".$result;
+			}
+		} else {
+			// error
+			// file not allowed
 		}
 	}
 }
