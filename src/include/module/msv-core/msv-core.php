@@ -448,8 +448,8 @@ function MSV_enableModule($module) {
 	if (!file_exists($pathModulePHP)) return false;
 	if (!is_readable($pathModulePHP)) return false;
 	
-	rename($pathModuleDisabled, $pathModuleEnabled);
-	
+	exec("mv ".escapeshellarg($pathModuleDisabled)." ".escapeshellarg($pathModuleEnabled));
+
 	MSV_Log("===== enableModule OK");
 	
 	$website->outputRedirect("/admin/");
@@ -475,7 +475,7 @@ function MSV_disableModule($module) {
 	if (!file_exists($pathModulePHP)) return false;
 	if (!is_readable($pathModulePHP)) return false;
 	
-	rename($pathModuleEnabled, $pathModuleDisabled);
+	exec("mv ".escapeshellarg($pathModuleEnabled)." ".escapeshellarg($pathModuleDisabled));
 	
 	MSV_Log("===== disableModule OK");
 	
