@@ -17,6 +17,13 @@ cd msv
 chmod +x install.sh && ./install.sh /var/www/html
 
 
+# Run with Docker
+
+docker build  -t msv-app .   
+docker run -d -p 80:80 msv-app
+
+Note: MySQL is not included in Docker image.
+
 # Automated Server Installation
 
 chmod +x install-server.sh && ./install-server.sh
