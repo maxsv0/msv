@@ -1,8 +1,9 @@
 # MSV Website PHP Framework 1.0. Beta
 
-http://msv.host/
+http://msvhost.com/
 
-Open Source PHP Web Framework with build-in CMS (Content Management System) for website of any complexity.
+Open Source PHP Framework with build-in Content Management System (CMS) for website of any complexity.
+Enterprise resource planning (ERP) is in alpha test.
 
 
 # Coping
