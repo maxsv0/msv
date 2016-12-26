@@ -98,7 +98,7 @@ Before getting started, we need to setup config.php file that can be found in th
 
 
 <div style="text-align:left;float:left;width:50%;">
-<p><u>Remove modules to activate</u> : </p>
+<p><u>Remote modules to install</u> : </p>
 {foreach from=$modulesListRemote item=moduleName} 
 <input type="checkbox" name="modules_remote[]" checked value="{$moduleName}">
 {$moduleName}<br>
@@ -114,6 +114,14 @@ Before getting started, we need to setup config.php file that can be found in th
 <h2>Add Administrator</h2>
 
 <table width="90%">
+<tr>
+	<td width="50%" align="right">
+		<input type="checkbox" name="admin_create" value="1" checked>
+	</td>
+	<td>
+		Create website admin account
+	</td>
+</tr>
 <tr>
 	<td width="50%" align="right">Administrator Login</td>
 	<td>

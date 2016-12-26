@@ -129,19 +129,25 @@ if (!empty($_REQUEST["install_step"]) && empty($website->messages["error"])) {
 			$website->messages["error"][] = "Can't start without modules";
 		}
 		
-		if (!empty($_REQUEST["admin_login"]) && !empty($_REQUEST["admin_password"])) {
-			
-			$resultUser = UserAdd($_REQUEST["admin_login"], 1, $_REQUEST["admin_password"], "admin", "", "superadmin", "install");
-			if ($resultUser["ok"] && !empty($resultUser["insert_id"])) {
-				$_SESSION['user_id'] = $resultUser["insert_id"];
-				$_SESSION['user_email'] = $_REQUEST["admin_login"];
+		// create superadmin account
+		if (!empty($_REQUEST["admin_create"])) {
+			if (!empty($_REQUEST["admin_login"]) && !empty($_REQUEST["admin_password"])) {
+				
+				$resultUser = UserAdd($_REQUEST["admin_login"], 1, $_REQUEST["admin_password"], "admin", "", "superadmin", "install");
+				if ($resultUser["ok"] && !empty($resultUser["insert_id"])) {
+					$_SESSION['user_id'] = $resultUser["insert_id"];
+					$_SESSION['user_email'] = $_REQUEST["admin_login"];
+				} else {
+					$website->messages["error"][] = "Error adding administrator account: ".$resultUser["msg"];
+				}
+				
 			} else {
-				$website->messages["error"][] = "Error adding administrator account: ".$resultUser["msg"];
+				$website->messages["error"][] = "Please enter login and password";
 			}
-			
-		} else {
-			$website->messages["error"][] = "Please enter login and password";
 		}
+		
+		
+		
 	}
 	
 	
