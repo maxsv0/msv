@@ -9,6 +9,11 @@ $(document).ready(function() {
 	
 	$('#uploadModal').on('shown.bs.modal', function() {
 	   	clearUploadModal();
+	   	
+	   	// TODO!!!!: fix this
+	   	// not working
+	   	// click file upload button
+	   	$("#iUploadFile")[0].trigger('click'); 
 	})
 	
 	// bind auto form submit on file change
