@@ -92,7 +92,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{$t["btn.close"]}</button>
-        <button type="button" class="btn btn-primary" onclick="closeUploadModal();">{$t["btn.save"]}</button>
+        <button type="button" class="btn btn-primary" onclick="closeUploadModal();" id="btnUploadSave">{$t["btn.save"]}</button>
       </div>
     </div>
   </div>

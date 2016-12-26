@@ -39,6 +39,8 @@ function uploadFrameLoad(iframe) {
     	
     	$("#uploadPreview").removeClass("hide");
     	$("#uploadPreview img").attr("src", path);
+    	
+    	$("#btnUploadSave").trigger('click');
     } else {
     	$("#uploadAlert").addClass("alert alert-danger").html("Error saving file");
     }
@@ -72,6 +74,7 @@ function closeUploadModal(x) {
 		$("#img-"+id).attr("src", path);
 		$("#value-"+id).html(path);
 		$("#path-"+id).val(path);
+		$("#alert-"+id).hide();
 		
 		$("#uploadModal").modal('hide');
 	}

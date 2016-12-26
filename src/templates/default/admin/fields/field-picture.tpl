@@ -5,7 +5,7 @@
 <img class="img-responsive" src="{$value}?{$rand}" id="img-{$item_id}">
 </div>
 {else}
-<div class="alert alert-danger">{_t("msg.no_stored_image")}</div>
+<div class="alert alert-danger" id="alert-{$item_id}">{_t("msg.no_stored_image")}</div>
 <div class="img-container">
 <img class="img-responsive" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" id="img-{$item_id}">
 </div>
