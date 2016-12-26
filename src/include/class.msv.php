@@ -514,7 +514,7 @@ class MSV_Website {
 		$Smarty->template_dir = ABS_TEMPLATE;
 		$compile_dir = ABS_INCLUDE."/custom/smarty/cache";
 		if (!is_writeable($compile_dir)) {
-			MSV_Error("Cant write to $compile_dir");
+			$this->outputError("Cant write to $compile_dir");
 		}
 		
 		$Smarty->compile_dir = $compile_dir;
@@ -659,6 +659,10 @@ class MSV_Website {
 			
 			$this->log("Page not found, loading 404 template");
 			$this->loadPage("/404/");
+
+			// reload page document
+			MSV_LoadPageDocument();
+			
 			header("HTTP/1.0 404 Not Found");
 			
 			// TODO: output this if 404 template not found
