@@ -45,10 +45,19 @@ chmod +x install.sh
 ```
 Web root dir  **/var/www/html**
 
+# Upgrade existing website
+File will be copied to **/var/www/html** 
+```
+chmod +x update-website.sh 
+./update-website.sh /var/www/html
+```
+
 # Auto LAMP Server Installation
 ```
 chmod +x install-server.sh 
 ./install-server.sh
 ```
 LAMP server installation
+
+
 
