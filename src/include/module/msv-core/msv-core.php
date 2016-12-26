@@ -649,6 +649,10 @@ function MSV_installModule($module, $redirect = true) {
 			MSV_Error("Can't copy file $filePath. Destination path is empty.");
 		}
 		
+		if (!file_exists($filePath)) {
+			MSV_Error("File not exist $filePath");
+		}
+		
 		$pathinfo = pathinfo($fileCopyPath);
 		
 		// create dirs in path

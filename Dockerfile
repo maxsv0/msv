@@ -3,10 +3,15 @@ MAINTAINER me
 
 COPY src/ /var/www/html/
 
-RUN find /var/www/html -type f  -exec chmod 666 {} \; \	
-	&& find /var/www/html -type d -exec chmod 777 {} \; 
 
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
+
+RUN find /var/www/html/ -type d -exec chmod 775 {} \; \
+	&& find /var/www/html/ -type f -exec chmod 664 {} \; \
+	&& chmod 777 /var/www/html/include/custom/smarty/cache \
+	&& chown -R www-data:www-data /var/www/html/
+
 
 RUN a2enmod rewrite
 RUN a2enmod headers 
@@ -40,3 +45,6 @@ RUN echo "file_uploads = On\n" \
 
 
 RUN apachectl restart
+
+
+EXPOSE 80
