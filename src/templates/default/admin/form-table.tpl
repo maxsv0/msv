@@ -79,9 +79,8 @@
 	<input name="uploadFile" id="iUploadFile" type="file" class="form-control" style="height: 50px;"/>
 	<input name="table" id="iUploadTable" type="hidden" value="{$admin_table}"/>
 	<input name="field" id="iUploadField" type="hidden" value=""/>
-	<label for="iUploadFile" id="lUploadFile"></label>
 	<input type="submit" name="submitBtn" id="btnSubmitUpload" value="{$t["btn.upload_file"]}" class="btn btn-warning btn-block"/>
-	</form>
+	</form>	
 	<iframe id="uploadFrame" name="uploadFrame" src="about:blank" style="width:0;height:0;border:0px solid #fff;" onload="uploadFrameLoad(this)"></iframe>
 	</div>
         

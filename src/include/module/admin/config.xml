@@ -105,6 +105,7 @@
 		<field name="form.file" value="Файл:"/>
 		<field name="form.server_path" value="Путь на севвере"/>
 		<field name="form.select_file" value="Выберете файлы"/>
+		<field name="form.image_max_size" value="Размер"/>
 		
 		<field name="admin.filename" value="Имя файла"/>
 		<field name="admin.filetype" value="Тип"/>
@@ -170,7 +171,8 @@
 		<field name="form.file" value="File:"/>
 		<field name="form.server_path" value="Server path"/>
 		<field name="form.select_file" value="Select file"/>
-
+		<field name="form.image_max_size" value="Image max size"/>
+		
 		<field name="admin.filename" value="Name"/>
 		<field name="admin.filetype" value="Type"/>
 		<field name="admin.filepreview" value="Preview"/>

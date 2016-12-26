@@ -9,7 +9,7 @@
 {if $item_type === "pic"}
 
 	<p class="text-info" style="margin-top:10px;font-weight:300;">
-	Image max size: 
+	{_t("image_max_size")}: 
 	</p>
 	<p class="text-nowrap">
 {if $itemField["max-width"]}
