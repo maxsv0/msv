@@ -118,7 +118,7 @@ Before getting started, we need to setup config.php file that can be found in th
 	<td width="50%" align="right">
 		<input type="checkbox" name="admin_create" value="1" checked>
 	</td>
-	<td>
+	<td align="left">
 		Create website admin account
 	</td>
 </tr>
