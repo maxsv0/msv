@@ -99,6 +99,9 @@
 		<field name="btn.goto" value="Перейти к"/>
 		<field name="msg.sitemap_generated" value="Sitemap.xml успешно создан"/>
 		<field name="title.upload_files" value="Загрузить файлы в "/>
+		<field name="title.upload_step1" value="1. Select file"/>
+		<field name="title.upload_step2" value="2. File uploaded automatically"/>
+		<field name="title.upload_step3" value="3. Click Save"/>
 		<field name="form.file" value="Файл:"/>
 		<field name="form.server_path" value="Путь на севвере"/>
 		<field name="form.select_file" value="Выберете файлы"/>
@@ -161,6 +164,9 @@
 		<field name="btn.export_table" value="Export table"/>
 		<field name="btn.goto" value="Goto"/>
 		<field name="title.upload_files" value="Upload files"/>
+		<field name="title.upload_step1" value="1. Select file"/>
+		<field name="title.upload_step2" value="2. File uploaded automatically"/>
+		<field name="title.upload_step3" value="3. Click Save"/>
 		<field name="form.file" value="File:"/>
 		<field name="form.server_path" value="Server path"/>
 		<field name="form.select_file" value="Select file"/>

@@ -63,9 +63,9 @@
         <h4 class="modal-title" id="myModalLabel">{$t["title.upload_files"]}</h4>
         
         <div class="row text-muted">
-        <p class="col-sm-4">1. Select file</p>
-        <p class="col-sm-4">2. Click "{$t["btn.upload_file"]}"</p>
-        <p class="col-sm-4">3. Click "{$t["btn.save"]}"</p>
+        <p class="col-sm-4">{_t("title.upload_step1")}</p>
+        <p class="col-sm-4">{_t("title.upload_step2")}</p>
+        <p class="col-sm-4">{_t("title.upload_step3")}</p>
         </div>
       </div>
       <div class="modal-body">
@@ -79,7 +79,7 @@
 	<input name="uploadFile" id="iUploadFile" type="file" class="form-control" style="height: 50px;"/>
 	<input name="table" id="iUploadTable" type="hidden" value="{$admin_table}"/>
 	<input name="field" id="iUploadField" type="hidden" value=""/>
-	<input type="submit" name="submitBtn" value="{$t["btn.upload_file"]}" class="btn btn-warning btn-block"/>
+	<input type="submit" name="submitBtn" id="btnSubmitUpload" value="{$t["btn.upload_file"]}" class="btn btn-warning btn-block"/>
 	</form>
 	<iframe id="uploadFrame" name="uploadFrame" src="about:blank" style="width:0;height:0;border:0px solid #fff;" onload="uploadFrameLoad(this)"></iframe>
 	</div>

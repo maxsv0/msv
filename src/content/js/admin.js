@@ -10,6 +10,15 @@ $(document).ready(function() {
 	$('#uploadModal').on('shown.bs.modal', function() {
 	   	clearUploadModal();
 	})
+	
+	// bind auto form submit on file change
+	$("#iUploadFile").change(function (){
+		var fileName = $(this).val();
+		if (fileName != '') {
+			// submit form.
+			$("#fUploadForm")[0].submit();
+		}
+     });
 });
 
 function removeLink(x) {
