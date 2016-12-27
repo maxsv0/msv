@@ -3,6 +3,7 @@
 
 $menu_ar = array();
 $menu_index = array();
+$menu_order = array();
 
 
 $submenu = array();
@@ -42,7 +43,8 @@ $menu_ar["index"] = array(
 	"access" => "admin",
 	"file" => "index.tpl",
 	"title" => _t("admin.homepage_title"),
-	"submenu" => $submenu
+	"submenu" => $submenu,
+	"orderID" => 10,
 );
 
 
@@ -94,7 +96,8 @@ $menu_ar["structure_docs"] = array(
 	"access" => "admin",
 	"file" => "index.tpl",
 	"title" => _t("admin.homepage_title"),
-	"submenu" => $submenu
+	"submenu" => $submenu,
+	"orderID" => 20,
 );
 $menu_ar["users"] = array(
 	"name" => _t("admin.users"), 
@@ -103,7 +106,8 @@ $menu_ar["users"] = array(
 	"table" => TABLE_USERS,
 	"url" => "/admin/?section=users",
 	"file" => "users.tpl",
-	"title" => _t("admin.users_title")
+	"title" => _t("admin.users_title"),
+	"orderID" => 30,
 );
 
 $menu_ar["media_library"] = array(
@@ -112,7 +116,8 @@ $menu_ar["media_library"] = array(
 	"handler" => "module-media.php",
 	"url" => "/admin/?section=media_library",
 	"file" => "media_library.tpl",
-	"title" =>  _t("admin.media_library")
+	"title" =>  _t("admin.media_library"),
+	"orderID" => 40,
 );
 
 
@@ -142,7 +147,8 @@ foreach ($this->website->modules as $module) {
 			"url" => "/admin/?section=".$module->name,
 			"file" => "custom.tpl",
 			"title" => $module->description,
-			"submenu" => $submenu
+			"submenu" => $submenu,
+			"orderID" => $module->adminMenuOrder
 		);
 		
 		$menu_index = array_merge($menu_index, array_keys($submenu));
@@ -159,7 +165,8 @@ $menu_ar["mail_template"] = array(
 	"table" => TABLE_MAIL_TEMPLATES,
 	"url" => "/admin/?section=mail_template",
 	"file" => "mail_template.tpl",
-	"title" => _t("admin.mail_template_title")
+	"title" => _t("admin.mail_template_title"),
+	"orderID" => 100,
 );
 
 
@@ -168,7 +175,8 @@ $menu_ar["module_settings"] = array(
 	"access" => "superadmin",
 	"url" => "/admin/?section=module_settings",
 	"file" => "module_settings.tpl",
-	"title" => _t("admin.module_settings_title")
+	"title" => _t("admin.module_settings_title"),
+	"orderID" => 110,
 );
 
 
@@ -213,7 +221,8 @@ $menu_ar["dev_tools"] = array(
 	"name" => _t("admin.dev_tools"), 
 	"access" => "admin",
 	"title" => _t("admin.dev_tools"),
-	"submenu" => $submenu
+	"submenu" => $submenu,
+	"orderID" => 200,
 );
 
 
@@ -238,3 +247,22 @@ $menu_ar["dev_tools"] = array(
 $menu_index = array_merge($menu_index, array_keys($menu_ar));
 
 
+/// reorder menu accrding to adminMenuOrder
+$menu_order_index = array();
+foreach ($menu_ar as $menuID => $menuItem) {
+	$num = 50;
+	if (!empty($menuItem["orderID"])) {
+		$num = $menuItem["orderID"];
+	}
+	$menu_order_index[$menuID] = $num;
+}
+
+asort($menu_order_index);
+
+// build new menu
+$menu_ar2 = array();
+foreach ($menu_order_index as $menuID => $num) {
+	$menu_ar2[$menuID] = $menu_ar[$menuID];
+}
+
+$menu_ar = $menu_ar2;

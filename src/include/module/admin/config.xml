@@ -4,6 +4,7 @@
 <config>
 	<param name="activationUrl" value="/admin/"/>
 	<param name="activationLevel" value="8"/>
+	<param name="adminMenu" value="0"/>
 	
 	<filter url="/admin/" action="AdminLoad"/>
 </config>

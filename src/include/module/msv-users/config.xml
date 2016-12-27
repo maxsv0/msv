@@ -5,6 +5,7 @@
 
 	<param name="activationLevel" value="1"/>
 	<param name="activationUrl" value="*"/>
+	<param name="adminMenu" value="0"/>
 	
 	<constant name="TABLE_USERS" value="users"/>
 	

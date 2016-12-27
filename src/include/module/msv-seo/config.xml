@@ -5,6 +5,7 @@
 
 	<param name="activationLevel" value="9"/>
 	<param name="activationUrl" value="*"/>
+	<param name="adminMenu" value="0"/>
 	
 	<constant name="TABLE_SEO" value="seo"/>
 	

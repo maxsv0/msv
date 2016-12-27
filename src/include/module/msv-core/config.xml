@@ -3,6 +3,7 @@
 
 <config>
 	<param name="activationUrl" value="*"/>
+	<param name="adminMenu" value="0"/>
 	
 	<constant name="TABLE_STRUCTURE" value="structure"/>
 	<constant name="TABLE_DOCUMENTS" value="documents"/>

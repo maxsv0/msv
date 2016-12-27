@@ -36,6 +36,8 @@ class MSV_Module {
 	public $title 				= "";
 	public $version 			= "";
 	public $description 		= "";
+	public $adminMenu 			= true;		// by default all modules listed in admin interface
+	public $adminMenuOrder 		= 50;		// default order id
 	
 	function __construct($module) {
 		$this->name = $module;

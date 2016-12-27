@@ -5,6 +5,8 @@
 
 	<param name="activationLevel" value="5"/>
 	<param name="activationUrl" value="*"/>
+	<param name="adminMenu" value="0"/>
+	<param name="adminMenuOrder" value="10"/>
 	
 	<constant name="CUSTOM_CONSTANT" value="custom_constant"/>
 	
