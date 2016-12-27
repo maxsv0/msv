@@ -22,4 +22,7 @@
 {include file="$themePath/widget/menu-top.tpl"}
 </div>
 
+
+<div class="container">
 {include file="$themePath/widget/messages.tpl"}
+</div>

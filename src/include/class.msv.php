@@ -739,7 +739,7 @@ class MSV_Website {
 		$debugHTML .= $this->logDebug;
 		$debugHTML .= "</pre>";
 		
-		if (DEBUG || DEBUG_PAGE) {
+		if (DEBUG && DEBUG_PAGE) {
 			$debugHTML .= "<form style='padding:5px 20px;' id='debugConsole'>";
 			$debugHTML .= "Run PHP code: <input type=text size=50 name='debugCode'> <input type='submit' value='Send'>";
 			$debugHTML .= '</form>';
