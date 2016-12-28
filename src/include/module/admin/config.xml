@@ -158,7 +158,7 @@
 	</locale>
 	<locale name="en">
 		<field name="msg.module_handler_not_found" value="Module handler not found"/>
-		<field name="msg.no_stored_image" value="No stored image"/>
+		<field name="msg.no_stored_image" value="No image"/>
 		<field name="msg.sitemap_generated" value="Sitemap.xml successfully created"/>
 		<field name="btn.remove_link" value="Remove Link"/>
 		<field name="btn.upload_file" value="Upload file"/>
@@ -224,7 +224,7 @@
 	</locale>
 	<locale name="de">
 		<field name="msg.module_handler_not_found" value="Module handler not found"/>
-		<field name="msg.no_stored_image" value="No stored image"/>
+		<field name="msg.no_stored_image" value="No image"/>
 		<field name="msg.sitemap_generated" value="Sitemap.xml successfully created"/>
 		<field name="btn.remove_link" value="Remove Link"/>
 		<field name="btn.upload_file" value="Upload file"/>

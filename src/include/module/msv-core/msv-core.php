@@ -786,7 +786,10 @@ function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "")
 	$hash = uniqid();
 	
 	if (!empty($name)) {
-		$fileName = $hash."-".$name;
+		if (substr($name, -strlen($type)-1) == ".".$type) {
+			$name = substr($name, 0, -strlen($type)-1);
+		}
+		$fileName = $name."-".$hash.".".$type;
 	} elseif (!empty($field)) {
 		$fileName = $hash."-".$field.".".$type;
 	} else {

@@ -14,7 +14,14 @@
 
 
 <p>
-{_t("form.file")} <span id="value-{$item_id}">{$value}</span>
+{_t("form.file")} 
+<span id="value-{$item_id}">
+{if $value}
+{$value}
+{else}
+<i>{_t("msg.no_stored_image")}</i>
+{/if}
+</span>
 
 {if $value}
 <input type="button" class="btn btn-danger btn-xs" value="{_t("btn.remove_link")}" onclick="removeLink('{$item_id}');">
@@ -33,6 +40,7 @@
 <input type="text" class="hide" id="aspectRatio-{$item_id}" value="{$itemField["max-width"]/$itemField["max-height"]}">
 <input type="text" class="hide" id="width-{$item_id}" value="{$itemField["max-width"]}">
 <input type="text" class="hide" id="height-{$item_id}" value="{$itemField["max-height"]}">
+<input type="text" class="hide" id="type-{$item_id}" value="">
 
 </div>
 

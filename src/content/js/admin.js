@@ -86,6 +86,7 @@ function openPicLibraryModal(x) {
 	$("#iUploadField").val(x);
 	
 	var pic_path = $("#img-"+x).attr("src");
+	var pic_path = pic_path.substr(0,pic_path.indexOf('?'));
 	
 	if (pic_path && pic_path.lastIndexOf("data", 0) !== 0) {
 		$("#picPreview").attr("src", pic_path);
@@ -101,7 +102,14 @@ function openPicLibraryModal(x) {
 		}
 	} 
 	
-	console.log($("#picPreview").attr("src"));
+	var ext = pic_path.split('.').pop();
+	if (ext == "jpg") {
+		// browser req
+		ext = "jpeg";
+	}
+	console.log("File: "+$("#picPreview").attr("src")+", type: "+ext);
+	
+	$("#type-"+x).val(ext);
 	
 	var aspect = $("#aspectRatio-"+x).val();
 	var imgWidth = $("#width-"+x).val();
@@ -139,7 +147,7 @@ function closePicLibraryModal() {
 		var table = $("#iUploadTable").val();
 		var id = $("#itemID").val();
 		
-		formData.append('uploadFile', blob, field+".jpg");
+		formData.append('uploadFile', blob, field);
 		formData.append('table', table);
 		formData.append('field', field);
 		formData.append('itemID', id);
@@ -162,7 +170,7 @@ function closePicLibraryModal() {
 			  console.log('Upload error');
 			}
 			});
-		}, "image/jpeg", 0.9);
+		}, "image/"+$("#type-"+$("#iUploadField").val()).val(), 1);
 	
 	
 	$("#libraryModal").modal('hide');
