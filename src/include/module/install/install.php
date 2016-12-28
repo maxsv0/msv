@@ -223,12 +223,19 @@ if ($install_step === 3) {
 		$modulesList[$module] = array();
 	}
 	
-	
-	$website->config["modulesList"] = $modulesList;
-	$website->config["modulesListRemote"] = array(
+	$modulesListRemote = array(
 		"fancybox",
 		"cropper",
+		"tinymce",
+		"isotope"
 	);
+	
+	// sort lists
+	asort($modulesList);
+	asort($modulesListRemote);
+	
+	$website->config["modulesList"] = $modulesList;
+	$website->config["modulesListRemote"] = $modulesListRemote;
 	
 	$website->config["admin_login"] = "admin@".HOST;
 	$website->config["admin_password"] = MSV_PasswordGenerate();
