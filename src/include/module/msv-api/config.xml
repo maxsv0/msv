@@ -10,10 +10,10 @@
 
 <install>
 	<param name="name" value="msv-api" />
-	<param name="version" value="1.0.3"/>
-	<param name="date" value="10.06.2016"/>
-	<param name="title" value="MSV - API"/>
-	<param name="description" value="API Functions for MSV."/>
+	<param name="version" value="1.1"/>
+	<param name="date" value="29.12.2016"/>
+	<param name="title" value="MSVAPI"/>
+	<param name="description" value="API functions for MSV"/>
 	
 	<dependency module="msv-core" version="1.0" />
 	

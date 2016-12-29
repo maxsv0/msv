@@ -57,10 +57,10 @@
 
 <install>
 	<param name="name" value="blog" />
-	<param name="version" value="1.0.1"/>
-	<param name="date" value="13.07.2016"/>
+	<param name="version" value="1.1"/>
+	<param name="date" value="29.12.2016"/>
 	<param name="title" value="Blog"/>
-	<param name="description" value="Blog and Publications module."/>
+	<param name="description" value="Blog and Publications module"/>
 	
 	<param name="installHook" value="BlogInstall"/>
 	

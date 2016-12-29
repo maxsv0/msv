@@ -12,10 +12,10 @@
 
 <install>
 	<param name="name" value="admin" />
-	<param name="version" value="1.0"/>
-	<param name="date" value="01.08.2016"/>
-	<param name="title" value="MSV - Admin"/>
-	<param name="description" value="MSV Admin Interface"/>
+	<param name="version" value="1.1"/>
+	<param name="date" value="29.12.2016"/>
+	<param name="title" value="MSVAdmin"/>
+	<param name="description" value="Website Content Management System"/>
 	
 	<dependency module="msv-core" version="1.0" />
 	<dependency module="msv-api" version="1.0" />

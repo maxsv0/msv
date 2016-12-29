@@ -54,10 +54,10 @@
 
 <install>
 	<param name="name" value="gallery"/>
-	<param name="version" value="1.0.1"/>
-	<param name="date" value="13.07.2016"/>
-	<param name="title" value="Gallery of Pictures"/>
-	<param name="description" value="Gallery of Pictures"/>
+	<param name="version" value="1.1"/>
+	<param name="date" value="29.12.2016"/>
+	<param name="title" value="Pictures Gallery"/>
+	<param name="description" value="Photos and Pictures management"/>
 	
 	<param name="installHook" value="GalleryInstall"/>
 	
