@@ -492,9 +492,25 @@ function API_setStructure($row) {
 function API_setMenu($menuID, $row) {
 	$website = MSV_get("website");
 	
-	// TODO : CHECK ... 
+	// TODO : CHECK input 
 	
-	$website->menu[$menuID] = $row;
+	// parse sub-level structure, based on parent_id
+	$menu = array();
+	
+	// build 0 level menu
+	foreach ($row as $item) {
+		if ($item["parent_id"] > 0) continue;
+		$menu[$item["id"]] = $item;
+	}
+	
+	// build first level submenu
+	foreach ($row as $itemSub) {
+		if ($itemSub["parent_id"] > 0) {
+			$menu[$itemSub["parent_id"]]["sub"][$itemSub["id"]] = $itemSub;
+		}
+	}
+	
+	$website->menu[$menuID] = array_values($menu);
 }
 
 
