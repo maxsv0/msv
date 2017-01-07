@@ -2,7 +2,7 @@
   <div class="form-group">
     <label for="inputEmail" class="col-sm-2 control-label">{_t("users.form.email")}</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail" placeholder="{_t("users.form.email")}" name="email">
+      <input type="text" class="form-control" id="inputEmail" placeholder="{_t("users.form.email")}" name="email">
     </div>
   </div>
   <div class="form-group">
