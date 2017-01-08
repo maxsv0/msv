@@ -76,7 +76,7 @@ function admin_build_media_list($home_path = "/images") {
 	    		"name" => $entry,
 	    		"path" => $filePath,
 	    		"type" => $info,
-	    		"url" => $media_url."/".$entry,
+	    		"url" => "/".$media_url."/".$entry,
 	    		"urlabs" => $media_url_asb."/".$entry,
 	    		"write" => is_writable($filePath),
 	    	);

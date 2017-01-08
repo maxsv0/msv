@@ -231,6 +231,14 @@ $submenu["config"] = array(
 	"file" => "config.tpl",
 	"title" => _t("admin.config_title")
 );
+$submenu["htaccess"] = array(
+	"name" => _t("admin.htaccess"), 
+	"access" => "superadmin",
+	"handler" => "module-htaccess.php",
+	"url" => "/admin/?section=htaccess",
+	"file" => "htaccess.tpl",
+	"title" => _t("admin.htaccess_title")
+);
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
 $menu_ar["dev_tools"] = array(

@@ -31,6 +31,7 @@
 	<file dir="module" path="admin/module-manual.php"/>
 	<file dir="module" path="admin/module-sitemap.php"/>
 	<file dir="module" path="admin/module-config.php"/>
+	<file dir="module" path="admin/module-htaccess.php"/>
 	<file dir="template" path="default/admin.tpl"/>
 	<file dir="template" path="default/admin-login.tpl"/>
 	<file dir="template" path="default/admin/list-table.tpl"/>
@@ -67,6 +68,7 @@
 	<file dir="template" path="default/admin/section/index.tpl"/>
 	<file dir="template" path="default/admin/section/custom.tpl"/>
 	<file dir="template" path="default/admin/section/config.tpl"/>
+	<file dir="template" path="default/admin/section/htaccess.tpl"/>
 	<file dir="template" path="default/admin/menu/edit.tpl"/>
 	<file dir="template" path="default/admin/menu/list.tpl"/>
 	<file dir="template" path="default/admin/documents/edit.tpl"/>
@@ -146,6 +148,8 @@
 		<field name="admin.history_title" value="История сессий вользоателей"/>
 		<field name="admin.config" value="Управление config.php"/>
 		<field name="admin.config_title" value="Редактирование файла config.php"/>
+		<field name="admin.htaccess" value="Управление .htaccess"/>
+		<field name="admin.htaccess_title" value="Редактирование файла .htaccess"/>
 		<field name="admin.locale_param" value="Название переменной"/>
 		<field name="admin.locale_value" value="Значение"/>
 		<field name="admin.robots_example_open" value="Пример открытого сайта:"/>
@@ -214,6 +218,8 @@
 		<field name="admin.history_title" value="History of users sessions"/>
 		<field name="admin.config" value="Manage config.php"/>
 		<field name="admin.config_title" value="Edit config.php file"/>
+		<field name="admin.htaccess" value="Manage .htaccess"/>
+		<field name="admin.htaccess_title" value="Edit .htaccess file"/>
 		<field name="admin.locale_param" value="Text ID"/>
 		<field name="admin.locale_value" value="Value"/>
 		<field name="admin.robots_example_open" value="Example for open website:"/>
