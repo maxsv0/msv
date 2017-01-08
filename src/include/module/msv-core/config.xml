@@ -250,6 +250,7 @@
 		<field name="table.menu.name" value="Название"/>
 		<field name="table.menu.url" value="Ссылка"/>
 		<field name="table.menu.order_id" value="Номер"/>
+		<field name="table.menu.parent_id" value="Родительский ID"/>
 		
 		<field name="msg.error_remove_active" value="Невозможно удалить активный модуль"/>
 		<field name="msg.removed" value="удален"/>
@@ -375,6 +376,7 @@
 		<field name="table.menu.name" value="Link name"/>
 		<field name="table.menu.url" value="Link URL"/>
 		<field name="table.menu.order_id" value="Sort number"/>
+		<field name="table.menu.parent_id" value="Parent ID"/>
 		
 		<field name="table.mail_templates" value="Email Templates"/>
 		<field name="table.mail_templates.id" value="ID"/>
