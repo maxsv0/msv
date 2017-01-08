@@ -215,6 +215,22 @@ $submenu["sitemap"] = array(
 	"file" => "sitemap.tpl",
 	"title" => _t("admin.sitemap_title")
 );
+$submenu["sitemap"] = array(
+	"name" => _t("admin.sitemap"), 
+	"access" => "superadmin",
+	"handler" => "module-sitemap.php",
+	"url" => "/admin/?section=sitemap",
+	"file" => "sitemap.tpl",
+	"title" => _t("admin.sitemap_title")
+);
+$submenu["config"] = array(
+	"name" => _t("admin.config"), 
+	"access" => "superadmin",
+	"handler" => "module-config.php",
+	"url" => "/admin/?section=config",
+	"file" => "config.tpl",
+	"title" => _t("admin.config_title")
+);
 $menu_index = array_merge($menu_index, array_keys($submenu));
 
 $menu_ar["dev_tools"] = array(
