@@ -66,6 +66,7 @@
 	<file dir="template" path="default/admin/section/manual.tpl"/>
 	<file dir="template" path="default/admin/section/index.tpl"/>
 	<file dir="template" path="default/admin/section/custom.tpl"/>
+	<file dir="template" path="default/admin/section/config.tpl"/>
 	<file dir="template" path="default/admin/menu/edit.tpl"/>
 	<file dir="template" path="default/admin/menu/list.tpl"/>
 	<file dir="template" path="default/admin/documents/edit.tpl"/>
