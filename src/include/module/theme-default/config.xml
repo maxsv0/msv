@@ -1,0 +1,46 @@
+<?xml version='1.0'?> 
+<document>
+
+<config>
+	<param name="activationLevel" value="4"/>
+	<param name="activationUrl" value="*"/>
+	<param name="adminMenu" value="0"/>
+	
+</config>
+
+<install>
+	<param name="name" value="theme-default"/>
+	<param name="version" value="1.0"/>
+	<param name="date" value="08.01.2017"/>
+	<param name="installHook" value="ThemeDefaultInstall"/>
+	<param name="title" value="Theme - Default"/>
+	<param name="description" value="Default theme for MSV"/>
+	
+	<dependency module="msv-core" version="1.0" />
+	
+	<file dir="module" path="theme-default/theme-default.php"/>
+	<file dir="module" path="theme-default/config.xml"/>
+	<file dir="template" path="default/404.tpl"/>
+	<file dir="template" path="default/main.tpl"/>
+	<file dir="template" path="default/main-sideblock.tpl"/>
+	<file dir="template" path="default/index.tpl"/>
+	<file dir="template" path="default/widget/header.tpl"/>
+	<file dir="template" path="default/widget/footer.tpl"/>
+	<file dir="template" path="default/widget/messages.tpl"/>
+	<file dir="template" path="default/widget/navigation.tpl"/>
+	<file dir="template" path="default/widget/pagination.tpl"/>
+	<file dir="template" path="default/widget/sideblock.tpl"/>
+	<file dir="template" path="default/widget/menu-top.tpl"/>
+	<file dir="template" path="default/widget/menu-bottom.tpl"/>
+</install>
+
+
+<locales>
+	<locale name="ru">
+		<field name="default.field" value="Custom Text"/>
+	</locale>
+	<locale name="en">
+		<field name="default.field" value="Custom Text"/>
+	</locale>
+</locales>
+</document>

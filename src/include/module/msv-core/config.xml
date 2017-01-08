@@ -100,35 +100,7 @@
 	<file dir="module" path="index.php"/>
 	<file dir="module" path="msv-core/msv-core.php"/>
 	<file dir="module" path="msv-core/config.xml"/>
-
-	<file dir="template" path="default/404.tpl"/>
-	<file dir="template" path="default/main.tpl"/>
-	<file dir="template" path="default/main-sideblock.tpl"/>
-	<file dir="template" path="default/index.tpl"/>
-	<file dir="template" path="default/admin.tpl"/>
-	<file dir="template" path="default/admin/list-table.tpl"/>
-	<file dir="template" path="default/admin/form-table.tpl"/>
-	<file dir="template" path="default/admin/field-form.tpl"/>
-	<file dir="template" path="default/admin/fields/field-bool.tpl"/>
-	<file dir="template" path="default/admin/fields/field-default.tpl"/>
-	<file dir="template" path="default/admin/fields/field-doc.tpl"/>
-	<file dir="template" path="default/admin/fields/field-lang.tpl"/>
-	<file dir="template" path="default/admin/fields/field-updated.tpl"/>
-	<file dir="template" path="default/admin/fields/field-select.tpl"/>
-	<file dir="template" path="default/admin/fields/field-date.tpl"/>
-	<file dir="template" path="default/admin/fields/field-picture.tpl"/>
-	<file dir="template" path="default/admin/fields/field-file.tpl"/>
-	<file dir="template" path="default/admin/fields/field-multiselect.tpl"/>
-	<file dir="template" path="default/widget/header.tpl"/>
-	<file dir="template" path="default/widget/footer.tpl"/>
-	<file dir="template" path="default/widget/messages.tpl"/>
-	<file dir="template" path="default/widget/navigation.tpl"/>
-	<file dir="template" path="default/widget/pagination.tpl"/>
-	<file dir="template" path="default/widget/sideblock.tpl"/>
-	<file dir="template" path="default/widget/menu-top.tpl"/>
-	<file dir="template" path="default/widget/menu-bottom.tpl"/>
 	<file dir="content" path="images/msv-logo.png"/>
-	<file dir="content" path="js/jquery.min.js"/>
 </install>
 
 <locales>

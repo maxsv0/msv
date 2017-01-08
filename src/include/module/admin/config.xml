@@ -19,6 +19,7 @@
 	
 	<dependency module="msv-core" version="1.0" />
 	<dependency module="msv-api" version="1.0" />
+	<dependency module="theme-default" version="1.0" />
 	
 	<file dir="module" path="admin/admin.php"/>
 	<file dir="module" path="admin/config-menu.php"/>
@@ -32,8 +33,11 @@
 	<file dir="module" path="admin/module-sitemap.php"/>
 	<file dir="module" path="admin/module-config.php"/>
 	<file dir="module" path="admin/module-htaccess.php"/>
+	<file dir="module" path="admin/module-design.php"/>
+	
 	<file dir="template" path="default/admin.tpl"/>
 	<file dir="template" path="default/admin-login.tpl"/>
+
 	<file dir="template" path="default/admin/list-table.tpl"/>
 	<file dir="template" path="default/admin/form-table.tpl"/>
 	<file dir="template" path="default/admin/field-form.tpl"/>
@@ -47,6 +51,7 @@
 	<file dir="template" path="default/admin/fields/field-date.tpl"/>
 	<file dir="template" path="default/admin/fields/field-picture.tpl"/>
 	<file dir="template" path="default/admin/fields/field-file.tpl"/>
+	<file dir="template" path="default/admin/fields/field-multiselect.tpl"/>
 	<file dir="template" path="default/admin/section/design.tpl"/>
 	<file dir="template" path="default/admin/section/documents.tpl"/>
 	<file dir="template" path="default/admin/section/structure.tpl"/>
@@ -91,6 +96,7 @@
 	
 	<file dir="content" path="css/admin.css"/>
 	<file dir="content" path="js/admin.js"/>
+	<file dir="content" path="js/jquery.min.js"/>
 </install>
 
 <locales>

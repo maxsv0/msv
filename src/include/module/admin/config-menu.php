@@ -249,16 +249,15 @@ $menu_ar["dev_tools"] = array(
 	"orderID" => 200,
 );
 
-
-
-
-//$menu_ar["design"] = array(
-//	"name" => _t("admin.design"), 
-//	"access" => "superadmin",
-//	"url" => "/admin/?section=design",
-//	"file" => "design.tpl",
-//	"title" => _t("admin.design_title")
-//);
+$menu_ar["design"] = array(
+	"name" => _t("admin.design"), 
+	"access" => "superadmin",
+	"handler" => "module-design.php",
+	"url" => "/admin/?section=design",
+	"file" => "design.tpl",
+	"title" => _t("admin.design_title"),
+	"orderID" => 100,
+);
 //$menu_ar["history"] = array(
 //	"name" => _t("admin.history"), 
 //	"access" => "superadmin",
