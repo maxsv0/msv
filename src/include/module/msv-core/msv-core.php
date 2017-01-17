@@ -92,6 +92,21 @@ function MSV_Load() {
 
 function MSV_Output404() {
 	$website = MSV_get("website");
+
+    $website = MSV_get("website");
+
+    $website->log("Page not found, loading 404 template");
+    $website->loadPage("/404/");
+
+    // reload page document
+    MSV_LoadPageDocument();
+
+    // output page 404 if exist
+    if (!empty($website->page)) {
+        header("HTTP/1.0 404 Not Found");
+        $website->outputPage();
+    }
+
 	$website->outputNotFound();
 }
 

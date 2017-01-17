@@ -656,15 +656,15 @@ class MSV_Website {
 
 		if (empty($this->page) && $this->instaled) {
 			// set 404 template
-			
+
 			$this->log("Page not found, loading 404 template");
 			$this->loadPage("/404/");
 
 			// reload page document
 			MSV_LoadPageDocument();
-			
+
 			header("HTTP/1.0 404 Not Found");
-			
+
 			// TODO: output this if 404 template not found
 			//$this->outputNotFound("Page not found", 404);
 		}
@@ -672,8 +672,8 @@ class MSV_Website {
 		$userAccess = $this->user["access"];
 		$pageAccess = $this->page["access"];
 		if (!$this->checkAccess($pageAccess, $userAccess)) {
-			
-			
+
+
 			// set redirect url to return after login
 			$_SESSION["redirect_url"] = $this->requestUrlRaw;
 			
