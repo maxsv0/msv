@@ -782,15 +782,15 @@ class MSV_Website {
 
             if ($_GET["table_action"] === "create") {
 
-                API_createTable($_GET["table"]);
+                API_createTable($_GET["module_table"]);
 
             } elseif ($_GET["table_action"] === "truncate") {
 
-                API_emptyTable($_GET["table"]);
+                API_emptyTable($_GET["module_table"]);
 
             } elseif ($_GET["table_action"] === "remove") {
 
-                API_removeTable($_GET["table"]);
+                API_removeTable($_GET["module_table"]);
 
             }
 
