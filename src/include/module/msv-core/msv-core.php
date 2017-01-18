@@ -1207,9 +1207,9 @@ function MSV_outputAdminModuleSetup() {
 			foreach ($tables as $table) {
 				$strOut .= "<p>";
 				$strOut .= "".$table["name"]." ";
-				$strOut .= " <a href='/admin/?module={$module}&table=".$table["name"]."' class='btn btn-danger btn-xs'>remove table</a> ";
-				$strOut .= " <a href='/admin/?module={$module}&table=".$table["name"]."' class='btn btn-danger btn-xs'>tranculate table</a> ";
-				$strOut .= " <a href='/admin/?module={$module}&table=".$table["name"]."' class='btn btn-primary btn-xs'>create table</a> ";
+				$strOut .= " <a href='/admin/?section=module_settings&module={$module}&table=".$table["name"]."&table_action=remove' class='btn btn-danger btn-xs'>remove table</a> ";
+				$strOut .= " <a href='/admin/?section=module_settings&module={$module}&table=".$table["name"]."&table_action=truncate' class='btn btn-danger btn-xs'>truncate table</a> ";
+				$strOut .= " <a href='/admin/?section=module_settings&module={$module}&table=".$table["name"]."&table_action=create' class='btn btn-primary btn-xs'>create table</a> ";
 				$strOut .= "</p>";
 			}
 			$strOut .= "</div>";

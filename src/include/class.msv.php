@@ -775,8 +775,30 @@ class MSV_Website {
 			// TODO: check $_GET["module_reinstall"]
 			MSV_reinstallModule($_GET["module_reinstall"], false);
 		}
-		
-		if (isset($_GET["module_update_all"])) {
+
+        if (!empty($_GET["table_action"])) {
+            // TODO: check $_GET["module"]
+            // TODO: check $_GET["table"]
+
+            if ($_GET["table_action"] === "create") {
+
+                API_createTable($_GET["table"]);
+
+            } elseif ($_GET["table_action"] === "truncate") {
+
+                API_emptyTable($_GET["table"]);
+
+            } elseif ($_GET["table_action"] === "remove") {
+
+                API_removeTable($_GET["table"]);
+
+            }
+
+            MSV_reinstallModule($_GET["table_action"], false);
+        }
+
+
+        if (isset($_GET["module_update_all"])) {
 			foreach ($this->modules as $module) {
 				MSV_reinstallModule($module, false);
 			}

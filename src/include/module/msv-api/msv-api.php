@@ -529,6 +529,22 @@ function API_removeTable($table) {
 }
 
 
+
+function API_emptyTable($table) {
+	$tablesList = MSV_get("website.tables");
+	$infoTable = $tablesList[$table];
+	if (empty($infoTable)) {
+		return false;
+	}
+
+	$sqlCode = "TRUNCATE TABLE `$table`";
+
+	$result = API_SQL($sqlCode);
+
+	return $result;
+}
+
+
 function API_createTable($table) {
 	$tablesList = MSV_get("website.tables");
 	$infoTable = $tablesList[$table];
