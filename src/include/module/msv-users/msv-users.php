@@ -93,6 +93,11 @@ if (!empty($_REQUEST["doLogin"]) && !empty($_REQUEST["email"]) && !empty($_REQUE
 			$_SESSION["user_email"] = $result["data"]["email"];
 			
 			$redirect_uri = "/user/";
+
+			if ($result["data"]["access"] === "admin" || $result["data"]["access"] === "superadmin") {
+                $redirect_uri = "/admin/";
+            }
+
 			if (!empty($_SESSION["redirect_url"])) {
 				$redirect_uri = $_SESSION["redirect_url"];
 				unset($_SESSION["redirect_url"]);
