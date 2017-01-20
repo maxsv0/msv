@@ -141,7 +141,9 @@ if (!empty($section) && in_array($section, $menu_index)) {
 			
 			foreach ($table_info["fields"] as $field) {
 				if (!empty($field["select-from"])) {
-					$field["type"] = "select";
+					if ($field["type"] !== "select" || $field["type"] !== "multiselect") {
+						$field["type"] = "select";
+					}
 
 					if ($field["select-from"]["source"] === "table") {
 						
