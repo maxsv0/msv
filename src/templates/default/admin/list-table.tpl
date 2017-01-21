@@ -46,6 +46,8 @@
 <span class="text-danger">{$t["no"]}</span>
 {/if}
 </td>
+{elseif $type === "doc"}
+<td>{$itemField}</td>
 {else}
 <td>{$itemField|htmlspecialchars|truncate:60:".."}</td>
 {/if}
