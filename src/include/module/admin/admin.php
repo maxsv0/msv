@@ -33,6 +33,11 @@ if (!empty($_REQUEST["table"])) {
 	$admin_table = $_REQUEST["table"];
 }
 
+// pagination
+if (!empty($_REQUEST["p"])) {
+    MSV_assignData("admin_list_page", $_REQUEST["p"]);
+}
+
 if (!empty($section)) {
 	if (array_key_exists($section, $menu_ar)) {
 		$menuItem = $menu_ar[$section];

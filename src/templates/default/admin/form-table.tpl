@@ -35,6 +35,7 @@
 <input type="hidden" value="{$admin_section}" name="section">
 <input type="hidden" value="{$admin_table}" name="table">
 <input type="hidden" value="{$dataList.id}" id="itemID">
+<input type="hidden" value="{$admin_list_page}" id="p">
 
 <div class="form-group">
 <div class="text-right">
