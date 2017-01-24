@@ -1099,7 +1099,17 @@ function MSV_proccessUpdateTable($table, $prefix = "") {
 
 function MSV_redirect($url) {
 	$website = MSV_get("website");
-	
+
+	// check lang URL
+    if (!empty($website->langUrl)) {
+
+        // only in case of local redirect
+        if (substr($url, 0, 1) === '/' && strpos($url, $website->langUrl) !== 0) {
+            $url = $website->langUrl.$url;
+        }
+
+    }
+    
 	$website->outputRedirect($url);
 }
 
