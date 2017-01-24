@@ -35,7 +35,10 @@ if (!empty($_REQUEST["table"])) {
 
 // pagination
 if (!empty($_REQUEST["p"])) {
+    $admin_list_page = $_REQUEST["p"];
     MSV_assignData("admin_list_page", $_REQUEST["p"]);
+} else {
+    $admin_list_page = 0;
 }
 
 if (!empty($section)) {
@@ -96,7 +99,7 @@ if (!empty($section) && in_array($section, $menu_index)) {
 		}
 	}
 	if (!empty($_POST["save_exit"])) {
-		MSV_redirect("/admin/?section=$section&table=$admin_table&saved");
+		MSV_redirect("/admin/?section=$section&table=$admin_table&saved&p=".$admin_list_page);
 	}
 	if (!empty($_POST["save"])) {
 		MSV_MessageOK(_t("msg.saved_ok"));
