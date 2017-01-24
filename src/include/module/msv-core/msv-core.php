@@ -875,7 +875,20 @@ function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "")
 					$heightNew = $height/$width*$widthNew;
 					
 					$imgNew = imagecreatetruecolor($widthNew, $heightNew);
-					imagecopyresampled($imgNew, $img, 0, 0, 0, 0, $widthNew, $heightNew, $width, $height);
+
+                    // save alpha channel
+                    imagesavealpha($imgNew, true);
+                    imagealphablending($imgNew, false);
+
+                    if ($type === "jpg") {
+                        $bgColor = imagecolorallocatealpha($imgNew, 255, 255, 255, 0);
+                    } else {
+                        $bgColor = imagecolorallocatealpha($imgNew, 255, 255, 255, 127);
+                    }
+                    imagefill($imgNew, 0, 0, $bgColor);
+
+                    // copy image
+                    imagecopyresampled($imgNew, $img, 0, 0, 0, 0, $widthNew, $heightNew, $width, $height);
 					$img = $imgNew;
 					
 					
