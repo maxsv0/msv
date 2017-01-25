@@ -2,7 +2,7 @@
 <document>
 
 <config>
-	<param name="activationLevel" value="4"/>
+	<param name="activationLevel" value="7"/>
 	<param name="activationUrl" value="*"/>
 	<param name="adminMenu" value="0"/>
 	
@@ -10,8 +10,8 @@
 
 <install>
 	<param name="name" value="theme-default"/>
-	<param name="version" value="1.0"/>
-	<param name="date" value="08.01.2017"/>
+	<param name="version" value="1.1"/>
+	<param name="date" value="24.01.2017"/>
 	<param name="installHook" value="ThemeDefaultInstall"/>
 	<param name="title" value="Theme - Default"/>
 	<param name="description" value="Default theme for MSV"/>
