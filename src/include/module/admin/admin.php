@@ -218,6 +218,7 @@ if (!empty($section) && in_array($section, $menu_index)) {
 		header('Content-Disposition: attachment; filename='.$table.'-'.time().'.csv');
 	
 		$out = fopen('php://output', 'w');
+		fputs($out, "\xEF\xBB\xBF");
 		
 		$table_info = MSV_getConfig("admin_table_info");
 		$rowShort = array();
