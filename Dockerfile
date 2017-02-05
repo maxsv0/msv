@@ -13,7 +13,7 @@ RUN a2enmod deflate
 # Install Git and run MSV install script
 RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/maxsv0/msv.git msv
-RUN cd msv && ./install.sh /var/www/html
+RUN cd msv && ./scripts/install.sh /var/www/html
 
 # Set user and group
 RUN chown -R www-data:www-data /var/www/html/

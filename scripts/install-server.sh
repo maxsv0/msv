@@ -73,7 +73,7 @@ adduser --disabled-password --gecos "" devftp -shell /bin/false -home /var/www
 
 echo devftp:$MSV_PASS | chpasswd
 
-./install.sh /var/www/html
+./scripts/install.sh /var/www/html
 
 chown -R devftp:www-data /var/www/html
 
