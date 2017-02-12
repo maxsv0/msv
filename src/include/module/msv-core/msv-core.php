@@ -783,7 +783,7 @@ function MSV_SQLEscape($string) {
 }
 
 
-function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "") {
+function MSV_storeFile($url, $type = "jpg", $name = "", $table = "", $field = "") {
 	
 	// path example:
 	// content/table/year/month/hash.jpg
@@ -851,8 +851,31 @@ function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "")
 	
 	$filePath = $dirPath."/".$fileName;
 	
+	$r = file_put_contents($filePath, $cont);
+	if ($r) {
+		return $fileUrl;
+	}
+	
+	return -10;
+}
+
+
+
+function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "") {
+	
+	// store original file
+	$fileResult = MSV_storeFile($url, $type, $name, $table, $field);
+	
+	if (is_numeric($fileResult)) {
+		// result is error
+		return $fileResult;
+	}
+	
+	$fileUrl = HOME_URL.$fileResult;
+	$filePath = ABS.$fileResult;
+	
 	// copy file
-	$cont = file_get_contents($url);
+	$cont = file_get_contents($fileUrl);
 	if ($cont) {
 		
 		if (!empty($field) && !empty($table)) {
@@ -918,11 +941,7 @@ function MSV_storePic($url, $type = "jpg", $name = "", $table = "", $field = "")
 			}
 		}
 		
-		
-		$r = file_put_contents($filePath, $cont);
-		if ($r) {
-			return $fileUrl;
-		}
+		return $fileResult;
 	}
 	
 	return -10;
